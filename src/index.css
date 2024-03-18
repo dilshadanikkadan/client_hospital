@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.calenderBox{
+    border: 2px dashed #202D57;
+    box-shadow: -28px 29px 13px -24px rgba(0,0,0,0.75);
+}
