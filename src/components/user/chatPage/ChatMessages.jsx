@@ -2,25 +2,25 @@ import React, { useEffect, useState } from 'react';
 import { singleuser } from '../../../services/api/adminRoute';
 import { useQuery } from '@tanstack/react-query';
 
-const ChatMessages = ({ chatsMembers, currentUser, user, SetUser,sendDataToParent }) => {
-    
+const ChatMessages = ({ chatsMembers, SetCurrentChat, currentUser, user, SetUser, sendDataToParent }) => {
+
     const friend = chatsMembers.participants.find((user) => user !== currentUser);
     const { data: singleUser, isLoading } = useQuery({
-        queryKey: friend ? ["user", friend] :undefined,
+        queryKey: friend ? ["user", friend] : undefined,
         queryFn: singleuser,
     });
 
     const sendCuurrentuser = () => {
         return sendDataToParent(singleUser)
     }
-
-
+    
     useEffect(() => {
-        if (singleUser) {
-            sendCuurrentuser()
-            SetUser(singleUser);
-        }
-    }, []);
+        
+        console.log(singleUser);
+        SetUser(singleUser);
+        sendCuurrentuser()
+
+    }, [chatsMembers, SetCurrentChat]);
 
 
     if (isLoading) {

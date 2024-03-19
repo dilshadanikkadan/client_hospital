@@ -17,12 +17,14 @@ const SocketProvider = ({ children }) => {
             }
 
         } catch (error) {
-         
+
         }
     }
 
     const [socket, setSocket] = useState(null);
     const [data, setData] = useState([]);
+    const [onlineUsers,setOnlineUsers]=useState(null)
+    const [mySocketId,setmySocketId]=useState("")
 
     useEffect(() => {
         console.log(data);
@@ -30,6 +32,7 @@ const SocketProvider = ({ children }) => {
         setSocket(newSocket);
         newSocket.on('connect', () => {
             newSocket.emit("sendId", { socketId: newSocket.id, _id: iduser })
+            setmySocketId(newSocket.id)
             console.log("Socket connected successfully!");
         });
 
@@ -38,6 +41,9 @@ const SocketProvider = ({ children }) => {
             setData(prevData => [...prevData, newData]);
         });
 
+        newSocket?.on("getOnlineUsers", (data) => {
+            setOnlineUsers(data)
+        })
 
 
         return () => {
@@ -50,7 +56,7 @@ const SocketProvider = ({ children }) => {
         socket.emit('sendData', newData);
     };
     return (
-        <SocketContext.Provider value={{ socket, data, sendDataToServer }}>
+        <SocketContext.Provider value={{ socket, data, mySocketId,sendDataToServer,onlineUsers }}>
             {children}
         </SocketContext.Provider>
     );

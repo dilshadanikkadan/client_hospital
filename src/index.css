@@ -5,4 +5,24 @@
 .calenderBox{
     border: 2px dashed #202D57;
     box-shadow: -28px 29px 13px -24px rgba(0,0,0,0.75);
+
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

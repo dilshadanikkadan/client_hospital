@@ -12,35 +12,54 @@ import { singleuser } from '../../services/api/adminRoute'
 const ChatWithPatients = () => {
     const { isAuthenticated } = useSelector((state) => state.user)
     const { isDoctor } = useSelector((state) => state.doctor)
+    const [isOpen, setIsOpen] = useState(false)
+
     const userId = currentUser()
     const [currentChat, SetCurrentChat] = useState(null)
     const [user, SetUser] = useState(null);
-    const [currentUserChat, setCurrentUserChat] = useState({})
+    const [currentUserChat, setCurrentUserChat] = useState({});
+    const [selectedUser, setSelectedUser] = useState(null)
 
     const { data: allConversation } = useQuery({
-        queryKey:  ["conversation", userId],
+        queryKey: ["conversation", userId],
         queryFn: getConversation
     })
     const handleGrandchildData = (data) => {
         setCurrentUserChat(data)
     };
-   
+
     return (
         <>
-           {
-            isAuthenticated ?
-            <Navbar/>
-            :""
-           }
-            
-            <div className={`flex w-full  ${isAuthenticated ? "m-auto " :""}`}>
+            {
+                isAuthenticated ?
+                    <Navbar />
+                    : ""
+            }
+
+            <div className={`flex w-full   ${isAuthenticated ? "m-auto " : ""}`}>
                 {
                     isDoctor ?
-                    <SideBarDocotor />:""
+                        <SideBarDocotor /> : ""
                 }
-                <div className={`div w-[80%] ${isAuthenticated ? "m-auto w-[83%] mt-0" :""}  flex mt-10 mr-10`}>
-                    <DcotorsViewBar sendDataToParent={handleGrandchildData} user={user} SetUser={SetUser} allConversation={allConversation?.result} SetCurrentChat={SetCurrentChat} />
-                    <DoctorsSingleChat currentUserChat={currentUserChat} currentChat={currentChat} SetCurrentChat={SetCurrentChat} user={user} userId={userId} />
+                <div className={`div w-[83%] ${isAuthenticated ? "mx-auto w-[83%] mt-0" : "mt-10 mr-10"}  flex  `}>
+                    <DcotorsViewBar
+                        isOpen={isOpen}
+                        setIsOpen={setIsOpen}
+                        setSelectedUser={setSelectedUser}
+                        currentChat={currentChat} sendDataToParent={handleGrandchildData}
+                        user={user} SetUser={SetUser}
+                        allConversation={allConversation?.result}
+                        SetCurrentChat={SetCurrentChat} />
+
+
+                    <DoctorsSingleChat
+                        isOpen={isOpen}
+                        selectedUser={selectedUser}
+                        currentUserChat={currentUserChat}
+                        currentChat={currentChat}
+                        SetCurrentChat={SetCurrentChat}
+                        user={user} userId={userId}
+                    />
 
                 </div>
             </div>

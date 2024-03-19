@@ -8,6 +8,7 @@ import SetdatesPage from './SetdatesPage'
 import PendingAppointment from './PendingAppointment'
 import ViewPendingAppointment from './ViewPendingAppointment'
 import ChatWithPatients from './ChatWithPatients'
+import VideoChatPage from './VideoChatPage'
 
 const Doctormain = () => {
   const router = createBrowserRouter([
@@ -37,6 +38,13 @@ const Doctormain = () => {
       path: '/doctor/chat',
       element:
       <ChatWithPatients/>
+
+     
+    },
+    {
+      path: '/doctor/chat/videoCall',
+      element:
+      <VideoChatPage/>
 
      
     },

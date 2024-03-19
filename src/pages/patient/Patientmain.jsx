@@ -36,6 +36,7 @@ import VerifiedPage from './VerifiedPage'
 import ResheduleAppointmentPage from './ResheduleAppointmentPage'
 import ChatPatientPage from './ChatPatientPage'
 import ChatWithPatients from '../doctor/ChatWithPatients'
+import VideoChatPage from '../doctor/VideoChatPage'
 const Patientmain = () => {
 
   const router = createBrowserRouter([
@@ -140,6 +141,11 @@ const Patientmain = () => {
       path: "/chat_doctors",
       element:
         <ChatWithPatients />
+    },
+    {
+      path: "/chat_doctors/videoCall",
+      element:
+        <VideoChatPage />
     },
     {
       path: "service/application_1",
