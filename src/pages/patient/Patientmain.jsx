@@ -37,6 +37,7 @@ import ResheduleAppointmentPage from './ResheduleAppointmentPage'
 import ChatPatientPage from './ChatPatientPage'
 import ChatWithPatients from '../doctor/ChatWithPatients'
 import VideoChatPage from '../doctor/VideoChatPage'
+import { CallStateRoute } from '../../store/others/CallState'
 const Patientmain = () => {
 
   const router = createBrowserRouter([
@@ -44,8 +45,9 @@ const Patientmain = () => {
       path: '/',
       element:
         <BlockeduserCheck>
-
-          <Home />
+          <CallStateRoute>
+            <Home />
+          </CallStateRoute>
         </BlockeduserCheck>,
       errorElement: <div>404  not hey</div>
 
@@ -58,21 +60,30 @@ const Patientmain = () => {
       path: '/about',
       element:
         <BlockeduserCheck>
-          <About />
+          <CallStateRoute>
+
+            <About />
+          </CallStateRoute>
         </BlockeduserCheck>
     },
     {
       path: '/Ourdoctors',
       element:
         <BlockeduserCheck>
-          <DoctorsPage />
+          <CallStateRoute>
+
+            <DoctorsPage />
+          </CallStateRoute>
         </BlockeduserCheck>
     },
     {
       path: '/service',
       element:
         <BlockeduserCheck>
-          <Service />
+          <CallStateRoute>
+
+            <Service />
+          </CallStateRoute>
         </BlockeduserCheck>
     },
     {
@@ -86,12 +97,17 @@ const Patientmain = () => {
     {
       path: "/about/allDoctors/:id",
       element:
-        <SingleDoctorView />
+        <CallStateRoute>
+
+          <SingleDoctorView />
+        </CallStateRoute>
     },
     {
       path: "/allDoctors/:id",
       element:
-        <SingleDoctorView />
+        <CallStateRoute>
+          <SingleDoctorView />
+        </CallStateRoute>
     },
     {
       path: "/makeAppointment",
@@ -140,7 +156,10 @@ const Patientmain = () => {
     {
       path: "/chat_doctors",
       element:
-        <ChatWithPatients />
+        <CallStateRoute>
+
+          <ChatWithPatients />
+        </CallStateRoute>
     },
     {
       path: "/chat_doctors/videoCall",

@@ -3,11 +3,27 @@ import Peer from "simple-peer"
 import { SocketContext } from '../../../store/redux/slices/SocketContext';
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import { useLocation } from 'react-router-dom';
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setCallerId } from "../../../store/redux/slices/DoctorSlice"
+import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
+import VideocamOffIcon from '@mui/icons-material/VideocamOff';
+import VideoCallIcon from '@mui/icons-material/VideoCall';
+import CallEndIcon from '@mui/icons-material/CallEnd';
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
+import CallIcon from '@mui/icons-material/Call';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import DuoIcon from '@mui/icons-material/Duo';
+import VideoChatIcon from '@mui/icons-material/VideoChat';
+import ChatIcon from '@mui/icons-material/Chat';
 const ChatVideoBox = () => {
+    const { isDoctor, isCalling, callerId } = useSelector((state) => state.doctor)
     const { sendDataToServer, socket, onlineUsers, mySocketId } = useContext(SocketContext);
+    const dispatch = useDispatch()
+    const [hide, setHide] = useState(false);
+    const [callingPeer, SetcallingPeer] = useState(false)
     const [me, setMe] = useState("");
+    const [meCalling, setCallingMe] = useState("")
+    const [mute, setMute] = useState(false)
     const [stream, setStream] = useState();
     const [caller, setcaller] = useState("");
     const [callerSignal, setCallerSignal] = useState("");
@@ -16,12 +32,14 @@ const ChatVideoBox = () => {
     const [callRecieve, setCallRecieve] = useState(false)
     const [callEnd, setCallEnd] = useState(false);
     const [name, Setname] = useState('')
-    const { state } = useLocation()
+    const { state } = useLocation();
+    const [userStream, setUserStream] = useState()
     const myVideo = useRef()
     const userVideo = useRef()
     const connectionRef = useRef()
     console.log(state);
     useEffect(() => {
+
         navigator.mediaDevices.getUserMedia({ video: true, audio: true })
             .then((stream) => {
                 setStream(stream);
@@ -29,16 +47,17 @@ const ChatVideoBox = () => {
                     myVideo.current.srcObject = stream;
                 }
             });
-        console.log(mySocketId);
         socket?.on("me", (id) => {
             console.log("reached");
             console.log("socket id " + id);
             setMe(id)
         })
         socket?.on('offer', (offerSignal) => {
-            console.log("reached here maaaaaaan");
-            // Handle the offer signal here
+            // console.log("reached here maaaaaaan");
         });
+
+
+
         socket?.on("callUser", (data) => {
             console.log(data);
             setCallRecieve(true);
@@ -47,6 +66,8 @@ const ChatVideoBox = () => {
             setCallerSignal(data.signal);
         });
     }, [socket]);
+
+
     const callHandle = (id) => {
         console.log(id);
         const peer = new Peer({
@@ -54,8 +75,8 @@ const ChatVideoBox = () => {
             trickle: false,
             stream: stream
         });
-
-        socket.emit("sendCalling", { msg: `Video from  ...  `, recieverId:state })
+        dispatch(setCallerId(state))
+        socket.emit("sendCalling", { msg: `Video from  ...  `, recieverId: state })
         peer.on("signal", (data) => {
             socket.emit("callUser", {
                 userToCall: state,
@@ -73,6 +94,8 @@ const ChatVideoBox = () => {
             setCallAccept(true)
             peer.signal(signal)
         })
+        SetcallingPeer(true)
+        setCallingMe(state)
         connectionRef.current = peer;
     };
 
@@ -105,53 +128,127 @@ const ChatVideoBox = () => {
             connectionRef.current.destroy();
         }
     };
+
+    const hideCamera = () => {
+
+        setHide(true)
+        const stream = myVideo.current.srcObject;
+        if (stream) {
+            console.log(stream);
+            const tracks = stream.getTracks()[1].enabled = false
+
+        }
+
+    };
+    const showCamera = () => {
+        setHide(false)
+        if (stream) {
+            console.log(stream.getTracks());
+
+            const tracks = stream.getTracks()[1].enabled = true
+        }
+
+    };
+    const muteAudio = () => {
+        setMute(false)
+    }
+    const unMuteAudio = () => {
+        setMute(true)
+    }
+
     return (
-        <div className='w-[80%] m-auto h-[80vh] mt-3'>
-            <div className='h-[75vh] m-auto w-[40rem] border-dashed border-[3px] flex gap-10 relative border-[#1567A3] rounded-md mt-3'>
-                {stream && <video playsInline muted ref={myVideo} autoPlay className='w-full'> </video>}
-                {
-                    callAccept ?
-                        <video playsInline muted  ref={userVideo} autoPlay className='w-[50%] absolute h-[20vh] top-0 left-0 z-10'> </video> : ""
-                }
-
+        <div className='w-[100%] m-auto h-[80vh] mt-3'>
+            <div className='w-[100%] md:w-[60%] m-auto h-[70vh] mt-3'>
+                <div className='h-[65vh] m-auto full flex gap-10 relative rounded-md mt-3'>
+                    {stream && (
+                        <video
+                            playsInline
+                            muted={!mute ? true : false}
+                            ref={myVideo}
+                            autoPlay
+                            className={`w-[40%] h-[20vh] lg:w-[90%] absolute top-0 left-0 z-10 object-cover ${callAccept ? 'lg:w-[100%] lg:h-[100%]' : 'w-full h-full bg-black object-cover rounded-md'}`}
+                        ></video>
+                    )}
+                    {callAccept && (
+                        <video
+                            playsInline
+                            muted
+                            ref={userVideo}
+                            autoPlay
+                            className='w-full h-full bg-black object-cover rounded-md  lg:w-[40%] md:h-[45%] lg:z-50'
+                        ></video>
+                    )}
+                </div>
             </div>
+
+
             <div className="call-button flex gap-10  m-auto w-[80%]">
-                <div className="wrapper   w-[60%] mx-auto">
-
-                    <div className='mt-3'>
-
-                        <CopyToClipboard text={me} style={{ marginBottom: "2rem" }}>
-                            <button className='py-2 px-5 rounded-lg bg-secondary text-white'>Copy Id</button>
-                        </CopyToClipboard>
-                        <input
-                            hidden
-                            className='border-2 border-gray-300'
-                            id="filled-basic"
-                            label="Name"
-                            value={name}
-                            onChange={(e) => Setname(e.target.value)}
-                        />
-                    </div>
-
-                    <input onChange={(e) => SetIdToCall(e.target.value)} type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+                <div className="wrapper   flex  justify-center w-[60%] mx-auto">
                     {callAccept && !callEnd ? (
-                        <button className=' bg-red-500 py-3 px-7 ml-3  rounded-lg text-white' onClick={endCall}>leave Call</button>
-                    ) : (
+                        <div className=' flex gap-5'>
+                            <div className=' bg-red-500 flex items-center justify-center rounded-xl px-2'>
+                                <CallEndIcon onClick={endCall} className='text-white' style={{ fontSize: "3rem" }} />
+                            </div>
+                            {
+                                mute ?
 
-                        <button className='bg-secondary py-3 px-7 ml-3  rounded-lg text-white' onClick={() => callHandle(idToCall)}>Call</button>
+                                    <div className=' bg-blue-500 flex items-center justify-center rounded-xl px-2'>
+                                        <VolumeUpIcon onClick={muteAudio} className='text-white' style={{ fontSize: "3rem" }} />
+                                    </div>
+                                    :
+                                    <div className=' bg-blue-500 flex items-center justify-center rounded-xl px-2'>
+                                        <VolumeOffIcon onClick={unMuteAudio} className='text-white' style={{ fontSize: "3rem" }} />
+                                    </div>
+                            }
+
+
+                            {
+                                !hide ?
+                                    <div className='bg-blue-500 items-center flex justify-center rounded-xl px-2'>
+
+                                        <VideoCameraBackIcon className='text-white bg-blue-500' onClick={hideCamera} style={{ fontSize: "3rem" }} />
+                                    </div>
+
+                                    :
+                                    <div className=' bg-blue-500 flex items-center justify-center rounded-xl px-2'>
+
+                                        <VideocamOffIcon className=' text-white' onClick={showCamera} style={{ fontSize: "3rem" }} />
+                                    </div>
+                            }
+                        </div>
+                    ) : (
+                        <div className=' bg-green-500 flex items-center justify-center rounded-xl px-2'>
+                            {
+                                callerId &&
+                                <CallIcon className='text-white' onClick={() => callHandle(idToCall)} style={{ fontSize: "3rem" }} />
+                            }
+
+
+                        </div>
 
                     )}
                     {/* {idToCall} */}
                 </div>
 
             </div>
-            <div className='absolute top-[78%] left-[58%]'>
-                {callRecieve && !callAccept ? (
-                    <div className="calle gap-3 items-center flex ">
-                        <h1 className='capitalize' >{name} dilshad is calling...</h1>
-                        <button className='bg-green-500  py-3 px-5 rounded-lg' onClick={answerCall}>
-                            Answer
-                        </button>
+            <div className='absolute top-[73%] left-[25%] md:left-[40%] '>
+                {callRecieve && !callAccept && (state !== meCalling) ? (
+                    <div className="calle gap-5 items-center flex  flex-col  ">
+                        <h1 className='capitalize font-semibold animate-' >Calling....</h1>
+                        <div className='flex gap-7'>
+                            <div className=' bg-gray-400 flex items-center justify-center rounded-xl px-2'>
+                                <CallEndIcon onClick={endCall} className='text-white' style={{ fontSize: "2.5rem" }} />
+                            </div>
+                            <div className='bg-blue-500 rounded-xl py-1 px-2 animate-bounce'>
+                                <DuoIcon onClick={answerCall} className='text-white  ' style={{ fontSize: "2.5rem" }} />
+                            </div>
+                            <div className=' bg-gray-400 flex items-center justify-center rounded-xl px-2'>
+                                <ChatIcon className='text-white' style={{ fontSize: "2.5rem" }} />
+                            </div>
+
+
+
+                        </div>
                     </div>
                 ) : null}
             </div>
