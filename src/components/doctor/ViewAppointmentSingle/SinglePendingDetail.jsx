@@ -76,10 +76,10 @@ const SinglePendingDetail = () => {
 
                     <button className='mt-6 bg-base-300  py-2 px-6 rounded-lg ' >Cancel</button>
                     {
-                        appointment?.status === "approved" ?
-                        <button className='mt-6 bg-secondary text-white  py-2 px-6 rounded-lg '  >Approved</button>
+                        appointment?.status === "completed" ?
+                        <button className='mt-6 bg-secondary text-white  py-2 px-6 rounded-lg '  >completed</button>
                         :
-                        <button className='mt-6 bg-secondary text-white  py-2 px-6 rounded-lg ' onClick={handleapproval} >Approve</button>
+                        <button className='mt-6 bg-secondary text-white  py-2 px-6 rounded-lg ' onClick={handleapproval} >update</button>
                     }
                 </div>
             </div>

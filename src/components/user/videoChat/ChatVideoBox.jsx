@@ -39,7 +39,6 @@ const ChatVideoBox = () => {
     const connectionRef = useRef()
     console.log(state);
     useEffect(() => {
-
         navigator.mediaDevices.getUserMedia({ video: true, audio: true })
             .then((stream) => {
                 setStream(stream);
@@ -59,7 +58,6 @@ const ChatVideoBox = () => {
 
 
         socket?.on("callUser", (data) => {
-            console.log(data);
             setCallRecieve(true);
             setcaller(data.from);
             Setname(data.name);
@@ -69,15 +67,17 @@ const ChatVideoBox = () => {
 
 
     const callHandle = (id) => {
-        console.log(id);
         const peer = new Peer({
             initiator: true,
             trickle: false,
             stream: stream
         });
-        dispatch(setCallerId(state))
+        dispatch(setCallerId(state));
+        console.log("iam calling to this number:"+state);
         socket.emit("sendCalling", { msg: `Video from  ...  `, recieverId: state })
         peer.on("signal", (data) => {
+            console.log("this is data");
+            console.log(data);
             socket.emit("callUser", {
                 userToCall: state,
                 signalData: data,
@@ -130,11 +130,9 @@ const ChatVideoBox = () => {
     };
 
     const hideCamera = () => {
-
         setHide(true)
         const stream = myVideo.current.srcObject;
         if (stream) {
-            console.log(stream);
             const tracks = stream.getTracks()[1].enabled = false
 
         }
@@ -219,7 +217,7 @@ const ChatVideoBox = () => {
                     ) : (
                         <div className=' bg-green-500 flex items-center justify-center rounded-xl px-2'>
                             {
-                                callerId &&
+                                isDoctor &&
                                 <CallIcon className='text-white' onClick={() => callHandle(idToCall)} style={{ fontSize: "3rem" }} />
                             }
 

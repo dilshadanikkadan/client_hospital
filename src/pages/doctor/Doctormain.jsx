@@ -9,6 +9,8 @@ import PendingAppointment from './PendingAppointment'
 import ViewPendingAppointment from './ViewPendingAppointment'
 import ChatWithPatients from './ChatWithPatients'
 import VideoChatPage from './VideoChatPage'
+import PrescriptionPage from './PrescriptionPage'
+import CompletedPatientsPage from './CompletedPatientsPage'
 
 const Doctormain = () => {
   const router = createBrowserRouter([
@@ -28,9 +30,23 @@ const Doctormain = () => {
      
     },
     {
+      path: '/doctor/prescription',
+      element:
+      <PrescriptionPage/>
+
+     
+    },
+    {
       path: '/doctor/patients',
       element:
       <PendingAppointment/>
+
+     
+    },
+    {
+      path: '/doctor/patientHistory',
+      element:
+      <CompletedPatientsPage/>
 
      
     },

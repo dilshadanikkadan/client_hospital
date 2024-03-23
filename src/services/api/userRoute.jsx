@@ -1,4 +1,4 @@
-import { getRequest, postRequest } from "../axios"
+import { deleterequest, getRequest, postRequest } from "../axios"
 
 
 
@@ -263,7 +263,7 @@ export const getAllMessage = async (id) => {
    try {
       const res = await getRequest(`api/chat/getMessages/${userId}`);
       if (res.status == 200) {
-        return res.data
+         return res.data
       }
 
    } catch (error) {
@@ -272,15 +272,102 @@ export const getAllMessage = async (id) => {
 
 }
 
-export const sendMessage =async (data)=>{
+export const sendMessage = async (data) => {
    console.log(data);
    try {
-      const res = await postRequest("api/chat/createMessage",data);
-      if(res.status == 200){
+      const res = await postRequest("api/chat/createMessage", data);
+      if (res.status == 200) {
          return {
-            success :true,
+            success: true,
             // result:res.data
          }
+      }
+   } catch (error) {
+
+   }
+}
+
+export const makeReview = async (data) => {
+   try {
+      const res = await postRequest("api/user/make_review", data)
+      if (res.status == 200) {
+         return {
+            success: true
+         }
+      }
+   } catch (error) {
+      console.log(error);
+   }
+}
+
+export const getReviews = async (id) => {
+   const userId = id.queryKey[1];
+
+   try {
+      const res = await getRequest(`api/user/get_review/${userId}`);
+      if (res.status == 200) {
+         return res.data
+      }
+
+
+   } catch (error) {
+
+   }
+}
+
+export const updateReview = async (data) => {
+   try {
+      const res = await postRequest("api/user/update_review", data);
+      if (res.status == 200) {
+         return {
+            success: true
+         }
+      }
+   } catch (error) {
+
+   }
+}
+
+export const creatChatRoom = async (data) => {
+   try {
+      const res = await postRequest("api/chat/createRoom", data)
+
+      if (res.status == 200) {
+         return true
+      }
+   } catch (error) {
+      console.log(error);
+   }
+}
+
+export const deleteEveryOne = async (id) => {
+
+   try {
+      const res = await deleterequest(`api/chat/delete_everyOne/${id}`)
+      if (res.status === 200) {
+         return true
+      }
+   } catch (error) {
+      console.log(error);
+   }
+}
+export const deleteForMe = async (id) => {
+
+   try {
+      const res = await postRequest(`api/chat/delete_forMe/${id}`)
+      if (res.status === 200) {
+         return true
+      }
+   } catch (error) {
+      console.log(error);
+   }
+}
+
+export const readMessage=async(data)=>{
+   try {
+      const res = await postRequest("api/chat/read_message",data);
+      if(res.status == 200){
+         return true;
       }
    } catch (error) {
       

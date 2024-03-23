@@ -12,7 +12,6 @@ const VideoChatButton = ({ username, recieverId }) => {
     const [calling, setCalling] = useState(false)
 
     const navigate = useNavigate()
-    console.log("iscalling is :" + isCalling);
 
     useEffect(() => {
         if (socket) {

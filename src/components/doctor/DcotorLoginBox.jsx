@@ -6,6 +6,7 @@ import { doctorLogin } from '../../services/api/doctorRoute'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import {loginDoctor} from "../../store/redux/slices/DoctorSlice"
+import {makeMeDcotor} from "../../store/redux/slices/userSlice"
 const initialValues = {
     email: '',
     password: '',
@@ -22,9 +23,9 @@ const [errorMsg, setErrorMsg] = useState("")
         onSuccess: (data) => {
             data.errorMsg ? setErrorMsg(data.errorMsg) : ""
             if (data.success) {
-
                 navigate("/doctor")
                 dispatch(loginDoctor(data?.doctor))
+                dispatch(makeMeDcotor())
             }
         }
     })

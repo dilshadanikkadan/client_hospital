@@ -23,7 +23,7 @@ const SocketProvider = ({ children }) => {
 
     const [socket, setSocket] = useState(null);
     const [data, setData] = useState([]);
-    const [onlineUsers,setOnlineUsers]=useState(null)
+    const [onlineUsers,setOnlineUsers]=useState([])
     const [mySocketId,setmySocketId]=useState("")
 
     useEffect(() => {
@@ -34,20 +34,24 @@ const SocketProvider = ({ children }) => {
             newSocket.emit("sendId", { socketId: newSocket.id, _id: iduser })
             setmySocketId(newSocket.id)
             console.log("Socket connected successfully!");
+            // setOnlineUsers(prev => [...prev, { socketId: newSocket.id, _id: iduser }]);
         });
-
+        
         newSocket.on('data', newData => {
             console.log(newData);
             setData(prevData => [...prevData, newData]);
         });
-
+        
         newSocket?.on("getOnlineUsers", (data) => {
+            console.log( "onlinbe users",data);
             setOnlineUsers(data)
         })
 
 
         return () => {
             newSocket.disconnect();
+            console.log("user is disocccted",iduser);
+            newSocket.emit("removeUserOnline",{iduser:iduser});
         };
     }, []);
 

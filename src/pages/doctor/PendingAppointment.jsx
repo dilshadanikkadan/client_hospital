@@ -6,11 +6,11 @@ const PendingAppointment = () => {
   return (
     <div className=' flex w-full'>
 
-    <SideBarDocotor />
-    <div className="div w-[80%] ">
-        <PatientsListPending/>
+      <SideBarDocotor />
+      <div className="div w-[80%] ">
+        <PatientsListPending />
+      </div>
     </div>
-  </div>
   )
 }
 

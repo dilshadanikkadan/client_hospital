@@ -3,22 +3,23 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { getPendingRequest } from '../../../services/api/doctorRoute'
 
-const PatientsListPending = () => {
+const CompletedPatientsList = () => {
 
     let iduser;
     const jwtToken = localStorage.getItem('persist:root');
-    if (JSON.parse(jwtToken).doctor !== "null") {
+    if (JSON.parse(jwtToken).doctor !== "null" ) {
         const decodedToken = JSON.parse(atob(jwtToken.split('.')[1]));
+
         const userId = decodedToken.id;
         iduser = userId
     }
+
     const { data: allPendingAppointment } = useQuery({
         queryKey: ["allPending", iduser],
         queryFn: getPendingRequest
     })
 
-    const filetred = allPendingAppointment?.filter((patient) => patient.status === "pending")
-
+    const filetred = allPendingAppointment?.filter((patient)=> patient.status === "completed")
     return (
         <div>
 
@@ -86,4 +87,4 @@ const PatientsListPending = () => {
     )
 }
 
-export default PatientsListPending
+export default CompletedPatientsList

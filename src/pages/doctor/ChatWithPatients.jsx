@@ -10,7 +10,7 @@ import Navbar from '../../components/user/HomePage/Navbar'
 import { singleuser } from '../../services/api/adminRoute'
 
 const ChatWithPatients = () => {
-    const { isAuthenticated } = useSelector((state) => state.user)
+    const { isAuthenticated ,isDoctorMe} = useSelector((state) => state.user)
     const { isDoctor } = useSelector((state) => state.doctor)
     const [isOpen, setIsOpen] = useState(false)
 
@@ -27,7 +27,7 @@ const ChatWithPatients = () => {
     const handleGrandchildData = (data) => {
         setCurrentUserChat(data)
     };
-
+    console.log(isDoctor);
     return (
         <>
             {

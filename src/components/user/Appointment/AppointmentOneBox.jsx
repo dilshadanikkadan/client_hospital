@@ -4,7 +4,7 @@ import { useFormik, Form, Formik, Field } from "formik"
 import { AppointMentOneValidation } from '../../../services/validation/AppointmentValidationOne'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
-import { makeAppointment, makePayment, validatePatientPayment } from '../../../services/api/userRoute'
+import { creatChatRoom, makeAppointment, makePayment, validatePatientPayment } from '../../../services/api/userRoute'
 
 
 const initialValues = {
@@ -28,11 +28,24 @@ const AppointmentOneBox = () => {
         }
     })
 
+ const {mutate:createRoomMutate} = useMutation({
+    mutationFn:creatChatRoom,
+    onSuccess:(data)=>{
+        if(data){
+            console.log("chat also created ");
+        }
+    }
+ })
+
     const { mutate: makeAppointmentMutate } = useMutation({
         mutationFn: makeAppointment,
         onSuccess: (data) => {
             if (data.success) {
                 console.log("all are done");
+                createRoomMutate({
+                    senderId:state.doctorListId,
+                    reciverId:state.patient 
+                })
                 navigate("/makeAppointment/_2/sucess", { replace: true })
             }
         }
@@ -55,6 +68,7 @@ const AppointmentOneBox = () => {
     })
 
     const handlePaymentAppointment = () => {
+   
         makePaymentMutate({
             amount: 799 * 100,
             currency: "INR",

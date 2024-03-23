@@ -8,17 +8,30 @@ import { format } from "timeago.js"
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import VideoChatButton from './VideoChatButton';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
+import { openEditor } from "react-profile"
+import "react-profile/themes/default"
+import axios from 'axios';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import VoiceRecordePage from './VoiceRecordePage';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import DeleteChatModal from './DeleteChatModal';
 
 const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
-    const { isDoctor, isCalling } = useSelector((state) => state.doctor)
-
+    const { isDoctor, isCalling } = useSelector((state) => state.doctor);
+    const [voiceOn, setVoiceOn] = useState(false)
+    const [pdf, setPdf] = useState(null)
+    const [modalOpen, setModalOpen] = useState(false)
     const navigate = useNavigate()
     const { sendDataToServer, socket, onlineUsers } = useContext(SocketContext);
     const [typing, setTyping] = useState(false)
     const [arrivedMsg, setarrivedMsg] = useState(null)
     const messageRef = useRef()
     const [messages, setMessages] = useState([]);
-    const [messageValue, setMessageValue] = useState("")
+    const [messageValue, setMessageValue] = useState("");
+    const [isOptionOn, setIsOptionOn] = useState(false);
+    const [currentMsId, setCurrentMessageId] = useState("")
+    const [seinderId, setSenderId] = useState("")
     const queryClient = useQueryClient()
 
     const { data: allMsg, refetch } = useQuery({
@@ -41,20 +54,24 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
             messageRef.current?.scrollIntoView({ behavior: "smooth" })
             setMessages(allMsg)
         }
-    }, [allMsg, queryClient, messages])
+    }, [allMsg, queryClient, messages]);
     const friend = messages[0]?.chatRoom?.participants.find((user) => user !== userId)
     const newFriend = onlineUsers?.find((user) => user._id !== userId)
 
     const handleMessageSend = () => {
+        console.log(newFriend);
+        console.log(friend);
+        console.log("sending id is" + friend);
         socket.emit("sendMessage", {
-            recieverId: newFriend?._id,
+            recieverId: friend,
             sender: userId,
             text: messageValue
         })
         sendMessageMutate({
             sender: userId,
             chatRoom: currentChat?._id,
-            text: messageValue
+            text: messageValue,
+            typeOfMessage: "message"
         })
         setMessageValue("")
     }
@@ -62,7 +79,12 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
     useEffect(() => {
         if (socket) {
             socket.on("getMessage", (data) => {
-                console.log("message has been reched " + data);
+                console.log(data);
+                setMessages((prev) => [...prev, {
+                    sender: data.sender,
+                    text: data.text,
+                    createdAt: Date.now()
+                }]);
                 setarrivedMsg({
                     sender: data.sender,
                     text: data.text,
@@ -81,17 +103,53 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
         }
 
     }, [socket, queryClient])
-
-
     useEffect(() => {
         messageRef.current?.scrollIntoView({ behavior: "smooth" })
     }, [messages, queryClient])
-
-
     useEffect(() => {
         arrivedMsg && currentChat?.participants.includes(arrivedMsg.sender) &&
-            setMessages((prev) => [...prev, arrivedMsg])
-    }, [arrivedMsg])
+            setMessages((prev) => [...prev, arrivedMsg]);
+        queryClient.invalidateQueries(["allMessages"])
+    }, [arrivedMsg, queryClient, socket])
+
+    const handlePdf = async (e) => {
+        setPdf(e.target.files[0]);
+        setModalOpen(true);
+    }
+
+    const handleSendPdf = async () => {
+        const dataOne = new FormData()
+        dataOne.append("file", pdf)
+        dataOne.append("upload_preset", "application")
+        console.log(pdf);
+        try {
+            const res = await axios.post("https://api.cloudinary.com/v1_1/dvqq5x5x6/upload", dataOne, {
+                withCredentials: false
+            })
+
+            socket.emit("sendMessage", {
+                recieverId: friend,
+                sender: userId,
+                text: res.data.url,
+            })
+            sendMessageMutate({
+                sender: userId,
+                chatRoom: currentChat?._id,
+                text: res.data.url,
+                typeOfMessage: "pdf"
+            })
+            setModalOpen(false)
+        } catch (error) {
+
+        }
+
+
+
+
+    };
+
+    const isOnline = onlineUsers?.map((x) => x._id).includes(friend);
+
 
     return (
         <div className={`${isOpen ? "block" : "hidden md:block"} w-full `}>
@@ -105,50 +163,102 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
                                     alt="" />
                                 <div className="info flex flex-col">
                                     <p className='font-semibold capitalize'>{selectedUser?.username} </p>
-                                    <p>10:30</p>
+                                    <p>{isOnline ? "Online" : "offline"}</p>
                                 </div>
-                                <VideoChatButton username={selectedUser?.username} recieverId={newFriend?._id} />
+                                <VideoChatButton username={selectedUser?.username} recieverId={friend} />
                             </div>
 
 
                         </div>
                         <div className="chatpreview w-[90%] mx-auto mt-3  h-[67%]   overflow-y-auto pr-5">
                             {
-                                messages?.map((msg, i) => (
-                                    <div key={i} ref={messageRef} className={`chat  ${msg?.sender === userId ? "chat-end" : "chat-start"} `}>
-                                        <div className="chat-image avatar">
-                                            <div className="w-10 rounded-full">
-                                                <div className={` h-32 Tailwind CSS chat bubble component rounded-full flex relative ${msg?.sender == userId ? "bg-secondary" : "bg-[#1567A3]"}   `}>
-                                                    <p className={`text-center absolute top-[8%] left-[20%] text-white text-sm `}> {msg?.sender == userId ? "You" : selectedUser?.username.charAt(0)}</p>
+
+                                messages?.map((msg, i) => {
+                                    const isFirstMessage = i === 0 || (messages[i - 1]?.deleteForMe === "true" && messages[i - 1]?.sender !== msg?.sender);
+
+                                    return (
+                                        <>
+                                            {msg?.deleteForMe === "false" || msg?.sender !== userId ?
+                                                <div key={i} ref={messageRef} className={`chat  ${msg?.sender === userId ? "chat-end" : "chat-start"} `}>
+                                                    <div className="chat-image avatar">
+                                                        <div className="w-10 rounded-full">
+                                                            <div className={` h-32 Tailwind CSS chat bubble component rounded-full flex relative ${msg?.sender == userId ? "bg-secondary" : "bg-[#1567A3]"}   `}>
+                                                                <p className={`text-center absolute top-[8%] left-[20%] text-white text-sm `}> {msg?.sender == userId ? "You" : selectedUser?.username.charAt(0)}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+
+                                                        {
+                                                            msg?.typeOfMessage == "pdf" ?
+                                                                <div className={` h-32  w-56 relative text-white rounded-md ${msg?.sender === userId ? "bg-[#1567A3]" : "bg-secondary"} `}>
+                                                                    <img src="/images/pres.PNG" alt="" className='w-full h-[70%]  object-cover object-left mt-3 border-2 border-gray-600 rounded-sm' />
+                                                                    <p className='ml-3'>Prescirption Details</p>
+                                                                    <a href={msg?.text} download="prescription.pdf" target="_blank" >
+
+                                                                        <FileDownloadIcon className='absolute bottom-2  right-3 border-[1px] border-white rounded-full py-1' />
+                                                                    </a>
+                                                                </div>
+                                                                :
+                                                                msg?.typeOfMessage == "audio" ? <audio controls src={msg?.text} />
+                                                                    :
+                                                                    msg?.typeOfMessage == "message" ?
+                                                                        <div className='relative'>
+
+                                                                            <div className={`chat-bubble  relative min-w-[70px!important]  ${msg?.sender === userId ? "bg-[#1567A3]" : "bg-secondary"} `}>
+                                                                                <KeyboardArrowDownIcon onClick={() => {
+                                                                                    setSenderId(msg?.sender)
+                                                                                    setIsOptionOn(true);
+                                                                                    setCurrentMessageId(msg?._id)
+                                                                                }} className='absolute top-[0px] right-[2px]' />
+                                                                                {msg?.text}
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                        : ""
+                                                        }
+
+                                                    </div>
+
+                                                    <div className="chat-footer opacity-50">
+                                                        {format(msg?.createdAt)}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        {msg && <div className={`chat-bubble  ${msg?.sender === userId ? "bg-[#1567A3]" : "bg-secondary"} `}>{msg?.text}</div>}
-
-                                        <div className="chat-footer opacity-50">
-                                            {format(msg?.createdAt)}
-                                        </div>
-                                    </div>
-                                ))
+                                                : ""}
+                                        </>
+                                    )
+                                })
                             }
                         </div>
-                        <div className='w-[90%] mx-auto  '>
+
+                        {
+                            isOptionOn &&
+
+                            <DeleteChatModal sender={seinderId} userId={userId} currentMsId={currentMsId} isOptionOn={isOptionOn} setIsOptionOn={setIsOptionOn} />
+                        }
+                        <div className='w-[90%] mx-auto  flex gap-3 items-center'>
                             {
                                 typing &&
 
                                 <p className='mb-1 text-secondary font-semibold'>Typing...</p>
                             }
-                            <label className="input input-bordered flex items-center gap-2">
+                            <label className="input input-bordered flex items-center gap-2 w-[93%]">
+                                <div>
+                                    <AttachFileIcon />
+                                    <input className='w-1' hidden type="file" onChange={handlePdf} name="" id="" />
+                                </div>
                                 <input value={messageValue} onChange={(e) => {
                                     setMessageValue(e.target.value)
                                     socket.emit("typing", { data: "typing", recieverId: friend, text: e.target.value })
                                 }
                                 } type="text" className="grow" placeholder="message here" />
+
                                 <button className='rounded-lg py-1 px-4 bg-secondary text-white'
                                     onClick={handleMessageSend}
                                 > Send</button>
                             </label>
+                            <VoiceRecordePage currentChat={currentChat} sender={userId} recieverId={friend} voiceOn={voiceOn} setVoiceOn={setVoiceOn} />
                         </div>
 
                     </div>
@@ -158,7 +268,25 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
 
                     </div>
             }
-        </div>
+            {
+                modalOpen && (
+                    <>
+                        <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-40" />
+
+                        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-lg z-50 shadow-md">
+                            <div className="mb-4">
+                                <h2 className="text-center text-lg font-bold">Document Preview</h2>
+                                <div className="w-72 opacity-100 h-20 bg-gray-200 rounded-lg border border-gray-300 flex items-center justify-center">
+                                    <p className="text-gray-500">Dummy Document</p>
+                                </div>
+                            </div>
+
+                            <button onClick={handleSendPdf} className="bg-blue-500 text-white py-2 px-4 rounded-md">Send</button>
+                        </div>
+                    </>
+                )
+            }
+        </div >
     )
 }
 

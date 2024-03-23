@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     user: null,
-    isAuthenticated: false
+    isAuthenticated: false,
+    isDoctorMe:false
 }
 const userSlice = createSlice({
     name: "user",
@@ -17,10 +18,13 @@ const userSlice = createSlice({
         logoutUser: (state, action) => {
             state.user=null
             state.isAuthenticated = false   
+        },
+        makeMeDcotor:(state)=>{
+            state.isDoctorMe= TrackEvent
         }
       
     }
 
 })
-export const { loginSucess, logoutUser, initializeUser } = userSlice.actions;
+export const { loginSucess, logoutUser, initializeUser,makeMeDcotor } = userSlice.actions;
 export default userSlice.reducer;

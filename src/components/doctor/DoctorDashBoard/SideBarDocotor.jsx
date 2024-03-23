@@ -16,7 +16,7 @@ import { useMutation } from '@tanstack/react-query';
 import { logoutDoctor } from '../../../store/redux/slices/DoctorSlice';
 import { useDispatch } from 'react-redux';
 import { userLogout } from '../../../services/api/userRoute';
-
+import MedicationIcon from '@mui/icons-material/Medication';
 
 
 const SideBarDocotor = () => {
@@ -55,7 +55,7 @@ const SideBarDocotor = () => {
                             <p>Appointment</p>
                         </NavLink>
 
-                        <NavLink to="/doctor/pending_doctorRequests" className={({ isActive }) => isActive ? "active  flex items-center gap-3 bg-slate-100" : 'flex items-center gap-3'} >
+                        <NavLink to="/doctor/patientHistory" className={({ isActive }) => isActive ? "active  flex items-center gap-3 bg-slate-100" : 'flex items-center gap-3'} >
                             <PersonAddAltOutlinedIcon />
                             <p>Patients</p>
                         </NavLink>
@@ -76,6 +76,10 @@ const SideBarDocotor = () => {
                             <p>set Dates</p>
                         </NavLink>
 
+                        <NavLink to="/doctor/prescription" className={({ isActive }) => isActive ? "active  flex items-center gap-3 bg-slate-100 py-1 pl-1 rounded-md" : 'flex items-center gap-3'} >
+                            <MedicationIcon />
+                            <p>set Priscription</p>
+                        </NavLink>
                         <NavLink to="/payment" className={({ isActive }) => isActive ? "active" : 'flex items-center gap-3'} >
                             <PaymentOutlinedIcon />
                             <p>Payment</p>
