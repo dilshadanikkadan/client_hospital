@@ -122,7 +122,7 @@ const SingleNotificationBox = () => {
                             convenience
                         </p>
                         <div classname="mt-5 mb-3">
-                            <p className='mt-4 mb-4'> Payment Amount:  $<span className='font-semibold'>{allNotification?.payment}</span></p>
+                            <p className='mt-4 mb-4'> Payment Amount:  ₹<span className='font-semibold'>{allNotification?.payment}</span></p>
                         </div>
                         <p>
                             Please ensure that the payment is completed within the specified

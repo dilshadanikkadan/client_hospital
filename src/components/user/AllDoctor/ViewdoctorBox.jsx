@@ -32,6 +32,9 @@ const ViewdoctorBox = () => {
 
     });
 
+    console.log("myAppointment" ,myAppointment);
+    const appointmentReview= myAppointment.find((x)=> x.status === "completed" || "pending")
+
     return (
         <div className='w-[80%] m-auto'>
 
@@ -83,11 +86,11 @@ const ViewdoctorBox = () => {
             </div>
 
             {
-                (myAppointment?.doctorListId === doctor?.user) && myAppointment?.status === "completed" && reviews?.length > 0 ?
-                    <p onClick={() => setIsOpenEdit(true)} className='py-2 text-center rounded-md  w-[17%] text-white bg-secondary mt-3'>edit your Reviews</p>
+                (appointmentReview?.doctorListId === doctor?.user) && appointmentReview?.status === "completed" && reviews?.length > 0 ?
+                    <p onClick={() => setIsOpenEdit(true)} className='py-2 text-center rounded-md  w-[17%] text-white bg-secondary mt-3'>edit </p>
 
                     :
-                    (myAppointment?.doctorListId === doctor?.user) && myAppointment?.status === "completed" ?
+                    (appointmentReview?.doctorListId === doctor?.user) && appointmentReview?.status === "completed" ?
                         <p onClick={() => setIsOpen(true)} className='py-2 text-center rounded-md  w-[17%] text-white bg-secondary mt-3'>Review Your Doctor</p>
 
                         :

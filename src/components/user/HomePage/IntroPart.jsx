@@ -14,7 +14,9 @@ const IntroPart = () => {
         queryKey: ["appointment", userId],
         queryFn: viewAppointment
 
-    })
+    });
+    const currentAppintment = myAppointment?.find((x)=> x.status === "pending")
+    console.log("myAppointment",myAppointment)
 
     const { data: logginedUser } = useQuery({
         queryKey: ["user", userId],
@@ -39,24 +41,24 @@ const IntroPart = () => {
                                 <br />
                             </h3>
                             :
-                            <h3 className='font-logo text-3xl mt-5 font-bold md:text-4xl lg:text-5xl md:mt-0'>Your Health is Our
+                            <h3 className='font-logo text-3xl mt-5 font-bold md:text-4xl lg:text-5xl md:mt-0 '>Your Health is Our
                                 <br />
                                 Top Priority</h3>
                         }
 
-                        <div className="info  w-[70%]">
+                        <div className="info d  w-[70%]">
 
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos, rem ad quo voluptates sapiente, nobis dolorum neque saepe quae consectetur at ratione obcaecati. Voluptas asperiores enim animi odit. Corporis, nemo.</p>
+                            <p className=''>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos, rem ad quo voluptates sapiente, nobis dolorum neque saepe quae consectetur at ratione obcaecati. Voluptas asperiores enim animi odit. Corporis, nemo.</p>
                         </div>
                         <div className="wrap w-full flex gap-10">
 
                             <button className='bg-secondary rounded-md text-white py-3 px-3 md:px-5 md:py-4 '>Watch Video</button>
 
-                            {myAppointment?.status == "pending" ?
+                            {currentAppintment?.status == "pending" ?
 
 
                                 <button className='bg-secondary rounded-md text-white px-3 py-3' onClick={() => navigate("/viewAppointment")} >View Appointment</button>
-                                : myAppointment?.status === "approved" ?
+                                : currentAppintment?.status === "approved" ?
 
                                     <button className='bg-secondary rounded-md text-white px-3 py-3' onClick={() => navigate("/viewAppointment")} >View Appointment</button>
                                     : logginedUser?.isDoctor ?

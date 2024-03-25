@@ -120,12 +120,12 @@ const SetDates = () => {
         setCurrentId(id)
     }
     return (
-        <div className='flex  w-[80%] m-auto'>
-            <div className="wrapper flex flex-wrap gap-10 mt-10  items-center justify-center ">
+        <div className='flex  w-[80%] mx-auto  '>
+            <div className="wrapper flex flex-wrap gap-10   items-center justify-center ">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DateCalendar className='calenderBox' onChange={handleDateChange} />
                 </LocalizationProvider>
-                <div className="warpapper w-[35vw] h-[50vh] overflow-y-scroll bg-base-100 border-dashed border-2 border-secondary rounded-lg shadow-xl relative">
+                <div className="warpapper w-[100%] md:w-[35vw] h-[50vh] overflow-y-scroll bg-base-100 border-dashed border-2 border-secondary rounded-lg shadow-xl relative">
                     {
                         errorMsg &&
 

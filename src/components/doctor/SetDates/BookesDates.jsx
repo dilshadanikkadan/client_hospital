@@ -11,7 +11,7 @@ const BookesDates = ({ dates }) => {
     });
 
     return (
-        <div className='w-[97%] m-auto pl-6 pt-2 h-[30vh] rounded-lg border-dashed border-2 border-secondary'>
+        <div className='w-[97%]   m-auto pl-6 pt-2 h-[30vh] rounded-lg border-dashed border-2 border-secondary'>
             <h3 className='text-2xl font-semibold font-info'>Booked Dates</h3>
             {
                 successfulBookings?.map((booking, i) => (

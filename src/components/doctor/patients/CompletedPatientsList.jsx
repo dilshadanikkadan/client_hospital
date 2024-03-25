@@ -47,8 +47,8 @@ const CompletedPatientsList = () => {
                                 </div>
                                 <div className="edit flex gap-3">
                                     {/* <button className={`${user?.status === "active" ? "bg-green-500 " : "bg-red-400"}  font-info px-5 py-1 rounded-md`} >{user?.status}</button> */}
-                                    <Link className='bg-secondary text-white  font-info px-5 py-2 rounded-md' to={`/doctor/patients/${patient?._id}`}>View Details</Link>
-                                    <button className='bg-[#8FE82B] text-white  font-info px-5 py-1 rounded-md' >{patient?.status}</button>
+                                    <Link className='bg-secondary text-white  font-info px-5 py-2 rounded-md' to={`/doctor/patients/${patient?._id}`}> Details</Link>
+                                    <button className='bg-[#8FE82B] text-white  font-info px-5 py-1 rounded-md hidden md:block' >{patient?.status}</button>
                                 </div>
                             </div>
 

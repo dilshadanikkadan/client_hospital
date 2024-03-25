@@ -12,6 +12,7 @@ import Footer from '../../components/user/HomePage/Footer'
 import { useLocation } from 'react-router-dom'
 import CheckBar from '../../components/user/HomePage/CheckBar'
 import AnimatedPage from '../../services/Animation/AnimatedPage'
+import DoctorModal from '../../components/user/HomePage/DoctorModal'
 
 const Home = () => {
   const location =useLocation()
@@ -20,6 +21,7 @@ const Home = () => {
 
     <div className='w-full overflow-hidden bg-primary'>
       <Navbar/>
+      <DoctorModal/>
       <IntroPart/>
       <SecondPart/>
       <ThirdPart/>  

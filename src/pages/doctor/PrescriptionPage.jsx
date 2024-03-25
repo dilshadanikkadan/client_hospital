@@ -7,7 +7,7 @@ const PrescriptionPage = () => {
         <div className=' flex w-full'>
 
             <SideBarDocotor />
-            <div className="div w-[80%] mt-10">
+            <div className="div w-[75%]  mt-14 border-[1px] border-gray-200  rounded-md h-[95%] py-7">
                 <PriscriptionBox/>
             </div>
         </div>

@@ -32,27 +32,29 @@ const ViewAppointmentBox = () => {
         queryFn: viewAppointment
 
     })
-    console.log(myAppointment?._id);
+    const currentAppintment = myAppointment?.find((x)=> x.status === "pending")
+
+    console.log("currentAppintment",currentAppintment._id);
     const handleCancelAppointment = () => {
          console.log(deleteAppointment);
         deleteAppointment({
-            appointmentId: myAppointment?._id,
-            timeId: myAppointment?.time.id,
-            doctorListId: myAppointment?.doctorListId,
-            bookedId: myAppointment?.bookedId
+            appointmentId: currentAppintment?._id,
+            timeId: currentAppintment?.time.id,
+            doctorListId: currentAppintment?.doctorListId,
+            bookedId: currentAppintment?.bookedId
         })
       
     }
     return (
-        <div className='w-full flex flex-col justify-center'>
-            <div className='w-[60%] m-auto  mt-10 '>
-                <h3 className='font-info font-semibold text-2xl capitalize'> Appointment Details</h3>
+        <div className='w-full flex flex-col justify-center  '>
+            <div className='w-[90%] md:w-[60%] m-auto overflow-hidden  mt-10    py-4 px-6 rounded-md shadow-md'>
+                <h3 className='font-info font-semibold text-2xl capitalize '> Appointment Details</h3>
                 <div className="details">
                     <div className="userinfo flex items-center  gap-3 mt-6">
                         <img className='w-14 h-14 object-cover rounded-full' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPjGnnelatTe1FbI6RHusiWG4wkbtmnjVC9uTBkSBX_g&s" alt="" />
                         <div className="details">
-                            <h3 className='font-semibold font-desc'>{myAppointment?.lastname}</h3>
-                            <p>{myAppointment?.email}</p>
+                            <h3 className='font-semibold font-desc capitalize subpixel-antialiased' >{currentAppintment?.lastname}</h3>
+                            <p className='subpixel-antialiased'>{currentAppintment?.email}</p>
 
                         </div>
 
@@ -64,16 +66,16 @@ const ViewAppointmentBox = () => {
                         <h3 className='text-xl font-semibold'> Appointment Details</h3>
                         <div className="deatils w-full flex  flex-col gap-3 mt-3">
                             <div className="info flex justify-between text-lg">
-                                <p>Date</p>
-                                <p>{myAppointment?.date} - {myAppointment?.month} - 2024</p>
+                                <p className='subpixel-antialiased'>Date</p>
+                                <p>{currentAppintment?.date} - {currentAppintment?.month} - 2024</p>
                             </div>
                             <div className="info  flex justify-between text-lg">
                                 <p>Time</p>
-                                <p>{myAppointment?.time.from}pm to  {myAppointment?.time.to}pm</p>
+                                <p>{currentAppintment?.time.from}pm to  {currentAppintment?.time.to}pm</p>
                             </div>
                             <div className="info  flex justify-between text-lg">
                                 <p>Status</p>
-                                <p className='capitalize'>{myAppointment?.status}</p>
+                                <p className='capitalize'>{currentAppintment?.status}</p>
                             </div>
                         </div>
                     </div>
@@ -81,10 +83,10 @@ const ViewAppointmentBox = () => {
                     <div className="doctorInfo mt-8">
                         <h3 className='text-2xl font-semibold'>Doctor</h3>
                         <div className="userinfo flex items-center  gap-3 mt-3">
-                            <img className='w-14 h-14 object-cover rounded-full' src={myAppointment?.doctor?.profileImage} alt="" />
+                            <img className='w-14 h-14 object-cover rounded-full' src={currentAppintment?.doctor?.profileImage} alt="" />
                             <div className="details">
-                                <h3 className='font-semibold font-desc'>{myAppointment?.doctor?.lastname}</h3>
-                                <p>{myAppointment?.doctor?.email}</p>
+                                <h3 className='font-semibold font-desc'>{currentAppintment?.doctor?.lastname}</h3>
+                                <p>{currentAppintment?.doctor?.email}</p>
 
                             </div>
 
@@ -97,16 +99,16 @@ const ViewAppointmentBox = () => {
             </div>
             <div className="div w-[60%] m-auto flex   items-center justify-center gap-10">
 
-                <button className='mt-6 bg-base-300  py-3 px-6 rounded-lg ' onClick={() => navigate("/")}>Return To Home</button>
-                <button className='mt-6 bg-base-300  py-3 px-6 rounded-lg ' onClick={() => navigate("/reshedule_appointment",{state:{
+                {/* <button className='mt-6 bg-base-300  py-3 px-6 rounded-lg ' onClick={() => navigate("/")}>Return To Home</button> */}
+                <button className='mt-6 bg-base-300  py-3 px-6 rounded-lg font-semibold ' onClick={() => navigate("/reshedule_appointment",{state:{
                     
-                    ...myAppointment?.doctor,
-                    myAppointmentId:myAppointment?._id,
-                    prevTimeId: myAppointment?.time.id,
-                    prevDoctodId: myAppointment?.doctorListId,
-                    prevBookedId: myAppointment?.bookedId
+                    ...currentAppintment?.doctor,
+                    myAppointmentId:currentAppintment?._id,
+                    prevTimeId: currentAppintment?.time.id,
+                    prevDoctodId: currentAppintment?.doctorListId,
+                    prevBookedId: currentAppintment?.bookedId,
                     }})}>Reshedule</button>
-                <button className='mt-6 bg-secondary text-white  py-3 px-6 rounded-lg ' onClick={handleCancelAppointment}>Cancel The Apoointment</button>
+                <button className='mt-6 bg-secondary text-white  py-3 px-6 rounded-lg ' onClick={handleCancelAppointment}>Cancel</button>
             </div>
         </div>
     )

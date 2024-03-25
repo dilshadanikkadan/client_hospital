@@ -20,6 +20,7 @@ import DeleteChatModal from './DeleteChatModal';
 const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
     const { isDoctor, isCalling } = useSelector((state) => state.doctor);
     const [voiceOn, setVoiceOn] = useState(false)
+    const [isHovered, setIsHovered] = useState(false)
     const [pdf, setPdf] = useState(null)
     const [modalOpen, setModalOpen] = useState(false)
     const navigate = useNavigate()
@@ -155,7 +156,7 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
         <div className={`${isOpen ? "block" : "hidden md:block"} w-full `}>
             {
                 currentChat ?
-                    <div className={`  w-full h-[75vh] border-[1px] border-gray-200 mt-3  rounded-md ml-2`}>
+                    <div className={`  w-full h-[85vh] md:h-[75vh] border-[1px] border-gray-200 mt-3  rounded-md ml-2`}>
                         <div className="div h-[5rem] border-b-[1px] border-gray-200 flex items-center">
                             <div className="userview ml-5 flex items-center gap-8">
                                 <img className='w-16 h-16 object-cover object-top rounded-full'
@@ -170,11 +171,10 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
 
 
                         </div>
-                        <div className="chatpreview w-[90%] mx-auto mt-3  h-[67%]   overflow-y-auto pr-5">
+                        <div className="chatpreview w-[90%] mx-auto mt-3  h-[70%]  md:h-[67%]   overflow-y-auto pr-5">
                             {
 
                                 messages?.map((msg, i) => {
-                                    const isFirstMessage = i === 0 || (messages[i - 1]?.deleteForMe === "true" && messages[i - 1]?.sender !== msg?.sender);
 
                                     return (
                                         <>
@@ -191,28 +191,66 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
 
                                                         {
                                                             msg?.typeOfMessage == "pdf" ?
-                                                                <div className={` h-32  w-56 relative text-white rounded-md ${msg?.sender === userId ? "bg-[#1567A3]" : "bg-secondary"} `}>
-                                                                    <img src="/images/pres.PNG" alt="" className='w-full h-[70%]  object-cover object-left mt-3 border-2 border-gray-600 rounded-sm' />
+
+
+                                                                <div className={` h-32  w-56 relative text-gray-500 rounded-md ${msg?.sender === userId ? "bg-[#E8F1F3]" : "bg-[#EFEFEF]"} `}
+                                                                    onMouseEnter={() => setIsHovered(true)}
+                                                                    onMouseLeave={() => setIsHovered(false)}
+                                                                >
+                                                                    {isHovered && (
+                                                                        <div className="absolute top-2 right-2">
+                                                                            <KeyboardArrowDownIcon
+                                                                                onClick={() => {
+                                                                                    setSenderId(msg?.sender);
+                                                                                    setIsOptionOn(true);
+                                                                                    setCurrentMessageId(msg?._id);
+                                                                                }}
+                                                                                className='text-gray-500 cursor-pointer'
+                                                                            />
+                                                                        </div>
+                                                                    )}
+                                                                    <img src="/images/pres.PNG" alt="" className='w-full h-[70%]  object-cover object-left border-[1px] border-gray-600 rounded-md ' />
                                                                     <p className='ml-3'>Prescirption Details</p>
                                                                     <a href={msg?.text} download="prescription.pdf" target="_blank" >
 
                                                                         <FileDownloadIcon className='absolute bottom-2  right-3 border-[1px] border-white rounded-full py-1' />
                                                                     </a>
                                                                 </div>
+
                                                                 :
-                                                                msg?.typeOfMessage == "audio" ? <audio controls src={msg?.text} />
+                                                                msg?.typeOfMessage == "audio" ?
+                                                                    <div className={`chat-bubble relative min-w-[70px!important] ${msg?.sender === userId ? "bg-[#E8F1F3]" : "bg-[#E4E6EB]"} rounded-lg p-2 mb-2 flex items-center`}
+                                                                        onMouseEnter={() => setIsHovered(true)}
+                                                                        onMouseLeave={() => setIsHovered(false)}>
+                                                                        <audio controls className="mr-2">
+                                                                            <source src={msg?.text} type="audio/mpeg" />
+                                                                            Your browser does not support the audio element.
+                                                                        </audio>
+                                                                        {isHovered && (
+                                                                            <KeyboardArrowDownIcon onClick={() => {
+                                                                                setSenderId(msg?.sender);
+                                                                                setIsOptionOn(true);
+                                                                                setCurrentMessageId(msg?._id);
+                                                                            }} className='text-gray-500 cursor-pointer' />
+                                                                        )}
+                                                                    </div>
                                                                     :
                                                                     msg?.typeOfMessage == "message" ?
                                                                         <div className='relative'>
 
-                                                                            <div className={`chat-bubble  relative min-w-[70px!important]  ${msg?.sender === userId ? "bg-[#1567A3]" : "bg-secondary"} `}>
-                                                                                <KeyboardArrowDownIcon onClick={() => {
-                                                                                    setSenderId(msg?.sender)
-                                                                                    setIsOptionOn(true);
-                                                                                    setCurrentMessageId(msg?._id)
-                                                                                }} className='absolute top-[0px] right-[2px]' />
+                                                                            <div className={`chat-bubble text-gray-600 relative min-w-[70px!important] ${msg?.sender === userId ? "bg-[#E8F1F3]" : "bg-[#EFEFEF]"}`}
+                                                                                onMouseEnter={() => setIsHovered(true)}
+                                                                                onMouseLeave={() => setIsHovered(false)}>
+                                                                                {isHovered && (
+                                                                                    <KeyboardArrowDownIcon onClick={() => {
+                                                                                        setSenderId(msg?.sender);
+                                                                                        setIsOptionOn(true);
+                                                                                        setCurrentMessageId(msg?._id);
+                                                                                    }} className='absolute top-[0px] right-[2px]' />
+                                                                                )}
                                                                                 {msg?.text}
                                                                             </div>
+
 
 
                                                                         </div>
@@ -237,13 +275,13 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
 
                             <DeleteChatModal sender={seinderId} userId={userId} currentMsId={currentMsId} isOptionOn={isOptionOn} setIsOptionOn={setIsOptionOn} />
                         }
-                        <div className='w-[90%] mx-auto  flex gap-3 items-center'>
+                        <div className='w-[90%] mx-auto  flex  gap-3  relative items-center'>
                             {
                                 typing &&
 
-                                <p className='mb-1 text-secondary font-semibold'>Typing...</p>
+                                <p className='mb-1 text-secondary font-semibold absolute top-[-30px] '>Typing...</p>
                             }
-                            <label className="input input-bordered flex items-center gap-2 w-[93%]">
+                            <label className="input input-bordered flex items-center gap-2 w-[92%] md:w-[93%]">
                                 <div>
                                     <AttachFileIcon />
                                     <input className='w-1' hidden type="file" onChange={handlePdf} name="" id="" />
@@ -252,7 +290,7 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
                                     setMessageValue(e.target.value)
                                     socket.emit("typing", { data: "typing", recieverId: friend, text: e.target.value })
                                 }
-                                } type="text" className="grow" placeholder="message here" />
+                                } type="text" className="grow w-[80%]" placeholder="message here" />
 
                                 <button className='rounded-lg py-1 px-4 bg-secondary text-white'
                                     onClick={handleMessageSend}
@@ -263,7 +301,7 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
 
                     </div>
                     :
-                    <div className='w-full h-[82vh] border-[1px] border-gray-200 mt-3  flex items-center justify-center rounded-md ml-2'>
+                    <div className='w-full h-[82vh]  border-[1px] border-gray-200 mt-3  flex items-center justify-center rounded-md ml-2'>
                         <span className='text-3xl text-[rgba(0,0,0,0.39)] capitalize font-semibold'>Open A chat to conversiate </span>
 
                     </div>
@@ -271,13 +309,13 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
             {
                 modalOpen && (
                     <>
-                        <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-40" />
+                        <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50" />
 
                         <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-lg z-50 shadow-md">
                             <div className="mb-4">
                                 <h2 className="text-center text-lg font-bold">Document Preview</h2>
                                 <div className="w-72 opacity-100 h-20 bg-gray-200 rounded-lg border border-gray-300 flex items-center justify-center">
-                                    <p className="text-gray-500">Dummy Document</p>
+                                    <p className="text-gray-500"> Document File</p>
                                 </div>
                             </div>
 

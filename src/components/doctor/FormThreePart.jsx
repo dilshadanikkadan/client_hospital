@@ -124,7 +124,7 @@ const FormThreePart = () => {
                                 <div className='border-dashed border-2 border-secondary rounded-2xl h-[40vh] flex flex-col items-center justify-center'>
                                     {!licenseImage ?
 
-                                        <p className='text-secondary font-info '>Upload A profile Photo</p> : ""
+                                        <p className='text-secondary font-info '>Upload Your Licesnce Image</p> : ""
                                     }
                                     {licenseImage && <div>
 

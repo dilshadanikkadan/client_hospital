@@ -1,7 +1,9 @@
 import React from 'react'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import { useNavigate } from 'react-router-dom';
 const OverViewBoxProfile = () => {
+    const navigate  = useNavigate()
 
     return (
 
@@ -24,7 +26,7 @@ const OverViewBoxProfile = () => {
                     <div className="ingo ml-5 mt-5 flex flex-col gap-3">
                         <h3 className='text-xl text-secondary font-semibold '>Apppointment</h3>
                         <div className="div flex flex-col lg:flex-row gap-10">
-                            <div className='w-[80%] lg:w-1/2 border-[1px] flex gap-5 items-center  h-[10vh] rounded-lg border-gray-200'>
+                            <div className='w-[80%] lg:w-1/2 border-[1px] flex gap-5 items-center  h-[10vh] rounded-lg border-gray-200' onClick={()=> navigate("/appointmentHistory")}>
                                 <ShoppingBagIcon className='text-2xl ml-5' />
                                 <p>Apppointment</p>
                             </div>

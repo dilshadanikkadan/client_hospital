@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import Peer from "simple-peer"
 import { SocketContext } from '../../../store/redux/slices/SocketContext';
 import { CopyToClipboard } from "react-copy-to-clipboard"
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCallerId } from "../../../store/redux/slices/DoctorSlice"
 import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
@@ -36,7 +36,8 @@ const ChatVideoBox = () => {
     const [userStream, setUserStream] = useState()
     const myVideo = useRef()
     const userVideo = useRef()
-    const connectionRef = useRef()
+    const connectionRef = useRef();
+    const navigate = useNavigate()
     console.log(state);
     useEffect(() => {
         navigator.mediaDevices.getUserMedia({ video: true, audio: true })
@@ -56,7 +57,9 @@ const ChatVideoBox = () => {
         });
 
 
-
+        socket?.on("endVideoCall", () => {
+            endCall()
+        })
         socket?.on("callUser", (data) => {
             setCallRecieve(true);
             setcaller(data.from);
@@ -73,7 +76,7 @@ const ChatVideoBox = () => {
             stream: stream
         });
         dispatch(setCallerId(state));
-        console.log("iam calling to this number:"+state);
+        console.log("iam calling to this number:" + state);
         socket.emit("sendCalling", { msg: `Video from  ...  `, recieverId: state })
         peer.on("signal", (data) => {
             console.log("this is data");
@@ -126,7 +129,13 @@ const ChatVideoBox = () => {
         setCallEnd(true);
         if (connectionRef.current) {
             connectionRef.current.destroy();
-        }
+        };
+        socket.emit("videoEnd", {
+            userToCall: state
+        })
+
+        console.log("dilshad");
+        isDoctor ? navigate("/doctor/chat", { replace: true }) : navigate("/chat_doctors", { replace: true })
     };
 
     const hideCamera = () => {

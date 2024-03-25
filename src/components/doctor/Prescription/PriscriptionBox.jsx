@@ -16,7 +16,6 @@ const PrescriptionBox = () => {
                 days: parseInt(days),
             };
             setPrescriptionList([...prescriptionList, prescription]);
-            // Clear input fields after adding prescription
             setMedicineName('');
             setTimesPerDay('');
             setDays('');
@@ -24,7 +23,7 @@ const PrescriptionBox = () => {
     };
 
     return (
-        <div className="max-w-lg mx-auto p-6 bg-white rounded-md shadow-md">
+        <div className="max-w-lg ml-10 p-6 bg-white rounded-md shadow-md">
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="medicineName">
                     Medicine Name

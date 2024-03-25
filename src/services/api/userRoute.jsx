@@ -373,3 +373,14 @@ export const readMessage=async(data)=>{
       
    }
 }
+
+export const myAppointments =async(id)=>{
+   const patiendId = id.queryKey[1];
+
+   try {
+      const res = await getRequest(`api/user/my_appointments/${patiendId}`);
+      return res.data
+   } catch (error) {
+      console.log(error);
+   }
+}

@@ -37,7 +37,7 @@ const DeleteChatModal = ({ setIsOptionOn, isOptionOn, currentMsId, sender, userI
         <div>
             <>
                 <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-40" />
-                <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white  h-24   w-[30%] rounded-lg z-50 shadow-md">
+                <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white  h-24  w-[70%] md:w-[30%] rounded-lg z-50 shadow-md">
                     <div className="flex flex-col bg-white rounded-lg">
                         <h2 className="text-xl font-bold mt-2  ml-3 ">delete message  ? </h2>
                         <div className="mb-4 flex items-end flex-col mr-5 cursor-pointer   ">

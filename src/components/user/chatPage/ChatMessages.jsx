@@ -51,9 +51,9 @@ const ChatMessages = ({ chatsMembers, messageLast,userId, time, lastMessage, Set
             <div className=' h-[5rem]  w-[90%]  flex  gap-3 items-center  mx-auto'>
                 <img className='w-12 h-12 object-cover object-top rounded-full' src={singleUser?.profilePicture} alt="" />
                 <div className="info flex flex-col w-full">
-                    <p className='font-semibold capitalize'> {singleUser.username} </p>
+                    <p className='font-semibold capitalize'> {singleUser.username.split(" ")[0] } </p>
                     <div className='flex  justify-between w-full  '>
-                        <p className='font-semibold subpixel-antialiased line-clamp-1 text-sm  w-[80px] h-7'>{lastMessage[lastMessage.length - 1]?.text || messageLast?.text}</p>
+                        <p className='font-semibold subpixel-antialiased line-clamp-1 text-sm  w-[80px] h-5'>{lastMessage[lastMessage.length - 1]?.text || messageLast?.text}</p>
 
                         {userId !== lastMessage[lastMessage.length - 1]?.sender ?
 

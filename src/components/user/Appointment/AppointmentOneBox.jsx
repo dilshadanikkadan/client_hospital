@@ -182,7 +182,7 @@ const AppointmentOneBox = () => {
                         }
 
                         <label className="border-[1px] border-gray-200 rounded-lg flex items-center gap-2 mt-5">
-                            <Field as="textarea" className="grow" placeholder="Reason For Your Appointment" name='reason'
+                            <Field as="textarea" className="grow pl-2 pt-3" placeholder="Reason For Your Appointment" name='reason'
 
                             />
                         </label>

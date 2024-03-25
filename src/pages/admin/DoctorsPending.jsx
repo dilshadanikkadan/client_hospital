@@ -8,7 +8,6 @@ const DoctorsPending = () => {
     <div className='flex w-full'>
       <SideBar/>
       <div className='w-[80%]'>
-          <DoctorSearchInput/>
           <DoctorPendingList/>
       </div>
     </div>

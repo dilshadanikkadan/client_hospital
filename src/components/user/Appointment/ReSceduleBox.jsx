@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import React, { useEffect, useState } from 'react'
-import { getAllDoctors, makeAppointment, reScheduleAppointment } from '../../../services/api/userRoute'
+import { getAllDoctors, makeAppointment, reScheduleAppointment ,creatChatRoom} from '../../../services/api/userRoute'
 import { current } from '@reduxjs/toolkit';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -53,13 +53,24 @@ const ReSceduleBox = () => {
         setSelectedDoctor(event.target.value);
     };
     const slectedDoctorData = allDoctors?.filter((x) => x?.lastname == selectedDoctor?.split(" ")[1]);
-    console.log(selectedDoctor);
-
-
-    const {mutate:rescheduleMutate}= useMutation({
-        mutationFn:reScheduleAppointment,
+    const {mutate:createRoomMutate} = useMutation({
+        mutationFn:creatChatRoom,
         onSuccess:(data)=>{
-            if(data.success){
+            if(data){
+                console.log("chat also created ");
+            }
+        }
+     })
+    
+
+    const { mutate: rescheduleMutate } = useMutation({
+        mutationFn: reScheduleAppointment,
+        onSuccess: (data) => {
+            if (data.success) {
+                createRoomMutate({
+                        senderId:slectedDoctorData[0]?.user,
+                        reciverId:iduser
+                })
                 navigate("/makeAppointment/_2/sucess", { replace: true })
             }
         }
@@ -81,20 +92,21 @@ const ReSceduleBox = () => {
     const handleSubmit = () => {
 
         rescheduleMutate({
-            prevDoctodId:state?.prevDoctodId,
-            prevTimeId:state?.prevTimeId,
-            prevBookedId:state?.prevBookedId,
-            appointmentId:state?.myAppointmentId,
-            newDoctorId:slectedDoctorData[0]?.user,
-            newTimeId:time?._id,
-            newBookedId:newBookedId,
+            prevDoctodId: state?.prevDoctodId,
+            prevTimeId: state?.prevTimeId,
+            prevBookedId: state?.prevBookedId,
+            appointmentId: state?.myAppointmentId,
+            newDoctorId: slectedDoctorData[0]?.user,
+            newTimeId: time?._id,
+            newBookedId: newBookedId,
+            date: selsctedDate,
             time: {
                 from: time.from,
                 to: time.to,
                 id: time._id
             }
         })
-        
+
     }
 
     return (

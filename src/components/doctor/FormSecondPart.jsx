@@ -67,7 +67,7 @@ const FormSecondPart = () => {
 
 
                                 <label className="border-[1px] border-gray-200 rounded-lg flex items-center gap-2 mt-5">
-                                    <Field as="textarea" className="grow   " placeholder="Qualification" name='qualification'
+                                    <Field as="textarea" className="grow pt-2  pl-2 " placeholder="Qualification" name='qualification'
 
                                     />
                                 </label>

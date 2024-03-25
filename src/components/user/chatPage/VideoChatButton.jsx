@@ -27,7 +27,7 @@ const VideoChatButton = ({ username, recieverId }) => {
                 isDoctor ?
                     <button onClick={() => {
 
-                        !isAuthenticated ? navigate("/doctor/chat/videoCall", { state: recieverId }) : navigate("/chat_doctors/videoCall")
+                        !isAuthenticated ? navigate("/doctor/chat/videoCall", { state: recieverId }) : navigate("/chat_doctors/videoCall",{state: recieverId })
                         dispatch(CallVideoCall())
                     }} className='py-1 px-5 bg-secondary rounded-lg text-white'>Video Call</button> : ""
             }

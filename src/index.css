@@ -26,3 +26,13 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #555; 
   }
+  audio{
+    width: 45vw;
+  }
+  @media (min-width: 768px) {
+
+    
+    audio {
+        width: 23vw;
+    }
+}
