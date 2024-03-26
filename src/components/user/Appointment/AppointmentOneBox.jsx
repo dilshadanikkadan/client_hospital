@@ -18,7 +18,7 @@ const AppointmentOneBox = () => {
     const navigate = useNavigate()
     const [credentials, setCredentials] = useState({})
     const { state } = useLocation()
-
+    console.log(state);
     const { mutate: makePaymentMutate } = useMutation({
         mutationFn: makePayment,
         onSuccess: (data) => {
@@ -28,14 +28,14 @@ const AppointmentOneBox = () => {
         }
     })
 
- const {mutate:createRoomMutate} = useMutation({
-    mutationFn:creatChatRoom,
-    onSuccess:(data)=>{
-        if(data){
-            console.log("chat also created ");
+    const { mutate: createRoomMutate } = useMutation({
+        mutationFn: creatChatRoom,
+        onSuccess: (data) => {
+            if (data) {
+                console.log("chat also created ");
+            }
         }
-    }
- })
+    })
 
     const { mutate: makeAppointmentMutate } = useMutation({
         mutationFn: makeAppointment,
@@ -43,8 +43,8 @@ const AppointmentOneBox = () => {
             if (data.success) {
                 console.log("all are done");
                 createRoomMutate({
-                    senderId:state.doctorListId,
-                    reciverId:state.patient 
+                    senderId: state.doctorListId,
+                    reciverId: state.patient
                 })
                 navigate("/makeAppointment/_2/sucess", { replace: true })
             }
@@ -68,7 +68,7 @@ const AppointmentOneBox = () => {
     })
 
     const handlePaymentAppointment = () => {
-   
+
         makePaymentMutate({
             amount: 799 * 100,
             currency: "INR",

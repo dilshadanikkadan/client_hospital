@@ -25,19 +25,20 @@ const AppointmentTwoBox = () => {
     const [selectedDoctorId, setSelectedDoctorId] = useState("");
     const [time, setTime] = useState(null)
     const [newBookedId, setNewBookedId] = useState("")
-    const [change,setChange]=useState(false)
+    const [change, setChange] = useState(false)
     const [idUser, setIdUser] = useState("");
     const [isFormValid, setIsFormValid] = useState(false);
+    const [timeSelected, setTimeSelected] = useState("")
     const { data: allDoctors } = useQuery({
         queryKey: ["allDoctors"],
         queryFn: getAllDoctors
     })
-    
+
     const { state } = useLocation()
     console.log(state);
     useEffect(() => {
 
-      !change ?  setSelectedDoctor(`${state?.firstname} ${state?.lastname}`) :""
+        !change ? setSelectedDoctor(`${state?.firstname} ${state?.lastname}`) : ""
         setIsFormValid(selectedDoctor && dateChecked && selsctedDate && selectedMonth && time);
     }, [selectedDoctor, dateChecked, selsctedDate, selectedMonth, time]);
 
@@ -64,7 +65,7 @@ const AppointmentTwoBox = () => {
     }
 
     const handleSubmit = () => {
-    
+
         navigate("/makeAppointment/_2", {
             state: {
                 bookedId: newBookedId,
@@ -73,11 +74,12 @@ const AppointmentTwoBox = () => {
                 patient: iduser,
                 date: selsctedDate,
                 month: selectedMonth,
-                amount:799,
+                amount: 799,
+                timeSelected:timeSelected,
                 time: {
-                    from: time.from,
-                    to: time.to,
-                    id: time._id
+                    from: time[0].from,
+                    to: time[0].to,
+                    id: time[0]._id
                 }
 
 
@@ -85,10 +87,11 @@ const AppointmentTwoBox = () => {
         })
 
     }
-
+console.log("timeSelected",timeSelected);
+console.log("time",time);
     return (
         <div className="form w-[60%] md:w-[28%]  m-auto mt-10 flex flex-col relative custom-select  ">
-               {
+            {
                 selectedDoctor?.length > 0 && selectedDoctor && slectedDoctorData?.length > 0 ? (
                     <div className='min-w-[10vw] hidden md:h-[15vh] lg:h-[28vh] shadow-md  absolute right-[-50%] md:flex flex-col items-center '>
                         <img className='h-24 w-24 rounded-lg object-cover' src={slectedDoctorData[0].profileImage} alt="" />
@@ -152,12 +155,13 @@ const AppointmentTwoBox = () => {
                 <div className="wrap w-[90%] m-auto mt-5 flex flex-wrap gap-3">
                     {
                         dateChecked ?
-                            slectedDoctorData[0]?.BookedDates?.filter((x) => x.date === selsctedDate)[0].time?.map((timeData) => (
+                            slectedDoctorData[0]?.BookedDates?.find((x) => x.date === selsctedDate).time[0].availbaleTimes.map((timeData) => (
 
                                 <div
-                                    className={`dateBox w-[40%] h-8 ${timeData?.status === "success" ? "hidden" : "flex"}   rounded-lg relative ${time?.to === timeData?.to ? "bg-secondary" : "bg-[#8FE82B]"}  flex  items-center  justify-center `} onClick={() => handleTime(timeData)}>
-
-                                    <p className='text-white text-1xl'>{timeData?.from} to {timeData?.to} </p>
+                                    className={`dateBox w-[40%] h-8 ${timeData?.status === "booked" ? "hidden" : "flex"} cursor-pointer   rounded-lg relative ${timeSelected === timeData?.from ? "bg-secondary" : "bg-[#8FE82B]"}  flex  items-center  justify-center `} onClick={() => handleTime(slectedDoctorData[0]?.BookedDates?.find((x) => x.date === selsctedDate).time)}>
+                                    <p className='text-white text-1xl' onClick={() => {
+                                        setTimeSelected(timeData?.from)
+                                    }}>{timeData?.from} </p>
                                 </div>
 
                             ))
@@ -176,7 +180,7 @@ const AppointmentTwoBox = () => {
                     onClick={handleSubmit}
                     disabled={!isFormValid}
                 >
-                   Next
+                    Next
                 </button>
 
             </div>

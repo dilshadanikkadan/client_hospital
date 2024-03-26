@@ -44,8 +44,16 @@ const DateModal = ({ setIsOpen, isOpen, itemId, iduser }) => {
     }
 
     const handleAddingTime = (e) => {
-        console.log(to, from);
-        e.preventDefault()
+        console.log({
+            bookedDateId: itemId,
+            userId: iduser,
+            timeObj: {
+                to,
+                from
+            }
+        });
+        e.preventDefault();
+
         addTimeMutate({
             bookedDateId: itemId,
             userId: iduser,

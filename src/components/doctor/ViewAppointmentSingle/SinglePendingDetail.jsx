@@ -54,7 +54,7 @@ const SinglePendingDetail = () => {
                                 </div>
                                 <div className="info  flex justify-between text-lg">
                                     <p>Time</p>
-                                    <p>{singleAppointment?.time.from}pm to {singleAppointment?.time.to}</p>
+                                    <p>{singleAppointment?.timeSelected}</p>
                                 </div>
                                 <div className="info  flex justify-between text-lg">
                                     <p>Status</p>

@@ -34,14 +34,15 @@ const ViewAppointmentBox = () => {
     })
     const currentAppintment = myAppointment?.find((x)=> x.status === "pending")
 
-    console.log("currentAppintment",currentAppintment._id);
+    console.log("currentAppintment",currentAppintment?._id);
     const handleCancelAppointment = () => {
          console.log(deleteAppointment);
         deleteAppointment({
             appointmentId: currentAppintment?._id,
             timeId: currentAppintment?.time.id,
             doctorListId: currentAppintment?.doctorListId,
-            bookedId: currentAppintment?.bookedId
+            bookedId: currentAppintment?.bookedId,
+            timeSelected:currentAppintment?.timeSelected
         })
       
     }
@@ -71,7 +72,7 @@ const ViewAppointmentBox = () => {
                             </div>
                             <div className="info  flex justify-between text-lg">
                                 <p>Time</p>
-                                <p>{currentAppintment?.time.from}pm to  {currentAppintment?.time.to}pm</p>
+                                <p>{currentAppintment?.timeSelected}pm</p>
                             </div>
                             <div className="info  flex justify-between text-lg">
                                 <p>Status</p>
@@ -107,6 +108,7 @@ const ViewAppointmentBox = () => {
                     prevTimeId: currentAppintment?.time.id,
                     prevDoctodId: currentAppintment?.doctorListId,
                     prevBookedId: currentAppintment?.bookedId,
+                    prevTimeSelected:currentAppintment?.timeSelected
                     }})}>Reshedule</button>
                 <button className='mt-6 bg-secondary text-white  py-3 px-6 rounded-lg ' onClick={handleCancelAppointment}>Cancel</button>
             </div>

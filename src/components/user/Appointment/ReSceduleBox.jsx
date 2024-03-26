@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import React, { useEffect, useState } from 'react'
-import { getAllDoctors, makeAppointment, reScheduleAppointment ,creatChatRoom} from '../../../services/api/userRoute'
+import { getAllDoctors, makeAppointment, reScheduleAppointment, creatChatRoom } from '../../../services/api/userRoute'
 import { current } from '@reduxjs/toolkit';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -28,13 +28,14 @@ const ReSceduleBox = () => {
     const [change, setChange] = useState(false)
     const [idUser, setIdUser] = useState("");
     const [isFormValid, setIsFormValid] = useState(false);
+    const [timeSelected, setTimeSelected] = useState("")
+
     const { data: allDoctors } = useQuery({
         queryKey: ["allDoctors"],
         queryFn: getAllDoctors
     })
 
     const { state } = useLocation()
-    console.log(state);
     useEffect(() => {
         if (state !== null || undefined) {
             !change ? setSelectedDoctor(`${state?.firstname} ${state?.lastname}`) : ""
@@ -53,28 +54,29 @@ const ReSceduleBox = () => {
         setSelectedDoctor(event.target.value);
     };
     const slectedDoctorData = allDoctors?.filter((x) => x?.lastname == selectedDoctor?.split(" ")[1]);
-    const {mutate:createRoomMutate} = useMutation({
-        mutationFn:creatChatRoom,
-        onSuccess:(data)=>{
-            if(data){
+    const { mutate: createRoomMutate } = useMutation({
+        mutationFn: creatChatRoom,
+        onSuccess: (data) => {
+            if (data) {
                 console.log("chat also created ");
             }
         }
-     })
-    
+    })
+
 
     const { mutate: rescheduleMutate } = useMutation({
         mutationFn: reScheduleAppointment,
         onSuccess: (data) => {
             if (data.success) {
                 createRoomMutate({
-                        senderId:slectedDoctorData[0]?.user,
-                        reciverId:iduser
+                    senderId: slectedDoctorData[0]?.user,
+                    reciverId: iduser
                 })
                 navigate("/makeAppointment/_2/sucess", { replace: true })
             }
         }
     })
+    console.log(state);
 
     const handleDateBoxClick = (dates) => {
         setDateChecked(true)
@@ -86,10 +88,27 @@ const ReSceduleBox = () => {
 
 
     const handleTime = (obj) => {
-        setTime(obj)
+        setTime(obj);
     }
-
     const handleSubmit = () => {
+
+        console.log({
+            prevDoctodId: state?.prevDoctodId,
+            prevTimeId: state?.prevTimeId,
+            prevBookedId: state?.prevBookedId,
+            appointmentId: state?.myAppointmentId,
+            newDoctorId: slectedDoctorData[0]?.user,
+            newTimeId: time[0]?._id,
+            newBookedId: newBookedId,
+            date: selsctedDate,
+            prevTimeSelected:state?.prevTimeSelected,
+            timeSelected,
+            time: {
+                from: time[0].from,
+                to: time[0].to,
+                id: time[0]._id
+            }
+        });
 
         rescheduleMutate({
             prevDoctodId: state?.prevDoctodId,
@@ -97,13 +116,15 @@ const ReSceduleBox = () => {
             prevBookedId: state?.prevBookedId,
             appointmentId: state?.myAppointmentId,
             newDoctorId: slectedDoctorData[0]?.user,
-            newTimeId: time?._id,
+            newTimeId: time[0]?._id,
             newBookedId: newBookedId,
+            prevTimeSelected:state?.prevTimeSelected,
             date: selsctedDate,
+            timeSelected,
             time: {
-                from: time.from,
-                to: time.to,
-                id: time._id
+                from: time[0].from,
+                to: time[0].to,
+                id: time[0]._id
             }
         })
 
@@ -176,12 +197,14 @@ const ReSceduleBox = () => {
                 <div className="wrap w-[90%] m-auto mt-5 flex flex-wrap gap-3">
                     {
                         dateChecked ?
-                            slectedDoctorData[0]?.BookedDates?.filter((x) => x.date === selsctedDate)[0].time?.map((timeData) => (
+                            slectedDoctorData[0]?.BookedDates?.find((x) => x.date === selsctedDate).time[0].availbaleTimes?.map((timeData) => (
 
                                 <div
-                                    className={`dateBox w-[40%] h-8 ${timeData?.status === "success" ? "hidden" : "flex"}   rounded-lg relative ${time?.to === timeData?.to ? "bg-secondary" : "bg-[#8FE82B]"}  flex  items-center  justify-center `} onClick={() => handleTime(timeData)}>
+                                    className={`dateBox w-[40%] h-8 ${timeData?.status === "booked" ? "hidden" : "flex"}   rounded-lg relative ${timeSelected === timeData?.from ? "bg-secondary" : "bg-[#8FE82B]"}  flex cursor-pointer  items-center  justify-center `} onClick={() => handleTime(slectedDoctorData[0]?.BookedDates?.find((x) => x.date === selsctedDate).time)}>
 
-                                    <p className='text-white text-1xl'>{timeData?.from} to {timeData?.to} </p>
+                                    <p className='text-white text-1xl' onClick={() => {
+                                        setTimeSelected(timeData?.from)
+                                    }}>{timeData?.from} </p>
                                 </div>
 
                             ))

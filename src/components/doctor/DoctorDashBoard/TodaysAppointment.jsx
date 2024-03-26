@@ -20,7 +20,7 @@ const TodaysAppointment = () => {
         {
           patientsPending?.length > 0 ?
 
-            patientsPending.map((patient) => (
+            patientsPending.slice(0, 2).map((patient) => (
               <div className="user flex gap-10 items-center mt-10">
                 <img className='w-16 h-16 object-cover rounded-full' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPjGnnelatTe1FbI6RHusiWG4wkbtmnjVC9uTBkSBX_g&s" alt="" />
                 <p className='text-lg font-semibold capitalize'>{patient?.lastname}</p>
