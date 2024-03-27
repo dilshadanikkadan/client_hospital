@@ -12,6 +12,7 @@ import { useMutation } from '@tanstack/react-query';
 import { userLogout } from '../../services/api/userRoute';
 import { logoutAdmin } from '../../store/redux/slices/AdminSlice';
 import { useDispatch } from 'react-redux';
+import BarChartIcon from '@mui/icons-material/BarChart';
 const SideBar = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -24,7 +25,7 @@ const SideBar = () => {
     })
     const handleLogout = () => {
         adminLogoutMutate()
-         dispatch(logoutAdmin())
+        dispatch(logoutAdmin())
 
     }
     return (
@@ -62,20 +63,24 @@ const SideBar = () => {
                             <NotificationsNoneOutlinedIcon />
                             <p>Notification</p>
                         </NavLink>
-                        
-                        
+
+
                         <NavLink to="/admin/license" className={({ isActive }) => isActive ? "active flex items-center gap-3 bg-slate-100" : 'flex items-center gap-3'} >
-                            <CreditScoreIcon/>
+                            <CreditScoreIcon />
                             <p>License</p>
                         </NavLink>
 
+                        <NavLink to="/admin/analystics" className={({ isActive }) => isActive ? "active flex items-center gap-3 bg-slate-100" : 'flex items-center gap-3'} >
+                            <BarChartIcon />
+                            <p>Analaystics</p>
+                        </NavLink>
                         <NavLink to="/payment" className={({ isActive }) => isActive ? "active" : 'flex items-center gap-3'} >
                             <PaymentOutlinedIcon />
                             <p>Payment</p>
                         </NavLink>
                     </div>
                     <div onClick={handleLogout} to="/logout" className='flex items-center gap-3 cursor-pointer' >
-                        <LogoutOutlinedIcon  />
+                        <LogoutOutlinedIcon />
                         <p>Logout</p>
                     </div>
                 </div>

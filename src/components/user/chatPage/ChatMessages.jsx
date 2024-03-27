@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { singleuser } from '../../../services/api/adminRoute';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { format, render } from 'timeago.js';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { readMessage } from '../../../services/api/userRoute';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { deletChat } from '../../../services/api/doctorRoute';
 
 function formateTime(timestamp) {
     const date = new Date(timestamp);
     let hours = date.getHours();
     const minutes = String(date.getMinutes()).padStart(2, '0');
     const period = hours >= 12 ? 'PM' : 'AM';
-
     hours = hours % 12;
     hours = hours ? hours : 12;
-
     return `${hours}:${minutes} ${period}`;
 }
 
-const ChatMessages = ({ chatsMembers, messageLast,userId, time, lastMessage, SetCurrentChat, currentUser, user, SetUser, sendDataToParent }) => {
+const ChatMessages = ({ chatsMembers, chatId, messageLast, userId, time, lastMessage, SetCurrentChat, currentUser, user, SetUser, sendDataToParent }) => {
     const friend = chatsMembers.participants.find((user) => user !== currentUser);
+    const queryClient = useQueryClient()
     const { data: singleUser, isLoading } = useQuery({
         queryKey: friend ? ["user", friend] : undefined,
         queryFn: singleuser,
@@ -27,7 +28,14 @@ const ChatMessages = ({ chatsMembers, messageLast,userId, time, lastMessage, Set
     const sendCuurrentuser = () => {
         return sendDataToParent(singleUser)
     }
-
+    const { mutate: deletChatMuatate } = useMutation({
+        mutationFn: deletChat,
+        onSuccess: (data) => {
+            if (data) {
+                queryClient.invalidateQueries(["conversation"])
+            }
+        }
+    })
     useEffect(() => {
 
         console.log(singleUser);
@@ -36,7 +44,9 @@ const ChatMessages = ({ chatsMembers, messageLast,userId, time, lastMessage, Set
 
     }, [chatsMembers, SetCurrentChat]);
 
-
+    const handleDeleteChat = () => {
+        deletChatMuatate(chatId)
+    }
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -50,8 +60,9 @@ const ChatMessages = ({ chatsMembers, messageLast,userId, time, lastMessage, Set
         <>
             <div className=' h-[5rem]  w-[90%]  flex  gap-3 items-center  mx-auto'>
                 <img className='w-12 h-12 object-cover object-top rounded-full' src={singleUser?.profilePicture} alt="" />
-                <div className="info flex flex-col w-full">
-                    <p className='font-semibold capitalize'> {singleUser.username.split(" ")[0] } </p>
+                <div className="info flex flex-col relative w-full">
+                    <DeleteIcon className='absolute right-0 top-[-20%]' onClick={handleDeleteChat} fontSize='1rem' />
+                    <p className='font-semibold capitalize'> {singleUser.username.split(" ")[0]} </p>
                     <div className='flex  justify-between w-full  '>
                         <p className='font-semibold subpixel-antialiased line-clamp-1 text-sm  w-[80px] h-5'>{lastMessage[lastMessage.length - 1]?.text || messageLast?.text}</p>
 
@@ -59,7 +70,7 @@ const ChatMessages = ({ chatsMembers, messageLast,userId, time, lastMessage, Set
 
                             <div className='relative top-[-18px]'>
 
-                                <p className='text-sm'>{formateTime(lastMessage[lastMessage.length - 1]?.time || messageLast?.time) }</p>
+                                <p className='text-sm'>{formateTime(lastMessage[lastMessage.length - 1]?.time || messageLast?.time)}</p>
                                 {
                                     lastMessage.length > 0 &&
                                     <div className="badge bg-secondary text-white badge-sm absolut">

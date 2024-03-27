@@ -11,6 +11,7 @@ const AppointmentHistoryBox = () => {
         queryKey: ["myAppointnts", userId],
         queryFn: myAppointments
     })
+    const completedAppointments = myAppointmentHistory?.filter((x)=> x.status == "completed")
     return (
         <div>
 
@@ -19,7 +20,7 @@ const AppointmentHistoryBox = () => {
 
 
                 {
-                    myAppointmentHistory?.map((appointment) => (
+                    completedAppointments?.map((appointment) => (
                         <div className="wrapper w-[90%] mt-10 border-[1px] border-gray-200 mx-auto shadow-md">
                             <div className="user  flex  gap-5 items-center mt-7 justify-between mx-4 mb-1 border-b-[1px] border-gray-200 pb-2">
                                 <div className="div flex items-center justify-center gap-5">
@@ -27,7 +28,7 @@ const AppointmentHistoryBox = () => {
                                     <p className='text-lg  font-semibold capitalize'>{appointment?.doctor?.lastname}</p>
                                 </div>
                                 <div className="edit flex gap-3">
-                                    <Link className='bg-secondary text-white  font-info px-5 py-2 rounded-md'> Details</Link>
+                                    <Link to={`/appointmentHistory/${appointment?._id}`} className='bg-secondary text-white  font-info px-5 py-2 rounded-md'> Details</Link>
                                     <button className='bg-[#8FE82B] text-white  font-info px-5 py-1 rounded-md  hidden md:block ' >{appointment?.status}</button>
                                 </div>
                             </div>

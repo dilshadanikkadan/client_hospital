@@ -49,7 +49,7 @@ const DcotorsViewBar = ({ isOpen, setIsOpen, setSelectedUser, allConversation, c
                             }}>
 
 
-                                <ChatMessages messageLast={item?.messageLast}  userId={userId} time={item?.createdAt} lastMessage={item?.lastMessage} SetCurrentChat={SetCurrentChat} sendDataToParent={sendDataToParent} user={user} SetUser={SetUser} chatsMembers={item} currentUser={userId} />
+                                <ChatMessages chatId={item?._id} messageLast={item?.messageLast}  userId={userId} time={item?.createdAt} lastMessage={item?.lastMessage} SetCurrentChat={SetCurrentChat} sendDataToParent={sendDataToParent} user={user} SetUser={SetUser} chatsMembers={item} currentUser={userId} />
                             </div>
                         ))
                     }

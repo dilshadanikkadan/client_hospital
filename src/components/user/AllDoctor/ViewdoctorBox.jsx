@@ -103,7 +103,7 @@ const ViewdoctorBox = () => {
                     setIsOpen={setIsOpen}
                     doctorListId={doctor?.user}
                     doctor={doctor?._id}
-                    patient={myAppointment?.patient}
+                    patient={appointmentReview?.patient}
                 />
             }
 

@@ -384,3 +384,14 @@ export const myAppointments =async(id)=>{
       console.log(error);
    }
 }
+export const singleAppointmentHistory =async(id)=>{
+   console.log("my dilu ",id);
+   const patiendId = id.queryKey[1];
+
+   try {
+      const res = await getRequest(`api/user/single_appointments/${patiendId}`);
+      return res.data
+   } catch (error) {
+      console.log(error);
+   }
+}

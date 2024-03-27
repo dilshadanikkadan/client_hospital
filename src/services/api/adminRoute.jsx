@@ -168,3 +168,29 @@ export const verifyApplicationDoctor =async(userId)=>{
         
     }
 }
+
+export const  userAnalstics =async ()=>{
+    try {
+        const res = await getRequest("api/admin/getUser_analytics");
+
+        if(res.status === 200){
+            return res.data
+        }
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const  doctorSideProfit =async ()=>{
+    try {
+        const res = await getRequest("api/admin/getDoctors_Profilts");
+
+        if(res.status === 200){
+            return res.data
+        }
+        
+    } catch (error) {
+        console.log(error);
+    }
+}

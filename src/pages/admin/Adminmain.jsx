@@ -12,6 +12,7 @@ import DoctorsPending from './DoctorsPending'
 import SinglePendingDoctor from './SinglePendingDoctor'
 import { AdminLoginProtectRoute } from '../../store/others/AdminLoginProtectRoute'
 import LicensePage from './LicensePage'
+import AnaysticsPage from './AnaysticsPage'
 const router = createBrowserRouter([
   {
     path: '/admin',
@@ -28,6 +29,14 @@ const router = createBrowserRouter([
       <AdminProtectRoute>
 
         <Users />
+      </AdminProtectRoute>
+  },
+  {
+    path: 'admin/analystics',
+    element:
+      <AdminProtectRoute>
+
+        <AnaysticsPage />
       </AdminProtectRoute>
   },
   {
@@ -60,17 +69,17 @@ const router = createBrowserRouter([
   },
   {
     path: 'admin/login',
-    element: 
-    <AdminLoginProtectRoute>
+    element:
+      <AdminLoginProtectRoute>
 
-    <AdminLogin />
-    </AdminLoginProtectRoute>
+        <AdminLogin />
+      </AdminLoginProtectRoute>
   },
   {
     path: 'admin/license',
-    element: 
+    element:
 
-    <LicensePage />
+      <LicensePage />
   }
 ])
 

@@ -39,6 +39,7 @@ import ChatWithPatients from '../doctor/ChatWithPatients'
 import VideoChatPage from '../doctor/VideoChatPage'
 import { CallStateRoute } from '../../store/others/CallState'
 import AppointmentHistoryPage from './AppointmentHistoryPage'
+import AppointmentHistorySingleView from './AppointmentHistorySingleView'
 const Patientmain = () => {
 
   const router = createBrowserRouter([
@@ -158,6 +159,11 @@ const Patientmain = () => {
       path: "/appointmentHistory",
       element:
         <AppointmentHistoryPage />
+    },
+    {
+      path: "/appointmentHistory/:id",
+      element:
+        <AppointmentHistorySingleView />
     },
     {
       path: "/chat_doctors",

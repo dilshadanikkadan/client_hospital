@@ -1,4 +1,4 @@
-import { getRequest, postRequest } from "../axios"
+import { deleterequest, getRequest, postRequest } from "../axios"
 
 
 
@@ -100,13 +100,26 @@ export const getPendingRequest = async(id) => {
 
 }
 
-export const approveAppointment = async(apppointmentId)=>{
+export const approveAppointment = async(data)=>{
     try {
-        const res = await postRequest("api/doctor/approve_appointment",{apppointmentId})
+        const res = await postRequest("api/doctor/approve_appointment",data)
         if(res.status == 200){
             return  {success:true}
         }
     } catch (error) {
         console.log(error);
+    }
+}
+
+export const deletChat = async(id)=>{
+    try {
+        const res = await deleterequest(`api/chat/delete_chat/${id}`);
+        if(res.status == 200){
+            return true
+        }
+
+    } catch (error) {
+        console.log(error);
+        
     }
 }
