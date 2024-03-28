@@ -54,9 +54,9 @@ const SideBar = () => {
                             <p>Doctors</p>
                         </NavLink>
 
-                        <NavLink to="/services" className={({ isActive }) => isActive ? "active" : 'flex items-center gap-3'} >
+                        <NavLink to="/admin/banner" className={({ isActive }) => isActive ? "active flex items-center gap-3 bg-slate-100" : 'flex items-center gap-3'} >
                             <AddBusinessOutlinedIcon />
-                            <p>Service</p>
+                            <p>Banner</p>
                         </NavLink>
 
                         <NavLink to="/notifications" className={({ isActive }) => isActive ? "active" : 'flex items-center gap-3'} >

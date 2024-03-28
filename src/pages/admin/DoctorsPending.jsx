@@ -5,12 +5,12 @@ import DoctorPendingList from '../../components/admin/DoctorPending/DoctorPendin
 
 const DoctorsPending = () => {
   return (
-    <div className='flex w-full'>
-      <SideBar/>
-      <div className='w-[80%]'>
-          <DoctorPendingList/>
+      <div className='flex w-full'>
+        <SideBar/>
+        <div className='w-[80%]'>
+            <DoctorPendingList/>
+        </div>
       </div>
-    </div>
   )
 }
 

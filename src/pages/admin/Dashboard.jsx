@@ -6,15 +6,11 @@ import Updates from '../../components/admin/DashBoard/Updates'
 const Dashboard = () => {
   return (
     <div className='flex w-full'>
-      <SideBar />
-      <div className="div w-[80%] ">
-        <Box />
-        <Updates />
-      </div>
-
-        {/* <Box /> */}
-
+    <SideBar/>
+    <div className='w-[80%]'>
+        <DoctorPendingList/>
     </div>
+  </div>
   )
 }
 

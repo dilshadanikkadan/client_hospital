@@ -87,7 +87,7 @@ const FormThreePart = () => {
     return (
 
         <div>
-            {(isPending && licenseImage && image) ? <LoadingPage/> :
+            {(isPending && licenseImage && image) ? <LoadingPage /> :
 
                 <div>
                     {

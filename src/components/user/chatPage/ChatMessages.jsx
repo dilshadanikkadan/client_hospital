@@ -70,7 +70,7 @@ const ChatMessages = ({ chatsMembers, chatId, messageLast, userId, time, lastMes
 
                             <div className='relative top-[-18px]'>
 
-                                <p className='text-sm'>{formateTime(lastMessage[lastMessage.length - 1]?.time || messageLast?.time)}</p>
+                                <p className='text-xs'>{formateTime(lastMessage[lastMessage.length - 1]?.time || messageLast?.time)}</p>
                                 {
                                     lastMessage.length > 0 &&
                                     <div className="badge bg-secondary text-white badge-sm absolut">

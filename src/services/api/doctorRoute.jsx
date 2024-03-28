@@ -87,39 +87,51 @@ export const deleteTime = async (data) => {
     }
 }
 
-export const getPendingRequest = async(id) => {
+export const getPendingRequest = async (id) => {
     const userId = id.queryKey[1]
     try {
-          const res= await getRequest(`api/doctor/get_pendingAppointment/${userId}`);
-          if(res.status === 200){
+        const res = await getRequest(`api/doctor/get_pendingAppointment/${userId}`);
+        if (res.status === 200) {
             return res.data
-          }
+        }
     } catch (error) {
 
     }
 
 }
 
-export const approveAppointment = async(data)=>{
+export const approveAppointment = async (data) => {
     try {
-        const res = await postRequest("api/doctor/approve_appointment",data)
-        if(res.status == 200){
-            return  {success:true}
+        const res = await postRequest("api/doctor/approve_appointment", data)
+        if (res.status == 200) {
+            return { success: true }
         }
     } catch (error) {
         console.log(error);
     }
 }
 
-export const deletChat = async(id)=>{
+export const deletChat = async (id) => {
     try {
         const res = await deleterequest(`api/chat/delete_chat/${id}`);
-        if(res.status == 200){
+        if (res.status == 200) {
             return true
         }
 
     } catch (error) {
         console.log(error);
-        
+
+    }
+}
+
+export const patientsAnalystics = async (id) => {
+    const userId = id.queryKey[1];
+    try {
+        const res = await getRequest(`api/doctor/get_patientAnalystics/${userId}`);
+        if (res.status === 200) {
+            return res.data
+        }
+    } catch (error) {
+
     }
 }

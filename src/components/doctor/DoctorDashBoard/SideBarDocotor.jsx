@@ -19,6 +19,7 @@ import { userLogout } from '../../../services/api/userRoute';
 import MedicationIcon from '@mui/icons-material/Medication';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
+import BarChartIcon from '@mui/icons-material/BarChart';
 
 const SideBarDocotor = () => {
     const [hidden, setHidden] = useState(100)
@@ -88,6 +89,10 @@ const SideBarDocotor = () => {
                         <NavLink to="/doctor/prescription" className={({ isActive }) => isActive ? "active  flex items-center gap-3 bg-slate-100 py-1 pl-1 rounded-md" : 'flex items-center gap-3'} >
                             <MedicationIcon />
                             <p > set Priscription</p>
+                        </NavLink>
+                        <NavLink to="/doctor/analystics" className={({ isActive }) => isActive ? "active flex items-center gap-3 bg-slate-100" : 'flex items-center gap-3'} >
+                            <BarChartIcon />
+                            <p>Analaystics</p>
                         </NavLink>
                         <NavLink to="/payment" className={({ isActive }) => isActive ? "active" : 'flex items-center gap-3'} >
                             <PaymentOutlinedIcon />

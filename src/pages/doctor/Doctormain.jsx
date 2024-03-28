@@ -11,6 +11,7 @@ import ChatWithPatients from './ChatWithPatients'
 import VideoChatPage from './VideoChatPage'
 import PrescriptionPage from './PrescriptionPage'
 import CompletedPatientsPage from './CompletedPatientsPage'
+import PatientsAnalysticsPage from './PatientsAnalysticsPage'
 
 const Doctormain = () => {
   const router = createBrowserRouter([
@@ -54,6 +55,13 @@ const Doctormain = () => {
       path: '/doctor/chat',
       element:
       <ChatWithPatients/>
+
+     
+    },
+    {
+      path: '/doctor/analystics',
+      element:
+      <PatientsAnalysticsPage/>
 
      
     },

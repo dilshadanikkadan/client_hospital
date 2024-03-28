@@ -40,7 +40,8 @@ const SinglePendingDetail = () => {
             })
             approveAppointmentMutate({
                 apppointmentId: singleAppointment?._id,
-                presciptionLink: res.data.url
+                presciptionLink: res.data.url,
+                myId
             })
         } catch (error) {
             console.log(error);
