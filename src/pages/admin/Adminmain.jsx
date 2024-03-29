@@ -14,12 +14,12 @@ import { AdminLoginProtectRoute } from '../../store/others/AdminLoginProtectRout
 import LicensePage from './LicensePage'
 import AnaysticsPage from './AnaysticsPage'
 import BannerPage from './BannerPage'
+import SpecialitiesPage from './SpecialitiesPage'
 const router = createBrowserRouter([
   {
     path: '/admin',
     element:
       <AdminProtectRoute>
-
         <Dashboard />
       </AdminProtectRoute>,
     errorElement: <div>404  not found</div>
@@ -28,7 +28,6 @@ const router = createBrowserRouter([
     path: 'admin/users',
     element:
       <AdminProtectRoute>
-
         <Users />
       </AdminProtectRoute>
   },
@@ -47,10 +46,16 @@ const router = createBrowserRouter([
       </AdminProtectRoute>
   },
   {
+    path: 'admin/specialities',
+    element:
+      <AdminProtectRoute>
+        <SpecialitiesPage />
+      </AdminProtectRoute>
+  },
+  {
     path: 'admin/pending_doctorRequests',
     element:
       <AdminProtectRoute>
-
         <DoctorsPending />
       </AdminProtectRoute>
   },
@@ -58,7 +63,6 @@ const router = createBrowserRouter([
     path: 'admin/pending_doctorRequests/:id',
     element:
       <AdminProtectRoute>
-
         <SinglePendingDoctor />
       </AdminProtectRoute>
   },
@@ -66,7 +70,6 @@ const router = createBrowserRouter([
     path: 'admin/users/:id',
     element:
       <AdminProtectRoute>
-
         <SingleUser />
       </AdminProtectRoute>
   },

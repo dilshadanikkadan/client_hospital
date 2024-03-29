@@ -8,7 +8,8 @@ const Dashboard = () => {
     <div className='flex w-full'>
     <SideBar/>
     <div className='w-[80%]'>
-        <DoctorPendingList/>
+        <Box/>
+        <Updates/>
     </div>
   </div>
   )

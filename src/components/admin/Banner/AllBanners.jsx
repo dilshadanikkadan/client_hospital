@@ -12,7 +12,7 @@ const AllBanners = ({setSelectedBannerObj}) => {
         <div className='mt-10 w-[50%] flex flex-col  h-[75vh] overflow-y-scroll pb-10 border-[1px] border-gray-200' >
             {
                 Allbanners?.filter((x) => x.type === "introPart").map((item) => (
-                    <div onClick={()=> setSelectedBannerObj(item)} className='w-[90%]  mx-auto mt-10 h-[35vh] rounded-md bg-base-200 '>
+                    <div onClick={()=> setSelectedBannerObj(item)} className='w-[90%]  mx-auto mt-10 h-[35vh] border-[1px] border-gray-300 rounded-lg'>
                         <div className='w-full h-full flex mt-4'>
                             <div className="info flex-[1] pl-10 ">
                                 <h3 className='font-semibold'>{item?.title}</h3>
@@ -28,7 +28,7 @@ const AllBanners = ({setSelectedBannerObj}) => {
 
             {
                 Allbanners?.filter((x) => x.type === "health requirement").map((item) => (
-                    <div onClick={()=> setSelectedBannerObj(item)} className='w-[90%]  mx-auto mt-10 h-[35vh] rounded-md bg-base-200 '>
+                    <div onClick={()=> setSelectedBannerObj(item)} className='w-[90%]  mx-auto mt-10 h-[35vh] border-[1px] border-gray-300 rounded-lg'>
                         <div className='w-full h-full flex mt-3 '>
                             <div className="info flex-[2] pl-10 ">
                                 <h3 className='font-semibold'>{item?.title}</h3>
@@ -42,7 +42,7 @@ const AllBanners = ({setSelectedBannerObj}) => {
             }
             {
                 Allbanners?.filter((x) => x.type === "check up banner").map((item) => (
-                    <div onClick={()=> setSelectedBannerObj(item)} className='w-[90%]  mx-auto mt-10 h-[35vh] rounded-md bg-base-200 '>
+                    <div onClick={()=> setSelectedBannerObj(item)} className='w-[90%]  mx-auto mt-10 h-[35vh] border-[1px] border-gray-300 rounded-lg '>
                         <div className='w-full h-full flex mt-3 '>
                             <img className='h-[85%] object-cover flex-[1]' src={item?.image} alt="" />
                             <div className="info flex-[2] pl-10 ">
@@ -58,7 +58,7 @@ const AllBanners = ({setSelectedBannerObj}) => {
 
             {
                 Allbanners?.filter((x) => x.type === "treatment banner").map((item) => (
-                    <div onClick={()=> setSelectedBannerObj(item)} className='w-[90%]  mx-auto mt-10 h-[35vh] rounded-md bg-base-200 '>
+                    <div onClick={()=> setSelectedBannerObj(item)} className='w-[90%]  mx-auto mt-10 h-[35vh] border-[1px] border-gray-300 rounded-lg '>
                         <div className='w-full h-full flex mt-0  flex-col '>
                             <h3 className='text-xs w-[60%] ml-5'>
                               {item?.title}

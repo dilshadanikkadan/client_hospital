@@ -217,3 +217,36 @@ export const getBanners = async () => {
         console.log(error);
     }
 }
+
+export const updateBanner = async(data)=>{
+    try {
+        const res = await postRequest("api/admin/update_banner",data);
+        if (res.status == 200) {
+            return res.data 
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const addSpecialities = async (data)=>{
+    try {
+        const res = await postRequest("api/admin/add_specialities", data)
+        if (res.status === 200) {
+            return res.data
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getSpecialities = async () => {
+    try {
+        const res = await getRequest("api/admin/get_specialities");
+        if (res.status == 200) {
+            return res.data
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}

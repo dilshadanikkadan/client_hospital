@@ -59,9 +59,9 @@ const SideBar = () => {
                             <p>Banner</p>
                         </NavLink>
 
-                        <NavLink to="/notifications" className={({ isActive }) => isActive ? "active" : 'flex items-center gap-3'} >
+                        <NavLink to="/admin/specialities" className={({ isActive }) => isActive ? "active  flex items-center gap-3 bg-slate-100" : 'flex items-center gap-3'} >
                             <NotificationsNoneOutlinedIcon />
-                            <p>Notification</p>
+                            <p>Specialities</p>
                         </NavLink>
 
 

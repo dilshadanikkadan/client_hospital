@@ -1,15 +1,16 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { openEditor } from "react-profile"
 import "react-profile/themes/default"
-import { addbanner, getBanners } from '../../../services/api/adminRoute';
+import { addbanner, getBanners, updateBanner } from '../../../services/api/adminRoute';
 
 const BannerForm = ({ selectBannerObj }) => {
     const [image, setImage] = useState(null);
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("");
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('');
     const [selectBanner, setSelecteBanner] = useState('');
+    const queryClient = useQueryClient()
     const [banner, setBanner] = useState('')
     const handleChange = (e) => {
         setSelecteBanner(e.target.value);
@@ -30,24 +31,35 @@ const BannerForm = ({ selectBannerObj }) => {
     }
 
     const { mutate: addbannerMutate } = useMutation({
-        mutationFn: addbanner,
+        mutationFn: updateBanner,
         onSuccess: (data) => {
             if (data) {
-
+                setImage(null);
+                setTitle("");
+                setDescription("");
+                selectBannerObj.image = null;
+                queryClient.invalidateQueries(["all banners"])
             }
         }
     })
-
+    useEffect(() => {
+        if (selectBannerObj?.title) {
+            setTitle(selectBannerObj.title);
+            setDescription(selectBannerObj.description);
+            setSelecteBanner(selectBannerObj?.type);
+        }
+    }, [selectBannerObj]);
 
     const hanleUpdate = async () => {
         const data = new FormData()
         data.append("file", image)
         data.append("upload_preset", "application");
         try {
-            const res = await axios.post("https://api.cloudinary.com/v1_1/dvqq5x5x6/image/upload", data, {
-                withCredentials: false
-            })
-            const { url: bannerImage } = res.data
+                const res = await axios.post("https://api.cloudinary.com/v1_1/dvqq5x5x6/image/upload", data, {
+                    withCredentials: false
+                })
+
+            const { url: bannerImage } = res?.data
             console.log({
                 title,
                 image: bannerImage,
@@ -93,12 +105,12 @@ const BannerForm = ({ selectBannerObj }) => {
 
             <div className='mt-3'>
                 <h3>Title</h3>
-                <textarea onChange={(e) => setTitle(e.target.value)} className="textarea textarea-bordered h-14 w-[100%]" placeholder="Title" value={selectBannerObj?.title}></textarea>
+                <textarea onChange={(e) => setTitle(e.target.value)} className="textarea textarea-bordered h-14 w-[100%]" placeholder="Title" value={title}></textarea>
             </div>
 
             <div className='mt-3'>
                 <h3>Description</h3>
-                <textarea onChange={(e) => setDescription(e.target.value)} className="textarea textarea-bordered h-24 w-[100%]" placeholder="Description" value={selectBannerObj?.description}></textarea>
+                <textarea onChange={(e) => setDescription(e.target.value)} className="textarea textarea-bordered h-24 w-[100%]" placeholder="Description" value={description}></textarea>
             </div>
             <select
                 id="doctorSelect"
