@@ -395,3 +395,13 @@ export const singleAppointmentHistory =async(id)=>{
       console.log(error);
    }
 }
+
+export const contactUs= async(data)=>{
+   try {
+      const res = await postRequest("api/user/contactUs",data);
+      return res.data
+   } catch (error) {
+      console.log(error);
+      
+   }
+} 

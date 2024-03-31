@@ -65,7 +65,7 @@ const SideBarDocotor = () => {
                             <p >Appointment</p>
                         </NavLink>
 
-                        <NavLink to="/doctor/patientHistory" className={({ isActive }) => isActive ? "active  flex items-center gap-3 bg-slate-100" : 'flex items-center gap-3'} >
+                        <NavLink to="/doctor/patientHistory" className={({ isActive }) => isActive ? "active  flex items-center gap-3 bg-slate-100 py-1 pl-1 rounded-md" : 'flex items-center gap-3'} >
                             <PersonAddAltOutlinedIcon />
                             <p >Patients</p>
                         </NavLink>
@@ -90,7 +90,7 @@ const SideBarDocotor = () => {
                             <MedicationIcon />
                             <p > set Priscription</p>
                         </NavLink>
-                        <NavLink to="/doctor/analystics" className={({ isActive }) => isActive ? "active flex items-center gap-3 bg-slate-100" : 'flex items-center gap-3'} >
+                        <NavLink to="/doctor/analystics" className={({ isActive }) => isActive ? "active flex items-center gap-3 bg-slate-100 py-1 pl-1 rounded-md" : 'flex items-center gap-3'} >
                             <BarChartIcon />
                             <p>Analaystics</p>
                         </NavLink>

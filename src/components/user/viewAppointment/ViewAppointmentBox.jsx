@@ -42,7 +42,8 @@ const ViewAppointmentBox = () => {
             timeId: currentAppintment?.time.id,
             doctorListId: currentAppintment?.doctorListId,
             bookedId: currentAppintment?.bookedId,
-            timeSelected:currentAppintment?.timeSelected
+            timeSelected:currentAppintment?.timeSelected,
+            myId:iduser
         })
       
     }

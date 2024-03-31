@@ -83,11 +83,7 @@ const Navbar = () => {
             <img onClick={() => setIsOpen(!iseOpen)} className='h-10 w-10  md:w-14 md:h-14 md:hidden' src="https://naziya-hospital.netlify.app/assets/img/icons/menu.png" alt="" />
           </div>
 
-
-
-
           <div className={`right transition-all duration-300   ${!iseOpen ? "hidden" : "gap-3"}  flex-[7] flex flex-col  md:flex md:flex-row  md:items-center  md:gap-4 lg:gap-10 mt-5`}>
-
             <NavLink
               to="/"
               className={({ isActive, isPending }) =>
@@ -99,22 +95,15 @@ const Navbar = () => {
             <NavLink to="/about" className={({ isActive, isPending }) => isActive ? "active  text-xl text-secondary " : 'text-xl text text-[#9095A1]'} >
               About
             </NavLink>
-
             <NavLink to="/service" className={({ isActive }) => isActive ? "active  text-xl text-secondary " : 'text-xl text text-[#9095A1]'} >
               Service
             </NavLink>
             <NavLink to="/Ourdoctors" className={({ isActive }) => isActive ? "active  text-xl text-secondary " : 'text-xl text text-[#9095A1]'} >
               Doctors
             </NavLink>
-
-            <NavLink to="/blogs" className={({ isActive }) => isActive ? "active  text-xl text-secondary " : 'text-xl text text-[#9095A1]'} >
-              Blogs
-            </NavLink>
-
             <NavLink to="/contact" className={({ isActive }) => isActive ? "active  text-xl text-secondary " : 'text-xl text text-[#9095A1]'} >
               Contact
             </NavLink>
-
             {
               isAuthenticated ?
                 <div className='flex gap-20 pb-5 h-full items-center cursor-pointer md:gap-5 md:pb-0'>

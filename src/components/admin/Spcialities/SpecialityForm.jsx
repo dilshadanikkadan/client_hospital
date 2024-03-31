@@ -7,7 +7,9 @@ const SpecialityForm = () => {
     const [image, setImage] = useState(null);
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('');
-    const queryClient = useQueryClient()
+    const [error, setError] = useState(null); 
+    const queryClient = useQueryClient();
+
     const handleImage = async (e) => {
         const file = e.target.files[0];
         const reader = new FileReader();
@@ -25,37 +27,41 @@ const SpecialityForm = () => {
                 queryClient.invalidateQueries(["all specialities"])
             }
         }
-    })
+    });
+
     const handleAdd = async () => {
-        const data = new FormData()
-        data.append("file", image)
+        if (!title.trim() || !image || !description.trim()) {
+            setError("All fields are required.");
+            return;
+        }
+
+        const data = new FormData();
+        data.append("file", image);
         data.append("upload_preset", "application");
         try {
             const res = await axios.post("https://api.cloudinary.com/v1_1/dvqq5x5x6/image/upload", data, {
                 withCredentials: false
-            })
-
-            const { url: specialityImage } = res?.data
-            console.log({
-                title,
-                image: specialityImage,
-                description,
             });
+
+            const { url: specialityImage } = res?.data;
 
             addSpecialitieMutate({
                 title,
                 image: specialityImage,
                 description,
-            })
+            });
 
+            setImage(null);
+            setTitle("");
+            setDescription("");
+            setError(null); 
         } catch (error) {
             console.log(error);
         }
     };
 
-
     return (
-        <div className='w-[40%]   mt-10 ml-10'>
+        <div className='w-[40%] mt-10 ml-10'>
             <div className='border-dashed border-2 border-secondary rounded-2xl h-[40vh] flex flex-col items-center justify-center'>
                 {!image ?
                     <p>Upload Image</p>
@@ -88,6 +94,8 @@ const SpecialityForm = () => {
                 <h3>Description</h3>
                 <textarea onChange={(e) => setDescription(e.target.value)} className="textarea textarea-bordered h-24 w-[100%]" placeholder="Description" value={description}></textarea>
             </div>
+
+            {error && <p className="text-red-500 mt-2">{error}</p>}
 
             <button onClick={handleAdd} className='py-1 rounded-lg px-5 mt-3 relative ml-[40%] bg-secondary text-white'>Add</button>
         </div>

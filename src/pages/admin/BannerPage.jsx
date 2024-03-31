@@ -4,16 +4,16 @@ import AllBanners from '../../components/admin/Banner/AllBanners'
 import BannerForm from '../../components/admin/Banner/BannerForm'
 
 const BannerPage = () => {
-    const [selectBannerObj,setSelectedBannerObj] = useState()
+  const [selectBannerObj, setSelectedBannerObj] = useState(null)
 
   return (
     <div className='flex w-full'>
-    <SideBar/>
-    <div className='w-[80%] flex'>
-        <AllBanners setSelectedBannerObj={setSelectedBannerObj}/>
-        <BannerForm  selectBannerObj={selectBannerObj}/>
+      <SideBar />
+      <div className='w-[80%] flex'>
+        <AllBanners setSelectedBannerObj={setSelectedBannerObj} />
+        <BannerForm selectBannerObj={selectBannerObj} />
+      </div>
     </div>
-  </div>
   )
 }
 

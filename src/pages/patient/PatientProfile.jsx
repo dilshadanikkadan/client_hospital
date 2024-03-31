@@ -18,7 +18,7 @@ const PatientProfile = () => {
             <div className="div flex  flex-col md:flex-row m-auto w-[83%] gap-10">
 
                 <ProfileBox user={singleUser} />
-                <OverViewBoxProfile />
+                <OverViewBoxProfile  user={singleUser}/>
             </div>
         </div>
     )

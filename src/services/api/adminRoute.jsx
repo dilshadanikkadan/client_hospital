@@ -218,18 +218,18 @@ export const getBanners = async () => {
     }
 }
 
-export const updateBanner = async(data)=>{
+export const updateBanner = async (data) => {
     try {
-        const res = await postRequest("api/admin/update_banner",data);
+        const res = await postRequest("api/admin/update_banner", data);
         if (res.status == 200) {
-            return res.data 
+            return res.data
         }
     } catch (error) {
         console.log(error);
     }
 }
 
-export const addSpecialities = async (data)=>{
+export const addSpecialities = async (data) => {
     try {
         const res = await postRequest("api/admin/add_specialities", data)
         if (res.status === 200) {
@@ -248,5 +248,17 @@ export const getSpecialities = async () => {
         }
     } catch (error) {
         console.log(error);
+    }
+}
+
+
+export const deleteSpecialities = async (id) => {
+    try {
+        const res = await deleterequest(`api/admin/delete_specialities/${id} `);
+        if (res.status === 200) {
+            return res.data
+        }
+    } catch (error) {
+
     }
 }

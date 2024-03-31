@@ -38,17 +38,17 @@ const UserListBox = ({ value }) => {
         delete_user(userId);
     };
 
-    const pageSize = 6; 
+    const pageSize = 4;
     const indexOfLastItem = currentPage * pageSize;
     const indexOfFirstItem = indexOfLastItem - pageSize;
     const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
 
     return (
         <div>
-            <div className="wrapper w-[90%] mt-10 border-[1px] h-[64vh] overflow-y-scroll border-gray-200 mx-auto shadow-md">
+            <div className="wrapper w-[90%] mt-10 border-[1px] h-[55vh] overflow-y-scroll border-gray-200 mx-auto shadow-md">
                 {isLoading && <p>loading</p>}
                 {isError && <p>error.</p>}
-
+            
                 {currentData.map((user, i) => (
                     <div key={i} className="user flex gap-5 items-center mt-7 justify-between mx-4 mb-1 border-b-[1px] border-gray-200 pb-2">
                         <div className="div flex items-center justify-center gap-5">
@@ -66,7 +66,6 @@ const UserListBox = ({ value }) => {
 
                 <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                     <div className="modal-box">
-                        <h3 className="font-bold text-lg">Hello!</h3>
                         <p className="py-4">are you sure want to delete {name}</p>
                         <div className="modal-action">
                             <form method="dialog">
@@ -81,7 +80,7 @@ const UserListBox = ({ value }) => {
                 <div>
 
                     {Array.from({ length: Math.ceil(data.length / pageSize) }).map((_, index) => (
-                        <button key={index} onClick={() => setCurrentPage(index + 1)} className={currentPage === index + 1 ? "active bg-secondary px-2 py-1  text-white  rounded-md mx-3" : "bg-secondary px-2 py-1  text-white  rounded-md"}>
+                        <button key={index} onClick={() => setCurrentPage(index + 1)} className={currentPage === index + 1 ? "active bg-secondary px-2 py-1  text-white  rounded-md ml-2" : "bg-secondary px-2 py-1 ml-2  text-white  rounded-md"}>
                             {index + 1}
                         </button>
                     ))}

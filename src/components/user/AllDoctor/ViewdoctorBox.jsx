@@ -32,9 +32,8 @@ const ViewdoctorBox = () => {
 
     });
 
-    console.log("myAppointment" ,myAppointment);
-    const appointmentReview= myAppointment.find((x)=> x.status === "completed" || "pending")
-
+    const appointmentReview= myAppointment?.filter((x)=> x.status === "completed" || "pending");
+    const myReview = reviews?.find((x) => x.patient._id  == userId)
     return (
         <div className='w-[80%] m-auto'>
 
@@ -86,11 +85,11 @@ const ViewdoctorBox = () => {
             </div>
 
             {
-                (appointmentReview?.doctorListId === doctor?.user) && appointmentReview?.status === "completed" && reviews?.length > 0 ?
+                (appointmentReview?.map((x)=> x.doctorListId).includes(doctor?.user)) && (appointmentReview?.map((x)=> x.status).includes("completed")) && (reviews?.map((x)=> x.patient._id).includes(userId))  &&reviews?.length > 0 ?
                     <p onClick={() => setIsOpenEdit(true)} className='py-2 text-center rounded-md  w-[17%] text-white bg-secondary mt-3'>edit </p>
 
                     :
-                    (appointmentReview?.doctorListId === doctor?.user) && appointmentReview?.status === "completed" ?
+                    (appointmentReview?.map((x)=> x.doctorListId).includes(doctor?.user)) && (appointmentReview?.map((x)=> x.status).includes("completed")) ?
                         <p onClick={() => setIsOpen(true)} className='py-2 text-center rounded-md  w-[17%] text-white bg-secondary mt-3'>Review Your Doctor</p>
 
                         :
@@ -103,14 +102,14 @@ const ViewdoctorBox = () => {
                     setIsOpen={setIsOpen}
                     doctorListId={doctor?.user}
                     doctor={doctor?._id}
-                    patient={appointmentReview?.patient}
+                    patient={userId}
                 />
             }
 
 
             {
                 isOpenEdit &&
-                <EditReviewModal reviewId={reviews[0]._id} ratingNum={reviews[0]?.rating} reviewTextUPdating={reviews[0]?.reviewText} setIsOpenEdit={setIsOpenEdit}/>
+                <EditReviewModal reviewId={myReview._id} ratingNum={myReview?.rating} reviewTextUPdating={myReview?.reviewText} setIsOpenEdit={setIsOpenEdit}/>
             }
             <div className="patientreviews mt-10">
                 <h3 className='text-2xl capitalize font-semibold'>Patient Reviews</h3>

@@ -1,6 +1,8 @@
+import { useQuery } from '@tanstack/react-query'
 import { useAnimation, motion } from 'framer-motion'
 import React, { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
+import { getSpecialities } from '../../../services/api/adminRoute'
 
 const CardsService = () => {
   const { inView, ref } = useInView()
@@ -14,32 +16,11 @@ const CardsService = () => {
     }
   }, [inView, controls])
 
-  const specialties = [
-    {
-        specialty: "Cardiology",
-        id: "cardiology",
-        image: "https://naziya-hospital.netlify.app/assets/img/departments/cardiology.jpg",
-        description: "Cardiology is the branch of medicine that deals with the disorders of the heart as well as some parts of the circulatory system."
-      },
-      {
-        specialty: "Neurology",
-        id: "neurology",
-        image: "https://naziya-hospital.netlify.app/assets/img/departments/neurology.jpg",
-        description: "Neurology is the branch of medicine concerned with the study and treatment of disorders of the nervous system."
-    },
-    {
-        specialty: "Dermatology",
-        id: "dermatology",
-        image: "https://charlestondermatology.com/wp-content/uploads/2023/03/skin-care.png",
-        description: "Dermatology is the branch of medicine dealing with the skin, nails, hair (functions & structures) and its diseases."
-    },
-    {
-        specialty: "Pediatrics",
-        id: "pediatrics",
-        image: "https://naziya-hospital.netlify.app/assets/img/departments/pediatric.jpg",
-        description: "Pediatrics is the branch of medicine that involves the medical care of infants, children, and adolescents."
-    }
-];
+
+const { data: allSpecialities } = useQuery({
+  queryKey: ["all specialities"],
+  queryFn: getSpecialities
+})
 
   return (
     <div>
@@ -50,7 +31,7 @@ const CardsService = () => {
         <div className="cardWrapper w-[83%] ml-[17%]  -500 flex gap-3 flex-wrap">
 
           {
-            specialties .map((item, i) => (
+            allSpecialities?.map((item, i) => (
               <motion.div
                 initial={{ opacity: 0, translateX: -100, translateY: -100 }}
                 animate={controls}
@@ -65,11 +46,6 @@ const CardsService = () => {
               </motion.div>
             ))
           }
-
-
-
-
-
 
         </div>
       </motion.div>

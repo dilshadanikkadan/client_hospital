@@ -173,8 +173,8 @@ const ChatVideoBox = () => {
                             muted={!mute ? true : false}
                             ref={myVideo}
                             autoPlay
-                            className={`w-[40%] h-[20vh] lg:w-[90%] absolute top-0 left-0 z-10 object-cover ${callAccept ? 'lg:w-[100%] lg:h-[100%]' : 'w-full h-full bg-black object-cover rounded-md'}`}
-                        ></video>
+                            className={`w-[40%] border-[5px] border-red-500 h-[20vh] lg:w-[90%] absolute top-0 left-0 z-10 object-cover ${callAccept ? 'lg:w-[27%] lg:h-[40%] z-[999]' : 'w-full h-full bg-black object-cover rounded-md'}`}
+                        ></video>   
                     )}
                     {callAccept && (
                         <video
@@ -182,7 +182,7 @@ const ChatVideoBox = () => {
                             muted
                             ref={userVideo}
                             autoPlay
-                            className='w-full h-full bg-black object-cover rounded-md  lg:w-[40%] md:h-[45%] lg:z-50'
+                            className='w-full h-full border-[5px] border-blue-500 bg-black object-cover rounded-md  lg:w-[100%] md:h-[100%] lg:z-50'
                         ></video>
                     )}
                 </div>

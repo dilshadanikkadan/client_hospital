@@ -29,7 +29,7 @@ const TodaysAppointment = () => {
 
             :
             <div className='mt-10'>
-              <p className='capitalize font-semibold text-xl'>No patients For you</p>
+              <p className='capitalize font-semibold text-xl'>No patients For you Now</p>
             </div>
         }
 

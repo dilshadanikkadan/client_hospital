@@ -3,6 +3,7 @@ import { singleuser } from '../../../services/api/adminRoute'
 import { currentUser } from '../../../services/hooks/CuurentUser'
 import { useQuery } from '@tanstack/react-query'
 import { viewAppointment } from '../../../services/api/userRoute'
+import AccountSheet from '../Analystics/AccountSheet'
 
 const DashBoardBoxDoctor = () => {
     let userId = currentUser()
@@ -15,17 +16,15 @@ const DashBoardBoxDoctor = () => {
         queryFn: viewAppointment
 
     });
-    const patientsCompleted = myAppointments?.filter((x)=> x.status == "completed");
-    const patientsPending = myAppointments?.filter((x)=> x.status == "pending");
+    const patientsCompleted = myAppointments?.filter((x) => x.status == "completed");
+    const patientsPending = myAppointments?.filter((x) => x.status == "pending");
     return (
         <>
             <div className="wrapper  w-[90%] ml-auto mr-auto  h-[70vh] md:h-[40vh] flex flex-col  justify-center gap-7">
-                <p className='ml-10 mt-10 font-info text-xl font-semibold'>Welcome {Doctor?.username}</p>
+                {/* <p className='ml-10  font-info text-xl font-semibold'>Welcome {Doctor?.username}</p> */}
 
                 <div className='flex w-full gap-7 flex-wrap'>
-
-
-                    <div className="box rounded-lg shadow-md w-[80%] md:w-[30%] h-40 bg-[#F2E8E9]">
+                    <div className="box rounded-lg shadow-md w-[80%] md:w-[24%] h-40  mt-10">
                         <div className="info w-[70%] m-auto flex flex-col  justify-center h-full font-desc">
 
                             <h3 className='text-lg font-semibold'>Total Patients</h3>
@@ -33,23 +32,16 @@ const DashBoardBoxDoctor = () => {
                             <p className='text-green-500  font-semibold'>+25</p>
                         </div>
                     </div>
-                    <div className="box rounded-lg shadow-md w-[80%] md:w-[30%] h-40 bg-[#F2E8E9] ">
+                    <div className="box rounded-lg shadow-md w-[80%] md:w-[24%] h-40  mt-10 ">
                         <div className="info w-[70%] m-auto flex flex-col  justify-center h-full font-desc">
 
                             <h3 className='text-lg font-semibold'>Pedning Patients</h3>
-                            <p className='text-lg font-semibold'>{patientsPending?.length ?? 0 }</p>
+                            <p className='text-lg font-semibold'>{patientsPending?.length ?? 0}</p>
                             <p className='text-green-500  font-semibold'>+25</p>
                         </div>
                     </div>
 
-                    <div className="box rounded-lg shadow-md w-[80%] md:w-[30%] h-40 bg-[#F2E8E9] ">
-                        <div className="info w-[70%] m-auto flex flex-col  justify-center h-full font-desc">
-
-                            <h3 className='text-lg font-semibold'>Total Patients</h3>
-                            <p className='text-lg font-semibold'>5000</p>
-                            <p className='text-green-500  font-semibold'>+25</p>
-                        </div>
-                    </div>
+                   <AccountSheet/>
 
                 </div>
 

@@ -39,45 +39,42 @@ const SideBar = () => {
                     <div className="div flex flex-col gap-5  h-[80%]">
 
 
-                        <NavLink to="/admin" className={({ isActive }) => isActive ? "active  flex items-center gap-3 100" : 'flex items-center gap-3'} >
+                        <NavLink to="/admin" className={({ isActive }) => isActive ? "active  flex items-center gap-3 100 " : 'flex items-center gap-3'} >
                             <HomeOutlinedIcon />
                             <p>Dashbord</p>
                         </NavLink>
 
-                        <NavLink to="/admin/users" className={({ isActive }) => isActive ? "active  flex items-center gap-3 bg-slate-100" : 'flex items-center gap-3'} >
+                        <NavLink to="/admin/users" className={({ isActive }) => isActive ? "active  flex items-center gap-3 bg-slate-100 py-1 pl-1 rounded-md shadow-lg" : 'flex items-center gap-3'} >
                             <PeopleOutlineOutlinedIcon />
                             <p>Users</p>
                         </NavLink>
 
-                        <NavLink to="/admin/pending_doctorRequests" className={({ isActive }) => isActive ? "active  flex items-center gap-3 bg-slate-100" : 'flex items-center gap-3'} >
+                        <NavLink to="/admin/pending_doctorRequests" className={({ isActive }) => isActive ? "active  flex items-center gap-3 bg-slate-100 py-1 pl-1 rounded-md shadow-lg" : 'flex items-center gap-3'} >
                             <PersonAddAltOutlinedIcon />
                             <p>Doctors</p>
                         </NavLink>
 
-                        <NavLink to="/admin/banner" className={({ isActive }) => isActive ? "active flex items-center gap-3 bg-slate-100" : 'flex items-center gap-3'} >
+                        <NavLink to="/admin/banner" className={({ isActive }) => isActive ? "active flex items-center gap-3 bg-slate-100 py-1 pl-1 rounded-md shadow-lg " : 'flex items-center gap-3'} >
                             <AddBusinessOutlinedIcon />
                             <p>Banner</p>
                         </NavLink>
 
-                        <NavLink to="/admin/specialities" className={({ isActive }) => isActive ? "active  flex items-center gap-3 bg-slate-100" : 'flex items-center gap-3'} >
-                            <NotificationsNoneOutlinedIcon />
+                        <NavLink to="/admin/specialities" className={({ isActive }) => isActive ? "active  flex items-center gap-3 bg-slate-100 py-1 pl-1 rounded-md shadow-lg" : 'flex items-center gap-3'} >
+                            <PaymentOutlinedIcon />
                             <p>Specialities</p>
                         </NavLink>
 
-
-                        <NavLink to="/admin/license" className={({ isActive }) => isActive ? "active flex items-center gap-3 bg-slate-100" : 'flex items-center gap-3'} >
+ 
+                        <NavLink to="/admin/license" className={({ isActive }) => isActive ? "active flex items-center gap-3 bg-slate-100 py-1 pl-1 rounded-md shadow-lg" : 'flex items-center gap-3'} >
                             <CreditScoreIcon />
                             <p>License</p>
                         </NavLink>
 
-                        <NavLink to="/admin/analystics" className={({ isActive }) => isActive ? "active flex items-center gap-3 bg-slate-100" : 'flex items-center gap-3'} >
+                        <NavLink to="/admin/analystics" className={({ isActive }) => isActive ? "active flex items-center gap-3 bg-slate-100 py-1 pl-1 rounded-md shadow-lg transition-all duration-1000 " : 'flex items-center gap-3'} >
                             <BarChartIcon />
                             <p>Analaystics</p>
                         </NavLink>
-                        <NavLink to="/payment" className={({ isActive }) => isActive ? "active" : 'flex items-center gap-3'} >
-                            <PaymentOutlinedIcon />
-                            <p>Payment</p>
-                        </NavLink>
+                     
                     </div>
                     <div onClick={handleLogout} to="/logout" className='flex items-center gap-3 cursor-pointer' >
                         <LogoutOutlinedIcon />

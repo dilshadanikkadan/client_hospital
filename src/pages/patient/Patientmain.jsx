@@ -40,6 +40,8 @@ import VideoChatPage from '../doctor/VideoChatPage'
 import { CallStateRoute } from '../../store/others/CallState'
 import AppointmentHistoryPage from './AppointmentHistoryPage'
 import AppointmentHistorySingleView from './AppointmentHistorySingleView'
+import Error from '../../components/common/Error'
+import ContactPage from './ContactPage'
 const Patientmain = () => {
 
   const router = createBrowserRouter([
@@ -51,7 +53,7 @@ const Patientmain = () => {
             <Home />
           </CallStateRoute>
         </BlockeduserCheck>,
-      errorElement: <div>404  not hey</div>
+      errorElement: <Error/>
 
     },
     {
@@ -261,27 +263,30 @@ const Patientmain = () => {
       path: '/notification',
       element:
         <BlockeduserCheck>
-
           <Notification />
         </BlockeduserCheck>
+    },
+    {
+      path: '/error',
+      element:
+          <Error />
     },
     {
       path: '/notification/:id',
       element:
         <BlockeduserCheck>
-
           <SingleNotification />
         </BlockeduserCheck>
     },
     {
       path: '/contact',
-      element: <div>coming soon</div>
+      element:
+      <ContactPage/>
     }
   ])
   return (
     <div>
       <AnimatePresence onExitComplete>
-
         <RouterProvider key={window.location.pathname} router={router} />
       </AnimatePresence>
 

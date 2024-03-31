@@ -48,7 +48,7 @@ const DoctorList = ({ searchTerm }) => {
                 <div className={`${searchTerm === undefined ? "w-[83%]" : "w-[100%]"} m-auto mt-10 flex flex-col items-center pb-10`}>
                     <div className="info w-[90%] md:w-[60%]">
                         <h3 className="title text-center text-4xl">Our Doctors</h3>
-                        <p className='hidden md:block text-xl text-center mt-5'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt dolores officia similique </p>
+                        <p className='hidden md:block text-xl text-center mt-5'>Our hospital proudly presents a curated list of verified doctors, each dedicated to providing exceptional healthcare services </p>
                     </div>
                     <div className="listContainer w-full flex gap-5 mt-10 flex-wrap">
                         {filteredDoctors.map((doctor, i) => (

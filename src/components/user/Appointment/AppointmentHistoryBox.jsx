@@ -14,14 +14,11 @@ const AppointmentHistoryBox = () => {
     const completedAppointments = myAppointmentHistory?.filter((x)=> x.status == "completed")
     return (
         <div>
-
             <div className='w-[90%] mx-auto mt-10 '>
-                <h3 className='text-2xl font-info font-semibold ml-14'>Appointment History</h3>
-
-
+                <h3 className='text-2xl font-info font-semibold ml-14 mb-10'>Appointment History</h3>
                 {
                     completedAppointments?.map((appointment) => (
-                        <div className="wrapper w-[90%] mt-10 border-[1px] border-gray-200 mx-auto shadow-md">
+                        <div className="wrapper w-[90%]  border-[1px] border-gray-200 mx-auto shadow-md">
                             <div className="user  flex  gap-5 items-center mt-7 justify-between mx-4 mb-1 border-b-[1px] border-gray-200 pb-2">
                                 <div className="div flex items-center justify-center gap-5">
                                     <img className='w-12 h-12 object-cover rounded-full' src={appointment?.doctor?.profileImage} alt="" />
