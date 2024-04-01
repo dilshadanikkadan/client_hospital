@@ -131,9 +131,9 @@ console.log("time",time);
                                     disabled={true}
                                     onClick={() => handleDateBoxClick(dates)}
 
-                                    className={`dateBox w-[12%] h-10 rounded-lg relative ${selsctedDate === dates.date ? "bg-secondary" : "bg-[#8FE82B]"}    flex flex-col items-center  justify-center`}>
+                                    className={`dateBox w-[12%] h-10 rounded-lg relative ${selsctedDate === dates.date ? "bg-secondary" : "border-[1px] border-secondary text-secondary"}    flex flex-col items-center  justify-center`}>
 
-                                    <p className='text-white text-1xl'>{dates?.date}</p>
+                                    <p className={`${selsctedDate === dates.date  ? "text-white" : "text-secondary"}  text-secondary text-1xl`}>{dates?.date}</p>
                                 </div>
 
                             ))
@@ -158,8 +158,8 @@ console.log("time",time);
                             slectedDoctorData[0]?.BookedDates?.find((x) => x.date === selsctedDate).time[0].availbaleTimes.map((timeData) => (
 
                                 <div
-                                    className={`dateBox w-[40%] h-8 ${timeData?.status === "booked" ? "hidden" : "flex"} cursor-pointer   rounded-lg relative ${timeSelected === timeData?.from ? "bg-secondary" : "bg-[#8FE82B]"}  flex  items-center  justify-center `} onClick={() => handleTime(slectedDoctorData[0]?.BookedDates?.find((x) => x.date === selsctedDate).time)}>
-                                    <p className='text-white text-1xl' onClick={() => {
+                                    className={`dateBox w-[40%] h-8 ${timeData?.status === "booked" ? "hidden" : "flex"} cursor-pointer   rounded-lg relative ${timeSelected === timeData?.from ? "bg-secondary" : "border-[1px] border-secondary"}  flex  items-center  justify-center `} onClick={() => handleTime(slectedDoctorData[0]?.BookedDates?.find((x) => x.date === selsctedDate).time)}>
+                                    <p className={`${timeSelected === timeData?.from ? "text-white" : "text-secondary"}  text-secondary text-1xl`} onClick={() => {
                                         setTimeSelected(timeData?.from)
                                     }}>{timeData?.from} </p>
                                 </div>
@@ -176,7 +176,7 @@ console.log("time",time);
             <div className='w-[87%] flec items-center justify-end'>
 
                 <button
-                    className={`py-3 w-[82%] lg:w-[52%] mt-5 float-right text-white bg-[#8FE82B] rounded-lg ${!isFormValid ? 'cursor-not-allowed opacity-50' : ''}`}
+                    className={`py-3 w-[82%] lg:w-[52%] mt-5 float-right text-white bg-secondary rounded-lg ${!isFormValid ? 'cursor-not-allowed opacity-50' : ''}`}
                     onClick={handleSubmit}
                     disabled={!isFormValid}
                 >

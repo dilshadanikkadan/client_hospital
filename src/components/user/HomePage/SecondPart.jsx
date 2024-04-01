@@ -37,10 +37,10 @@ const SecondPart = () => {
                                 animate={controls}
                                 transition={{ duration: 0.8 }}
                             >
-                                <h3 className='font-logo  text-3xl mt-3 font-bold md:text-1xl md:mt-0'>{item?.title}</h3>
+                                <h3 className='font-logo   text-3xl mt-3 font-bold md:text-1xl md:mt-0'>{item?.title}</h3>
                                 <div className="info  w-[80%]">
 
-                                    <p className='text-lg font-desc'>{item?.description}</p>
+                                    <p className='text-lg font-info '>{item?.description}</p>
                                 </div>
                                 <div className="chack flex flex-col">
                                     <div className="item1 flex gap-2 font-desc">
@@ -50,12 +50,12 @@ const SecondPart = () => {
                                     </div>
                                     <div className="item1 flex gap-2 font-desc">
                                         <CheckBoxIcon />
-                                        <p className='font-desc'>Top-notch Facilities</p>
+                                         <p className='font-desc'>Top Doctors</p>
 
                                     </div>
                                     <div className="item1 flex gap-2 font-desc">
                                         <CheckBoxIcon />
-                                        <p className='font-desc'>Top-notch Facilities</p>
+                                        <p className='font-desc'>Top  Service </p>
 
                                     </div>
                                 </div>

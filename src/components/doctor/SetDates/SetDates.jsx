@@ -125,7 +125,7 @@ const SetDates = () => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DateCalendar className='calenderBox' onChange={handleDateChange} />
                 </LocalizationProvider>
-                <div className="warpapper w-[100%] md:w-[35vw] h-[50vh] overflow-y-scroll bg-base-100 border-dashed border-2 border-secondary rounded-lg shadow-xl relative">
+                <div className="warpapper w-[100%] md:w-[35vw] h-[50vh] overflow-y-scroll bg-base-100  border-[1px] border-secondary rounded-lg shadow-xl relative">
                     {
                         errorMsg &&
 
@@ -144,7 +144,7 @@ const SetDates = () => {
 
                     </div>
                 </div>
-                <BookesDates dates={allDates} />
+                {/* <BookesDates dates={allDates} /> */}
             </div>
 
             {isOpen &&

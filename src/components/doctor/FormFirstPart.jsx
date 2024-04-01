@@ -21,7 +21,7 @@ const FormFirstPart = () => {
                 }}
             >
                 {({ errors, touched }) => (
-                    <Form className="form w-[28%] m-auto mt-10 flex flex-col relative">
+                    <Form className="form w-[60%] md:w-[28%] m-auto mt-10 flex flex-col relative">
                         <h3 className='text-2xl font-info font-bold '>Apply For your Service </h3>
                         <p className=' mt-3'>Thank you for your interest in volunteering with MedServe! Please fill out this form to apply as a pro bono doctor. This will allow us to verify your credentials and match you with opportunities.</p>
                         <label className="input input-bordered flex items-center gap-2 mt-5">

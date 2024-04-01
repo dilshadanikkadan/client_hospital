@@ -3,26 +3,22 @@
 @tailwind utilities;
 
 .calenderBox{
-    border: 2px dashed #202D57;
-    box-shadow: -28px 29px 13px -24px rgba(0,0,0,0.75);
-
+    border: 1px solid #202D57;
+    margin-top: 20px !important;
 }
 
 ::-webkit-scrollbar {
     width: 5px;
   }
   
-  /* Track */
   ::-webkit-scrollbar-track {
     background: #f1f1f1; 
   }
    
-  /* Handle */
   ::-webkit-scrollbar-thumb {
     background: #888; 
   }
   
-  /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #555; 
   }
@@ -30,9 +26,21 @@
     width: 45vw;
   }
   @media (min-width: 768px) {
-
     
     audio {
         width: 23vw;
     }
+}
+
+
+p{
+  font-family: "Questrial", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h3{
+  font-family: "Questrial", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }

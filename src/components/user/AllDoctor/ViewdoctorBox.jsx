@@ -32,8 +32,12 @@ const ViewdoctorBox = () => {
 
     });
 
-    const appointmentReview= myAppointment?.filter((x)=> x.status === "completed" || "pending");
-    const myReview = reviews?.find((x) => x.patient._id  == userId)
+    const reviewTotal = reviews?.reduce((acc, curr) => acc += curr.rating,0)
+    const averageRating = reviewTotal / reviews?.length;
+    const scaledRating = (averageRating / 5) * 5;
+    console.log("scaled",scaledRating.toFixed(1));
+    const appointmentReview = myAppointment?.filter((x) => x.status === "completed" || "pending");
+    const myReview = reviews?.find((x) => x.patient._id == userId)
     return (
         <div className='w-[80%] m-auto'>
 
@@ -60,13 +64,13 @@ const ViewdoctorBox = () => {
 
             <div className="cardWrapper hidden mt-10 md:flex gap-8 ">
                 <div className="card w-1/3 border-[1px] border-gray-300 h-[15vh] flex items-center justify-center">
-                    <p className='text-xl font-semibold capitalize'>4.9 <span>rating</span></p>
+                    <p className='text-xl font-semibold capitalize'>{ scaledRating ? scaledRating.toFixed(1) : '0'} <span>rating</span></p>
                 </div>
                 <div className="card w-1/3 border-[1px] border-gray-300 h-[15vh] flex items-center justify-center">
-                    <p className='text-xl font-semibold capitalize'>4.9 <span>rating</span></p>
+                    <p className='text-xl font-semibold capitalize'>{reviews?.length} <span>Reviews</span></p>
                 </div>
                 <div className="card w-1/3 border-[1px] border-gray-300 h-[15vh] flex items-center justify-center">
-                    <p className='text-xl font-semibold capitalize'>4.9 <span>rating</span></p>
+                    <p className='text-xl font-semibold capitalize'>5 <span>Patients</span></p>
                 </div>
             </div>
 
@@ -85,11 +89,11 @@ const ViewdoctorBox = () => {
             </div>
 
             {
-                (appointmentReview?.map((x)=> x.doctorListId).includes(doctor?.user)) && (appointmentReview?.map((x)=> x.status).includes("completed")) && (reviews?.map((x)=> x.patient._id).includes(userId))  &&reviews?.length > 0 ?
+                (appointmentReview?.map((x) => x.doctorListId).includes(doctor?.user)) && (appointmentReview?.map((x) => x.status).includes("completed")) && (reviews?.map((x) => x.patient._id).includes(userId)) && reviews?.length > 0 ?
                     <p onClick={() => setIsOpenEdit(true)} className='py-2 text-center rounded-md  w-[17%] text-white bg-secondary mt-3'>edit </p>
 
                     :
-                    (appointmentReview?.map((x)=> x.doctorListId).includes(doctor?.user)) && (appointmentReview?.map((x)=> x.status).includes("completed")) ?
+                    (appointmentReview?.map((x) => x.doctorListId).includes(doctor?.user)) && (appointmentReview?.map((x) => x.status).includes("completed")) ?
                         <p onClick={() => setIsOpen(true)} className='py-2 text-center rounded-md  w-[17%] text-white bg-secondary mt-3'>Review Your Doctor</p>
 
                         :
@@ -109,7 +113,7 @@ const ViewdoctorBox = () => {
 
             {
                 isOpenEdit &&
-                <EditReviewModal reviewId={myReview._id} ratingNum={myReview?.rating} reviewTextUPdating={myReview?.reviewText} setIsOpenEdit={setIsOpenEdit}/>
+                <EditReviewModal reviewId={myReview._id} ratingNum={myReview?.rating} reviewTextUPdating={myReview?.reviewText} setIsOpenEdit={setIsOpenEdit} />
             }
             <div className="patientreviews mt-10">
                 <h3 className='text-2xl capitalize font-semibold'>Patient Reviews</h3>

@@ -41,15 +41,15 @@ const CheckUp = () => {
 
                                 <div className="card w-[70%] font-desc hidden xl:flex flex-col  gap-5 mt-5">
                                     <h3 className="title text-2xl ">Medical Best Treatment</h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi illum distinctio quo earum repudiandae quam aut! Odit accusantium dolorem rerum.</p>
+                                    <p>With a focus on excellence, we offer a wide range of medical treatments spanning various specialties, including but not limited to internal medicine, surgery, pediatrics, obstetrics and gynecology, dermatology, and more</p>
                                 </div>
 
 
 
 
                                 <div className="card w-[70%] font-desc flex flex-col  gap-5 mt-5">
-                                    <h3 className="title text-2xl ">Medical Best Treatment</h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi illum distinctio quo earum repudiandae quam aut! Odit accusantium dolorem rerum.</p>
+                                    <h3 className="title text-2xl  capitalize">medical facility</h3>
+                                    <p>At our medical facility, we believe in empowering our patients with knowledge and resources to make informed decisions about their health.</p>
                                 </div>
                             </div>
 

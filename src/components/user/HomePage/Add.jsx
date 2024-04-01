@@ -25,8 +25,7 @@ const Add = () => {
 
         <div className="wrapper  w-[83%] h-[30vh] m-auto  flex items-center justify-center">
           <div className="info w-[90%] md:w-[50%]">
-
-            <p className='text-3xl md:text-4xl font-desc font-normal text-center'>We're an employee benefit at 7000+ companies</p>
+            <p className='text-3xl md:text-4xl font-desc font-normal text-center capitalize'>We  have  Dcotors with several With Potenital</p>
           </div>
         </div>
       </motion.div>

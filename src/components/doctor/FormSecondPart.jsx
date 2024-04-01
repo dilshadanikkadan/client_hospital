@@ -44,7 +44,7 @@ const FormSecondPart = () => {
                         }}
                     >
                         {({ errors, touched }) => (
-                            <Form className="form w-[28%] m-auto mt-10 flex flex-col relative">
+                            <Form className="form w-[60%] md:w-[28%] m-auto mt-10 flex flex-col relative">
                                 <h3 className='text-2xl font-info font-bold '>Apply For your Service </h3>
                                 <div className="mt-4">
                                     <label htmlFor="doctorSelect" className="block text-sm font-medium text-gray-700">

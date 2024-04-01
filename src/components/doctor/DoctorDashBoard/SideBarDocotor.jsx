@@ -94,10 +94,7 @@ const SideBarDocotor = () => {
                             <BarChartIcon />
                             <p>Analaystics</p>
                         </NavLink>
-                        <NavLink to="/payment" className={({ isActive }) => isActive ? "active" : 'flex items-center gap-3'} >
-                            <PaymentOutlinedIcon />
-                            <p >Payment</p>
-                        </NavLink>
+                    
                     </div>
                     <div to="/logout" className='flex items-center gap-3 cursor-pointer' onClick={handleLogout} >
                         <LogoutOutlinedIcon />

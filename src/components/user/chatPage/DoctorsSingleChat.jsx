@@ -144,9 +144,6 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
 
         }
 
-
-
-
     };
 
     const isOnline = onlineUsers?.map((x) => x._id).includes(friend);
@@ -175,7 +172,6 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
                             {
 
                                 messages?.map((msg, i) => {
-
                                     return (
                                         <>
                                             {msg?.deleteForMe === "false" || msg?.sender !== userId ?
@@ -188,7 +184,6 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
                                                         </div>
                                                     </div>
                                                     <div>
-
                                                         {
                                                             msg?.typeOfMessage == "pdf" ?
 
@@ -216,7 +211,6 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
                                                                         <FileDownloadIcon className='absolute bottom-2  right-3 border-[1px] border-white rounded-full py-1' />
                                                                     </a>
                                                                 </div>
-
                                                                 :
                                                                 msg?.typeOfMessage == "audio" ?
                                                                     <div className={`chat-bubble relative min-w-[70px!important] ${msg?.sender === userId ? "bg-[#E8F1F3]" : "bg-[#E4E6EB]"} rounded-lg p-2 mb-2 flex items-center`}
@@ -250,9 +244,6 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
                                                                                 )}
                                                                                 {msg?.text}
                                                                             </div>
-
-
-
                                                                         </div>
                                                                         : ""
                                                         }
@@ -269,7 +260,6 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
                                 })
                             }
                         </div>
-
                         {
                             isOptionOn &&
 
@@ -327,5 +317,4 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
         </div >
     )
 }
-
 export default DoctorsSingleChat
