@@ -1,20 +1,21 @@
 import React from 'react'
-import Navbar from '../../components/admin/SideBar'
+import Navbar from '../components/admin/SideBar'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import Dashboard from './Dashboard'
-import About from '../patient/About'
-import Contact from '../patient/Contact'
-import Users from './Users'
-import AdminLogin from './AdminLogin'
-import { AdminProtectRoute } from '../../store/others/AdminProtectRoute'
-import SingleUser from './SingleUser'
-import DoctorsPending from './DoctorsPending'
-import SinglePendingDoctor from './SinglePendingDoctor'
-import { AdminLoginProtectRoute } from '../../store/others/AdminLoginProtectRoute'
-import LicensePage from './LicensePage'
-import AnaysticsPage from './AnaysticsPage'
-import BannerPage from './BannerPage'
-import SpecialitiesPage from './SpecialitiesPage'
+import Dashboard from '../pages/admin/Dashboard'
+import About from '../pages/patient/About'
+import Contact from '../pages/patient/Contact'
+import Users from '../pages/admin/Users'
+import AdminLogin from '../pages/admin/AdminLogin'
+import { AdminProtectRoute } from '../store/others/AdminProtectRoute'
+import SingleUser from '../pages/admin/SingleUser'
+import DoctorsPending from '../pages/admin/DoctorsPending'
+import SinglePendingDoctor from '../pages/admin/SinglePendingDoctor'
+import { AdminLoginProtectRoute } from '../store/others/AdminLoginProtectRoute'
+import LicensePage from '../pages/admin/LicensePage'
+import AnaysticsPage from '../pages/admin/AnaysticsPage'
+import BannerPage from '../pages/admin/BannerPage'
+import SpecialitiesPage from '../pages/admin/SpecialitiesPage'
+import Error from '../components/common/Error'
 const router = createBrowserRouter([
   {
     path: '/admin',
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
       <AdminProtectRoute>
         <Dashboard />
       </AdminProtectRoute>,
-    errorElement: <div>404  not found</div>
+      errorElement: <Error/>
   },
   {
     path: 'admin/users',

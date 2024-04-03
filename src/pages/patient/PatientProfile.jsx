@@ -5,6 +5,7 @@ import OverViewBoxProfile from '../../components/user/ProfilePgae/OverViewBoxPro
 import { useQuery } from '@tanstack/react-query'
 import { singleuser } from '../../services/api/adminRoute'
 import { currentUser } from '../../services/hooks/CuurentUser'
+import AnimatedPage from '../../services/Animation/AnimatedPage'
 
 const PatientProfile = () => {
     let userId = currentUser()
@@ -13,14 +14,15 @@ const PatientProfile = () => {
         queryFn: singleuser
     })
     return (
-        <div>
-            <Navbar />
-            <div className="div flex  flex-col md:flex-row m-auto w-[83%] gap-10">
-
-                <ProfileBox user={singleUser} />
-                <OverViewBoxProfile  user={singleUser}/>
+        <AnimatedPage>
+            <div>
+                <Navbar />
+                <div className="div flex  flex-col md:flex-row m-auto w-[83%] gap-10">
+                    <ProfileBox user={singleUser} />
+                    <OverViewBoxProfile user={singleUser} />
+                </div>
             </div>
-        </div>
+        </AnimatedPage>
     )
 }
 

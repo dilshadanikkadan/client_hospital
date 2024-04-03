@@ -1,12 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { cancelAppointment, viewAppointment } from '../../../services/api/userRoute';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 const ViewAppointmentBox = () => {
-      
     const navigate = useNavigate()
-
     let iduser;
     const jwtToken = localStorage.getItem('persist:root');
 
@@ -32,21 +30,60 @@ const ViewAppointmentBox = () => {
         queryFn: viewAppointment
 
     })
-    const currentAppintment = myAppointment?.find((x)=> x.status === "pending")
-
-    console.log("currentAppintment",currentAppintment?._id);
-    const handleCancelAppointment = () => {
-         console.log(deleteAppointment);
-        deleteAppointment({
-            appointmentId: currentAppintment?._id,
-            timeId: currentAppintment?.time.id,
-            doctorListId: currentAppintment?.doctorListId,
-            bookedId: currentAppintment?.bookedId,
-            timeSelected:currentAppintment?.timeSelected,
-            myId:iduser
-        })
-      
+    const currentAppintment = myAppointment?.find((x) => x.status === "pending")
+    let penalty = false
+    console.log("currentAppintment", currentAppintment?._id);
+    function formateTime(timestamp) {
+        const date = new Date(timestamp);
+        let hours = date.getHours();
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const period = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        return `${hours}:${minutes}`;
     }
+
+    const currentTime = formateTime(new Date().getTime());
+    const appointmentTime = currentAppintment?.timeSelected;
+
+    if (appointmentTime) {
+        const [currentHours, currentMinutes] = currentTime.split(':').map(Number);
+        const [appointmentHours, appointmentMinutes] = appointmentTime.split(':').map(Number);
+
+        const currentTotalMinutes = currentHours * 60 + currentMinutes;
+        const appointmentTotalMinutes = appointmentHours * 60 + appointmentMinutes;
+        const minutesDifference = appointmentTotalMinutes - currentTotalMinutes;
+
+        if (minutesDifference <= 45 && minutesDifference >= 0) {
+            console.log("There are 15 minutes or less left until the appointment.");
+            penalty = true
+        } else {
+            penalty = false
+            console.log("There are more than 15 minutes left until the appointment.");
+        }
+    } else {
+        console.log("Appointment time is not defined.");
+    }
+
+   
+ 
+    const handleCancelAppointment = () => {
+        console.log(deleteAppointment);
+        document.getElementById('my_modal_5').showModal();
+
+    }
+    const cancelAppointmentModal =()=>{
+        deleteAppointment({
+                appointmentId: currentAppintment?._id,
+                timeId: currentAppintment?.time.id,
+                doctorListId: currentAppintment?.doctorListId,
+                bookedId: currentAppintment?.bookedId,
+                timeSelected: currentAppintment?.timeSelected,
+                myId: iduser,
+                penalty
+            })
+        }
+    console.log("currentTime", penalty);
     return (
         <div className='w-full flex flex-col justify-center  '>
             <div className='w-[90%] md:w-[60%] m-auto overflow-hidden  mt-10    py-4 px-6 rounded-md shadow-md'>
@@ -102,17 +139,32 @@ const ViewAppointmentBox = () => {
             <div className="div w-[60%] m-auto flex   items-center justify-center gap-10">
 
                 {/* <button className='mt-6 bg-base-300  py-3 px-6 rounded-lg ' onClick={() => navigate("/")}>Return To Home</button> */}
-                <button className='mt-6 bg-base-300  py-3 px-6 rounded-lg font-semibold ' onClick={() => navigate("/reshedule_appointment",{state:{
-                    
-                    ...currentAppintment?.doctor,
-                    myAppointmentId:currentAppintment?._id,
-                    prevTimeId: currentAppintment?.time.id,
-                    prevDoctodId: currentAppintment?.doctorListId,
-                    prevBookedId: currentAppintment?.bookedId,
-                    prevTimeSelected:currentAppintment?.timeSelected
-                    }})}>Reshedule</button>
+                <button className='mt-6 bg-base-300  py-3 px-6 rounded-lg font-semibold ' onClick={() => navigate("/reshedule_appointment", {
+                    state: {
+
+                        ...currentAppintment?.doctor,
+                        myAppointmentId: currentAppintment?._id,
+                        prevTimeId: currentAppintment?.time.id,
+                        prevDoctodId: currentAppintment?.doctorListId,
+                        prevBookedId: currentAppintment?.bookedId,
+                        prevTimeSelected: currentAppintment?.timeSelected
+                    }
+                })}>Reshedule</button>
                 <button className='mt-6 bg-secondary text-white  py-3 px-6 rounded-lg ' onClick={handleCancelAppointment}>Cancel</button>
             </div>
+            <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box">
+                    <p className="py-2">are you sure want to Cancel the appointment ?</p>
+                    <p className="py-1 text-red-500">
+                        Notice: Cancellations before 45 minuts of booked time result in 50% refund only.</p>
+                    <div className="modal-action">
+                        <form method="dialog">
+                            <button className="btn bg-base-300">Cancel</button>
+                            <button className="btn bg-secondary text-white ml-3"  onClick={cancelAppointmentModal}>Yes</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
         </div>
     )
 }

@@ -2,11 +2,9 @@ import { useContext } from "react";
 import io from "socket.io-client"
 import { SocketContext } from "../../store/redux/slices/SocketContext";
 
-const socket = io('http://localhost:3000');
+const socket = io('https://server-lrrl5vdx8-muhammed-dilshads-projects.vercel.app/');
 
-const data = "neymar"
 export const notificationService = (notification) => {
     const { sendDataToServer } = useContext(SocketContext);
-
     sendDataToServer('Hello from AnotherComponent');
 }

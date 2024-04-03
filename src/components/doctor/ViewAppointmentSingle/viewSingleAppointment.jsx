@@ -1,12 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const viewSingleAppointment = () => {
-  return (
-    <div>
-        thi is me
-        
-    </div>
-  )
-}
+  return <div>thi is me</div>;
+};
 
-export default viewSingleAppointment
+export default viewSingleAppointment;

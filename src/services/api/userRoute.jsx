@@ -17,7 +17,6 @@ export const signUp = async (user) => {
    }
 }
 
-
 export const verifyEmail = async (user) => {
    try {
       const res = await postRequest("api/user/verify_email", user)

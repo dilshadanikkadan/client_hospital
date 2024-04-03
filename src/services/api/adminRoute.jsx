@@ -185,7 +185,6 @@ export const userAnalstics = async () => {
 export const doctorSideProfit = async () => {
     try {
         const res = await getRequest("api/admin/getDoctors_Profilts");
-
         if (res.status === 200) {
             return res.data
         }

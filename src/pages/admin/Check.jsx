@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const check = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  return <div></div>;
+};
 
-export default check
+export default check;

@@ -6,15 +6,17 @@ import PatientProfitGraph from '../../components/doctor/Analystics/PatientProfit
 
 const PatientsAnalysticsPage = () => {
     return (
-        <div className='w-full flex'>
+        <div className='w-full flex flex-col md:flex-row'>
             <SideBarDocotor />
-            <div className="div w-[40%] ">
-                <div>
+            <div className="div w-[90%] md:w-[40%]  ">
+                <div className=''>
                     <PatientGraph />
-                    <PatientProfitGraph/>
+                    <PatientProfitGraph />
                 </div>
             </div>
-                <AccountSheet/>
+            <div className='mx-10'>
+                <AccountSheet />
+            </div>
         </div>
     )
 }

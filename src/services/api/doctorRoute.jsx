@@ -135,3 +135,14 @@ export const patientsAnalystics = async (id) => {
 
     }
 }
+
+export const WithDrawBalance = async (data) => {
+    try {
+        const res = await postRequest("api/doctor/withdraw_amount", data);
+        if (res.status === 200) {
+            return res.data
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}

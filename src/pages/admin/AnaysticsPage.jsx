@@ -10,7 +10,7 @@ const AnaysticsPage = () => {
         <div className='w-full flex'>
             <SideBar />
             <div className="div w-[45%] ">
-                <div>
+                <div className=''>
 
                     <UserGraph />
                     <DoctorProfitGraph setProfit={setProfit} />

@@ -36,9 +36,12 @@ const ChatVideoBox = () => {
     const [userStream, setUserStream] = useState()
     const myVideo = useRef()
     const userVideo = useRef()
-    const connectionRef = useRef();
+    const connectionRef = useRef(null);
     const navigate = useNavigate()
     console.log(state);
+
+
+    
     useEffect(() => {
         navigator.mediaDevices.getUserMedia({ video: true, audio: true })
             .then((stream) => {
@@ -66,7 +69,11 @@ const ChatVideoBox = () => {
             Setname(data.name);
             setCallerSignal(data.signal);
         });
+        
     }, [socket]);
+
+   
+
 
 
     const callHandle = (id) => {
@@ -101,7 +108,6 @@ const ChatVideoBox = () => {
         setCallingMe(state)
         connectionRef.current = peer;
     };
-
     const answerCall = () => {
         setCallAccept(true);
         const peer = new Peer({
@@ -128,14 +134,15 @@ const ChatVideoBox = () => {
     const endCall = () => {
         setCallEnd(true);
         if (connectionRef.current) {
+            console.log("ended ya hooo");
             connectionRef.current.destroy();
+
         };
         socket.emit("videoEnd", {
             userToCall: state
         })
-
         console.log("dilshad");
-        isDoctor ? navigate("/doctor/chat", { replace: true }) : navigate("/chat_doctors", { replace: true })
+        isDoctor ? navigate("/doctor/chat?callEnd=true", { replace: true ,state:{endcall:true}}) : navigate("/chat_doctors", { replace: true })
     };
 
     const hideCamera = () => {
@@ -151,7 +158,6 @@ const ChatVideoBox = () => {
         setHide(false)
         if (stream) {
             console.log(stream.getTracks());
-
             const tracks = stream.getTracks()[1].enabled = true
         }
 
@@ -173,8 +179,7 @@ const ChatVideoBox = () => {
                             muted={!mute ? true : false}
                             ref={myVideo}
                             autoPlay
-                            className={`w-[40%] border-[5px] border-red-500 h-[20vh] lg:w-[90%] absolute top-0 left-0 z-10 object-cover ${callAccept ? 'lg:w-[27%] lg:h-[40%] z-[999]' : 'w-full h-full bg-black object-cover rounded-md'}`}
-                        ></video>   
+                            className={`w-[40%] border-[5px]  h-[20vh] lg:w-[90%] absolute top-0 left-0 z-10 object-cover ${callAccept ? 'lg:w-[25vw] lg:h-[40%] z-[999]' : 'w-full h-full bg-black object-cover rounded-md'}`}                        ></video>   
                     )}
                     {callAccept && (
                         <video
@@ -182,8 +187,7 @@ const ChatVideoBox = () => {
                             muted
                             ref={userVideo}
                             autoPlay
-                            className='w-full h-full border-[5px] border-blue-500 bg-black object-cover rounded-md  lg:w-[100%] md:h-[100%] lg:z-50'
-                        ></video>
+                            className='w-full h-full border-[5px]  bg-black object-cover rounded-md  lg:w-[100%] md:h-[100%] lg:z-50'  ></video>
                     )}
                 </div>
             </div>

@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const CheckBar = () => {
-  return (
-    <div className='w-screen h-[20vh] bg-blue-500'>
-      
-    </div>
-  )
-}
+  return <div className="w-screen h-[20vh] bg-blue-500"></div>;
+};
 
-export default CheckBar
+export default CheckBar;
