@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'https://back-end-hospital-management-4q6z.vercel.app/',
+    baseURL: 'https://back-end-hospital-management.onrender.com/',
     withCredentials: true 
 });
 
