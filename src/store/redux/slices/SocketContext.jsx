@@ -30,7 +30,7 @@ const SocketProvider = ({ children }) => {
   useEffect(() => {
     console.log(data);
     const newSocket = io("https://back-end-hospital-management-4q6z.vercel.app/",{
-      "transports": ['websocket']
+      transports: ['websocket']
     }); 
     setSocket(newSocket);
     newSocket.on("connect", () => {
