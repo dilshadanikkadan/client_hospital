@@ -5,7 +5,7 @@ import Doctormain from "./routes/Doctormain";
 import Adminmain from "./routes/Adminmain";
 
 function App() {
-  let route = "user";
+  let route = "admin";
   if (window.location.pathname == "/") {
     route = "user";
   } else if (window.location.pathname.includes("/admin")) {
