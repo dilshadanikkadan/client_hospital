@@ -64,6 +64,7 @@ const ChatVideoBox = () => {
             endCall()
         })
         socket?.on("callUser", (data) => {
+            console.log(data);
             setCallRecieve(true);
             setcaller(data.from);
             Setname(data.name);
@@ -73,9 +74,6 @@ const ChatVideoBox = () => {
     }, [socket]);
 
    
-
-
-
     const callHandle = (id) => {
         const peer = new Peer({
             initiator: true,
@@ -83,7 +81,7 @@ const ChatVideoBox = () => {
             stream: stream
         });
         dispatch(setCallerId(state));
-        console.log("iam calling to this number:" + state);
+        console.log("iam calling to this number:" , state);
         socket.emit("sendCalling", { msg: `Video from  ...  `, recieverId: state })
         peer.on("signal", (data) => {
             console.log("this is data");
