@@ -5,14 +5,12 @@ import Doctormain from "./routes/Doctormain";
 import Adminmain from "./routes/Adminmain";
 
 function App() {
-  let route = "admin";
-  // if (window.location.pathname == "/") {
-  //   route = "user";
-  // } else if (window.location.pathname.includes("/admin")) {
-  //   route = "admin";
-  // } else if (window.location.pathname.includes("/doctor")) {
-  //   route = "doctor";
-  // }
+  let route = "user";
+  if (window.location.pathname.includes("/admin")) {
+    route = "admin";
+  } else if (window.location.pathname.includes("/doctor")) {
+    route = "doctor";
+  }
   let mainComponent;
   switch (route) {
     case "admin":
