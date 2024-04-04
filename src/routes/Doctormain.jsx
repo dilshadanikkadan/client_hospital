@@ -68,7 +68,7 @@ const Doctormain = () => {
   ]);
   return (
     <div>
-      <RouterProvider router={router} />
+      <RouterProvider key={window.location.pathname} router={router} />
     </div>
   );
 };

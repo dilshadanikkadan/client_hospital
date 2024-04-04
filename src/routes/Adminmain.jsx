@@ -98,7 +98,7 @@ const Adminmain = () => {
   const dilu = "dilu"
   return (
     <div>
-      <RouterProvider dilu="heu dilu" router={router} />
+      <RouterProvider key={window.location.pathname} router={router} />
     </div>
   )
 }
