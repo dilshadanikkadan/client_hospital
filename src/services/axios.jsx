@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'https://server-lrrl5vdx8-muhammed-dilshads-projects.vercel.app/',
+    baseURL: 'https://back-end-hospital-management-4q6z.vercel.app/',
     withCredentials: true 
 });
 
