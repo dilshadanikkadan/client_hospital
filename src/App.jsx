@@ -6,7 +6,7 @@ import Adminmain from "./routes/Adminmain";
 
 function App() {
 
-  let mainComponent=<Adminmain />
+  let mainComponent=<Patientmain />
   // switch (route) {
   //   case "admin":
   //     mainComponent = <Adminmain />;
