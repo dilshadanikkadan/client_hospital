@@ -180,7 +180,10 @@ const Navbar = () => {
                     </span>
                   )}
                 </div>
-                <ChatIcon onClick={() => navigate("/chat_doctors")} />
+                <ChatIcon onClick={() => {
+                  window.location.reload()
+                  navigate("/chat_doctors")
+                }} />
                 <LogoutIcon
                   onClick={handleLogout}
                   className="text-blue-950 hover:text-red-700 text-3xl"

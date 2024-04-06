@@ -103,6 +103,9 @@ const SideBarDocotor = () => {
                         </NavLink> */}
             <NavLink
               to="/doctor/chat"
+              onClick={()=> {
+                window.location.reload()
+              }}
               className={({ isActive }) =>
                 isActive
                   ? "active  flex items-center gap-3 bg-slate-100 py-1 pl-1 rounded-md"
