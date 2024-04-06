@@ -26,7 +26,7 @@ const ChatVideoBox = () => {
   const { sendDataToServer, socket, onlineUsers, mySocketId } =
     useContext(SocketContext);
   const dispatch = useDispatch();
-  const userId = currentUser()
+  const userId = currentUser();
   const [hide, setHide] = useState(false);
   const [callingPeer, SetcallingPeer] = useState(false);
   const [me, setMe] = useState("");
@@ -154,7 +154,10 @@ const ChatVideoBox = () => {
           replace: true,
           state: { endcall: true },
         })
-      : navigate("/chat_doctors", { replace: true });
+      : navigate("/chat_doctors?callEnd=true", {
+          replace: true,
+          state: { endcall: true },
+        });
   };
 
   const hideCamera = () => {
@@ -178,8 +181,8 @@ const ChatVideoBox = () => {
     setMute(true);
   };
   // console.log("myVideo",myVideo.current);
-  console.log("me calling",meCalling);
-  console.log("this is satte",state);
+  console.log("me calling", meCalling);
+  console.log("this is satte", state);
 
   return (
     <div className="w-[100%] m-auto h-[80vh] mt-3">
@@ -193,7 +196,7 @@ const ChatVideoBox = () => {
               autoPlay
               className={`w-[40%] border-[5px]  h-[20vh] lg:w-[90%] absolute top-0 left-0 z-10 object-cover ${
                 callAccept
-                  ? "lg:w-[25vw] lg:h-[40%] z-[999]"
+                  ? "lg:w-[22vw] lg:h-[40%] z-[999]"
                   : "w-full h-full  object-cover rounded-md "
               }`}
             ></video>
@@ -201,7 +204,7 @@ const ChatVideoBox = () => {
           {callAccept && (
             <video
               playsInline
-              muted
+              muted={!mute ? true : false}
               ref={userVideo}
               autoPlay
               className="w-full h-full border-[5px]  bg-black object-cover rounded-md  lg:w-[100%] md:h-[100%] lg:z-50"
@@ -283,8 +286,8 @@ const ChatVideoBox = () => {
                   className="text-white"
                   style={{ fontSize: "2.5rem" }}
                 />
-              </div> 
-            
+              </div>
+
               <div className="bg-blue-500 rounded-xl py-1 px-2 animate-bounce">
                 <DuoIcon
                   onClick={answerCall}

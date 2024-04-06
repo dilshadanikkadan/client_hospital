@@ -60,10 +60,10 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
 
   useEffect(() => {
     if (isRefreshNeeded === "true") {
-      window.location.reload();
+      window.location.reload()
       window.history.replaceState({}, document.title, window.location.pathname);
     }
-  }, []);
+  }, [isRefreshNeeded]);
 
   const friend = messages[0]?.chatRoom?.participants.find(
     (user) => user !== userId
@@ -157,7 +157,7 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
     } catch (error) {}
   };
 
-  console.log("friend",friend);
+  console.log("friend", friend);
   const isOnline = onlineUsers?.map((x) => x._id).includes(friend);
 
   return (
@@ -385,6 +385,23 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
           </span>
         </div>
       )}
+      <dialog id="my_modal_5" className="modal  z-[99999] absolute top-0 modal-bottom sm:modal-middle ">
+        <div className="modal-box">
+          <p className="py-4">Call has been end</p>
+          <div className="modal-action">
+            <form method="dialog">
+             
+              <button
+                className="btn bg-red-400 ml-3"
+             
+              >
+                Delete
+              </button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+
       {modalOpen && (
         <>
           <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50" />
