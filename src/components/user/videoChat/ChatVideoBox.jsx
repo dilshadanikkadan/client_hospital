@@ -4,7 +4,10 @@ import { SocketContext } from "../../../store/redux/slices/SocketContext";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setCallerId } from "../../../store/redux/slices/DoctorSlice";
+import {
+  setCallerId,
+  setCallStatus,
+} from "../../../store/redux/slices/DoctorSlice";
 import VideoCameraBackIcon from "@mui/icons-material/VideoCameraBack";
 import VideocamOffIcon from "@mui/icons-material/VideocamOff";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
@@ -16,7 +19,7 @@ import DuoIcon from "@mui/icons-material/Duo";
 import VideoChatIcon from "@mui/icons-material/VideoChat";
 import ChatIcon from "@mui/icons-material/Chat";
 const ChatVideoBox = () => {
-  const { isDoctor, isCalling, callerId } = useSelector(
+  const { isDoctor, isCalling, callerId, callingStatus } = useSelector(
     (state) => state.doctor
   );
   const { sendDataToServer, socket, onlineUsers, mySocketId } =
@@ -83,6 +86,7 @@ const ChatVideoBox = () => {
     });
 
     dispatch(setCallerId(state));
+    dispatch(setCallStatus(true));
     console.log("iam calling to this number:" + state);
     socket.emit("sendCalling", { msg: `Video from  ...  `, recieverId: state });
     peer.on("signal", (data) => {
@@ -134,6 +138,7 @@ const ChatVideoBox = () => {
 
   const endCall = () => {
     setCallEnd(true);
+    dispatch(setCallStatus(false));
     if (connectionRef.current) {
       console.log("ended ya hooo");
       connectionRef.current.destroy();
@@ -171,7 +176,7 @@ const ChatVideoBox = () => {
     setMute(true);
   };
   // console.log("myVideo",myVideo.current);
-  console.log("stream",stream);
+  console.log("call status", callingStatus);
 
   return (
     <div className="w-[100%] m-auto h-[80vh] mt-3">
@@ -264,7 +269,7 @@ const ChatVideoBox = () => {
         </div>
       </div>
       <div className="absolute top-[73%] left-[25%] md:left-[40%] ">
-        {callRecieve && !callAccept && isCalling && state !== meCalling ? (
+        {callRecieve && !callAccept && state !== meCalling ? (
           <div className="calle gap-5 items-center flex  flex-col  ">
             <h1 className="capitalize font-semibold animate-">Calling....</h1>
             <div className="flex gap-7">

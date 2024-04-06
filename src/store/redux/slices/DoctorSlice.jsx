@@ -5,6 +5,7 @@ const initialState = {
   isDoctor: false,
   isCalling: false,
   callerId: "",
+  callingStatus: false,
 };
 
 const DoctorSlice = createSlice({
@@ -22,12 +23,15 @@ const DoctorSlice = createSlice({
     CallVideoCall: (state) => {
       state.isCalling = true;
     },
+    setCallStatus: (state,action) => {
+      state.callingStatus = action.payload;
+    },
     setCallerId: (state, action) => {
       state.callerId = action.payload;
     },
   },
 });
 
-export const { loginDoctor, logoutDoctor, CallVideoCall, setCallerId } =
+export const { loginDoctor, logoutDoctor, CallVideoCall, setCallStatus,setCallerId } =
   DoctorSlice.actions;
 export default DoctorSlice.reducer;
