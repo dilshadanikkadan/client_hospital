@@ -18,6 +18,7 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import DuoIcon from "@mui/icons-material/Duo";
 import VideoChatIcon from "@mui/icons-material/VideoChat";
 import ChatIcon from "@mui/icons-material/Chat";
+import { currentUser } from "../../../services/hooks/CuurentUser";
 const ChatVideoBox = () => {
   const { isDoctor, isCalling, callerId, callingStatus } = useSelector(
     (state) => state.doctor
@@ -25,6 +26,7 @@ const ChatVideoBox = () => {
   const { sendDataToServer, socket, onlineUsers, mySocketId } =
     useContext(SocketContext);
   const dispatch = useDispatch();
+  const userId = currentUser()
   const [hide, setHide] = useState(false);
   const [callingPeer, SetcallingPeer] = useState(false);
   const [me, setMe] = useState("");
@@ -177,6 +179,7 @@ const ChatVideoBox = () => {
   };
   // console.log("myVideo",myVideo.current);
   console.log("me calling",meCalling);
+  console.log("this is satte",state);
 
   return (
     <div className="w-[100%] m-auto h-[80vh] mt-3">
@@ -269,7 +272,8 @@ const ChatVideoBox = () => {
         </div>
       </div>
       <div className="absolute top-[73%] left-[25%] md:left-[40%] ">
-        {callRecieve && !callAccept && state !== meCalling ? (
+        {/* mnaging calls */}
+        {callRecieve && !callAccept && state === userId  ? (
           <div className="calle gap-5 items-center flex  flex-col  ">
             <h1 className="capitalize font-semibold animate-">Calling....</h1>
             <div className="flex gap-7">
@@ -279,7 +283,8 @@ const ChatVideoBox = () => {
                   className="text-white"
                   style={{ fontSize: "2.5rem" }}
                 />
-              </div>
+              </div> 
+            
               <div className="bg-blue-500 rounded-xl py-1 px-2 animate-bounce">
                 <DuoIcon
                   onClick={answerCall}
