@@ -56,14 +56,8 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
       setMessages(allMsg);
     }
   }, [allMsg, queryClient, messages]);
-  const isRefreshNeeded = new URLSearchParams(location.search).get("callEnd");
 
-  useEffect(() => {
-    if (isRefreshNeeded === "true") {
-      window.location.reload()
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-  }, [isRefreshNeeded]);
+  
 
   const friend = messages[0]?.chatRoom?.participants.find(
     (user) => user !== userId
@@ -385,22 +379,7 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
           </span>
         </div>
       )}
-      <dialog id="my_modal_5" className="modal  z-[99999] absolute top-0 modal-bottom sm:modal-middle ">
-        <div className="modal-box">
-          <p className="py-4">Call has been end</p>
-          <div className="modal-action">
-            <form method="dialog">
-             
-              <button
-                className="btn bg-red-400 ml-3"
-             
-              >
-                Delete
-              </button>
-            </form>
-          </div>
-        </div>
-      </dialog>
+ 
 
       {modalOpen && (
         <>

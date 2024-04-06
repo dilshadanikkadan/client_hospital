@@ -194,9 +194,9 @@ const ChatVideoBox = () => {
               muted={!mute ? true : false}
               ref={myVideo}
               autoPlay
-              className={`w-[40%] border-[5px]  h-[20vh] lg:w-[90%] absolute top-0 left-0 z-10 object-cover ${
+              className={`w-[40%] border-[5px]  h-[20vh] absolute top-0 left-0 z-10 object-cover ${
                 callAccept
-                  ? "lg:w-[22vw] lg:h-[40%] z-[999]"
+                  ? "lg:w-[21vw] lg:h-[40%] z-[999]"
                   : "w-full h-full  object-cover rounded-md "
               }`}
             ></video>
