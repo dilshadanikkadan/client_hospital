@@ -171,7 +171,7 @@ const ChatVideoBox = () => {
     setMute(true);
   };
   // console.log("myVideo",myVideo.current);
-  // console.log("stream",stream);
+  console.log("stream",stream);
 
   return (
     <div className="w-[100%] m-auto h-[80vh] mt-3">
