@@ -87,6 +87,7 @@ const ChatVideoBox = () => {
         console.log("iam calling to this number:" + state);
         socket.emit("sendCalling", { msg: `Video from  ...  `, recieverId: state })
         peer.on("signal", (data) => {
+            console.log(state,"statis is here man");
             console.log("this is data");
             console.log(data);
             socket.emit("callUser", {
