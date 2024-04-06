@@ -38,7 +38,7 @@ const ChatVideoBox = () => {
     const userVideo = useRef()
     const connectionRef = useRef(null);
     const navigate = useNavigate()
-    console.log(state);
+    console.log(state,"state is  here");
 
 
     
@@ -82,6 +82,7 @@ const ChatVideoBox = () => {
             trickle: false,
             stream: stream
         });
+
         dispatch(setCallerId(state));
         console.log("iam calling to this number:" + state);
         socket.emit("sendCalling", { msg: `Video from  ...  `, recieverId: state })
