@@ -269,7 +269,7 @@ const ChatVideoBox = () => {
         </div>
       </div>
       <div className="absolute top-[73%] left-[25%] md:left-[40%] ">
-        {callRecieve && !callAccept ? (
+        {callRecieve && !callAccept && state !== state ? (
           <div className="calle gap-5 items-center flex  flex-col  ">
             <h1 className="capitalize font-semibold animate-">Calling....</h1>
             <div className="flex gap-7">
