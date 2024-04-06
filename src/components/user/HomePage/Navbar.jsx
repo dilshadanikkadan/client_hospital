@@ -181,8 +181,8 @@ const Navbar = () => {
                   )}
                 </div>
                 <ChatIcon onClick={() => {
-                  window.location.reload()
                   navigate("/chat_doctors")
+                  window.location.reload()
                 }} />
                 <LogoutIcon
                   onClick={handleLogout}
