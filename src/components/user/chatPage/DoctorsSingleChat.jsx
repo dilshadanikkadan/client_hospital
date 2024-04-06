@@ -157,6 +157,7 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
     } catch (error) {}
   };
 
+  console.log("friend",friend);
   const isOnline = onlineUsers?.map((x) => x._id).includes(friend);
 
   return (

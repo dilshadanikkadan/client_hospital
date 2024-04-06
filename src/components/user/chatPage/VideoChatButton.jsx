@@ -10,9 +10,8 @@ const VideoChatButton = ({ username, recieverId }) => {
 
   const { isDoctor, isCalling } = useSelector((state) => state.doctor);
   const [calling, setCalling] = useState(false);
-
   const navigate = useNavigate();
-
+console.log("iam hey dilu",recieverId);
   useEffect(() => {
     if (socket) {
       socket.on("recieveCall", (data) => {
