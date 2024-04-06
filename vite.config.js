@@ -9,12 +9,5 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['js-big-decimal']
   },
-  define: {
-    global: {},
-  },
-  resolve: {
-    alias: {
-      'events': 'rollup-plugin-node-polyfills/polyfills/events',
-    }
-  }
+
 });
