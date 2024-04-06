@@ -176,7 +176,7 @@ const ChatVideoBox = () => {
     setMute(true);
   };
   // console.log("myVideo",myVideo.current);
-  console.log("call status", callingStatus);
+  console.log("me calling",meCalling);
 
   return (
     <div className="w-[100%] m-auto h-[80vh] mt-3">
@@ -269,7 +269,7 @@ const ChatVideoBox = () => {
         </div>
       </div>
       <div className="absolute top-[73%] left-[25%] md:left-[40%] ">
-        {callRecieve && !callAccept && state !== state ? (
+        {callRecieve && !callAccept && state !== meCalling ? (
           <div className="calle gap-5 items-center flex  flex-col  ">
             <h1 className="capitalize font-semibold animate-">Calling....</h1>
             <div className="flex gap-7">
