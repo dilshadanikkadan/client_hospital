@@ -18,7 +18,6 @@ const Home = () => {
   const location =useLocation()
   return (
     <AnimatedPage>
-
     <div className='w-full overflow-hidden bg-primary'>
       <Navbar/>
       <DoctorModal/>

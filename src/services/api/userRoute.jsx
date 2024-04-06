@@ -1,9 +1,5 @@
 import { deleterequest, getRequest, postRequest } from "../axios"
 
-
-
-
-
 export const signUp = async (user) => {
    try {
       const res = await postRequest("api/user/SignUp", user)
