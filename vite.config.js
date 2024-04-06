@@ -3,7 +3,9 @@ import react from '@vitejs/plugin-react';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 export default defineConfig({
-  plugins: [react(), nodePolyfills()],
+  plugins: [react(), nodePolyfills({
+    protocolImports:true
+  })],
   optimizeDeps: {
     exclude: ['js-big-decimal']
   },
@@ -12,7 +14,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      'crypto-random-string': 'crypto-random-string/dist/crypto-random-string.browser.js'
+      'events': 'rollup-plugin-node-polyfills/polyfills/events',
     }
   }
 });

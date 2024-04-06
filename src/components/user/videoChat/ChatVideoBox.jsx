@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import Peer from "simple-peer"
+import Peer from 'simple-peer/simplepeer.min.js'
 import { SocketContext } from '../../../store/redux/slices/SocketContext';
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import { useLocation, useNavigate } from 'react-router-dom';
