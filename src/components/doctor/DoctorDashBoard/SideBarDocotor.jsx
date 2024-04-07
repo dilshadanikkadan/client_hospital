@@ -102,8 +102,8 @@ const SideBarDocotor = () => {
                             <p>Reminder</p>
                         </NavLink> */}
             <NavLink
-              to="/doctor/chat"
               onClick={()=> {
+                navigate('/doctor/chat')
                 window.location.reload()
               }}
               className={({ isActive }) =>
