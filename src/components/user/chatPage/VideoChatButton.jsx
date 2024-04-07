@@ -30,9 +30,9 @@ const VideoChatButton = ({ username, recieverId }) => {
               : navigate("/chat_doctors/videoCall", { state: recieverId });
             dispatch(CallVideoCall());
           }}
-          className="py-1 px-5 bg-secondary rounded-lg text-white"
+          className="py-1 px-7 bg-secondary rounded-lg text-white"
         >
-          Video Call
+           Call
         </button>
       ) : (
         ""

@@ -33,7 +33,7 @@ const AccountSheet = () => {
     });
   };
   return (
-    <div className="min-w-[30vw]  max-h-[40vh] bg-white shadow-md rounded-lg p-6 mt-10">
+    <div className="w-[70vw] md:w-[30vw]  max-h-[40vh] bg-white shadow-md rounded-lg p-6 mt-10">
       <h2 className="text-xl font-semibold mb-4">Account Balance</h2>
       <div className="flex justify-between items-center mb-4">
         <p className="text-gray-600">Total Balance</p>

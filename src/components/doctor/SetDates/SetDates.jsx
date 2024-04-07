@@ -141,7 +141,7 @@ const SetDates = () => {
             {allDates?.map((item, i) => (
               <div
                 key={item._id + Date.now()}
-                className="dateBox cursor-pointer w-[12%] h-12 rounded-lg relative border-[1px] border-secondary  flex flex-col items-center"
+                className="dateBox cursor-pointer w-[16%] md:w-[12%] h-12 rounded-lg relative border-[1px] border-secondary  flex flex-col items-center"
               >
                 <CancelIcon
                   className="text-secondary absolute top-[-7px] right-[-5px]"

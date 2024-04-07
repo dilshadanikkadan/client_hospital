@@ -10,7 +10,6 @@ const PatientsListPending = () => {
   const [selectDate, setSelectDate] = useState(currentDate);
   const [todaysAppointments, setTodaysApoointment] = useState([]);
 
-  
   console.log(selectDate);
   let iduser;
   const jwtToken = localStorage.getItem("persist:root");
@@ -35,34 +34,33 @@ const PatientsListPending = () => {
     (doctor) => doctor.user === iduser
   ).BookedDates;
 
-
   const handleDateChange = (event, i) => {
     console.log("sleceted", event.target.value);
     setSelectDate(event.target.value);
   };
-  console.log("selectDate", selectDate);
+  console.log("filtered", filetred);
+
+
   useEffect(() => {
-    setTodaysApoointment([]);
-    if (filetred && selectDate) {
-      const filteredAppointments = filetred.filter((user) => user.date === selectDate);
+    if (allPendingAppointment) {
+      const filteredAppointments = filetred.filter(
+        (user) => user.date === selectDate
+      );
       setTodaysApoointment(filteredAppointments);
     }
-  }, [selectDate, filetred]);
- 
-  
+  }, [selectDate]);
 
   console.log("todaysAppointments", todaysAppointments);
-
   return (
     <div>
-      <div className="w-[90%] mx-auto mt-10 ">
-        <h3 className="text-2xl font-info font-semibold ml-10">Pending List</h3>
+      <div className="w-[100%] md:w-[90%] mx-auto mt-10 ">
+        <h3 className="text-2xl font-info font-semibold ml-4 md:ml-10">Pending List</h3>
 
         <select
-          className="select select-bordered w-[40%] ml-10 mt-5"
+          className="select select-bordered w-[40%] ml-4 md:ml-10 mt-5"
           onChange={handleDateChange}
         >
-          <option disabled defaultValue="" className="py-2 text-gray-500">
+          <option  defaultValue="" className="py-2 text-gray-500">
             Dates
           </option>
 
@@ -75,7 +73,7 @@ const PatientsListPending = () => {
             </option>
           ))}
         </select>
-        <p className="ml-10 mt-3 font-bold subpixel-antialiased text-xl">
+        <p className="ml-4 md:ml-10 mt-3 font-bold subpixel-antialiased text-xl">
           {" "}
           April {selectDate} th Pending Appointments
         </p>

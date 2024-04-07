@@ -166,7 +166,7 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
                 alt=""
               />
               <div className="info flex flex-col">
-                <p className="font-semibold capitalize">
+                <p className="font-semibold text-sm capitalize">
                   {selectedUser?.username}{" "}
                 </p>
                 <p>{isOnline ? "Online" : "offline"}</p>

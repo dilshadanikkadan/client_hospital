@@ -21,7 +21,7 @@ const DashBoardBoxDoctor = () => {
   const patientsPending = myAppointments?.filter((x) => x.status == "pending");
   return (
     <>
-      <div className="wrapper  w-[90%] ml-auto mr-auto mt-20 md:mt-0   md:h-[40vh] flex flex-col  justify-center gap-7">
+      <div className="wrapper  w-[90%] ml-auto mr-auto mt-0 md:mt-0   md:h-[40vh] flex flex-col  justify-center gap-7">
         {/* <p className='ml-10  font-info text-xl font-semibold'>Welcome {Doctor?.username}</p> */}
 
         <div className="flex w-full gap-7 flex-wrap">
