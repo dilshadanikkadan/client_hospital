@@ -10,6 +10,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 const DateModal = ({ setIsOpen, isOpen, itemId, iduser }) => {
   const [to, setTo] = useState("");
   const [from, setFrom] = useState("");
+  const [errTime, setTimeErr] = useState("");
   const queryClient = useQueryClient();
   const { data: allDates } = useQuery({
     queryKey: ["allDates", iduser],
@@ -46,6 +47,12 @@ const DateModal = ({ setIsOpen, isOpen, itemId, iduser }) => {
   };
 
   const handleAddingTime = (e) => {
+    if (from.length && to.length > 2) {
+      return setTimeErr("invalid time ");
+    }
+    if (parseInt(to) === parseInt(from)) {
+      return setTimeErr("select diffrent time");
+    }
     console.log({
       bookedDateId: itemId,
       userId: iduser,
@@ -92,6 +99,10 @@ const DateModal = ({ setIsOpen, isOpen, itemId, iduser }) => {
             </div>
             <form>
               <div className="mb-4">
+                <p className="text-xs">
+                  NB: enter a time between 9 to 6 in morning
+                </p>
+                {errTime && <p className="text-xs text-red-500">{errTime}</p>}
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="fromTime"
@@ -99,10 +110,11 @@ const DateModal = ({ setIsOpen, isOpen, itemId, iduser }) => {
                   From:
                 </label>
                 <input
+                  maxLength={2}
                   onChange={(e) => setFrom(e.target.value)}
                   className="border border-gray-300 rounded px-4 py-2 w-48"
                   id="fromTime"
-                  type="text"
+                  type="number"
                   placeholder="HH:MM AM/PM"
                 />
               </div>
@@ -114,10 +126,11 @@ const DateModal = ({ setIsOpen, isOpen, itemId, iduser }) => {
                   To:
                 </label>
                 <input
+                  maxLength={2}
                   onChange={(e) => setTo(e.target.value)}
                   className="border border-gray-300 rounded px-4 py-2 w-48"
                   id="toTime"
-                  type="text"
+                  type="number"
                   placeholder="HH:MM AM/PM"
                 />
               </div>

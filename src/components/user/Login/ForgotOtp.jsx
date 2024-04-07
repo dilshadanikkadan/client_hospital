@@ -111,7 +111,7 @@ const ForgotOtp = () => {
     <>
       <div className="wrapper  w-full h-[70vh] flex flex-col items-center justify-center ">
         <form
-          className="w-[70%]  lg:w-[20%]   m-auto h-full flex items-center lg:items-start  gap-1 flex-col "
+          className="w-[80%]  lg:w-[20%]   m-auto h-full flex items-center lg:items-start  gap-1 flex-col "
           action=""
         >
           <p className="mt-[15%] text-2xl font-logo">

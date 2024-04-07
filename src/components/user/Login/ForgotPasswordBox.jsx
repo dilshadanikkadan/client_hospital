@@ -40,7 +40,7 @@ const ForgotPasswordBox = () => {
           }}
         >
           {({ errors, touched }) => (
-            <Form className="form w-[70%] lg:w-[28%] m-auto  flex flex-col ">
+            <Form className="form w-[80%] lg:w-[28%] m-auto  flex flex-col ">
               <h3 className="text-2xl font-info font-bold text-center">
                 Enter your Email
               </h3>
@@ -68,7 +68,7 @@ const ForgotPasswordBox = () => {
               <input
                 type="submit"
                 className="cursor-pointer py-3 w-[50%] rounded-xl font-desc text-white bg-secondary m-auto mt-5"
-                value="Send Opt"
+                value="Send Otp"
               />
             </Form>
           )}
