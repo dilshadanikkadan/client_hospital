@@ -6,9 +6,12 @@ import { useLocation } from 'react-router-dom'
 const Login = () => {
   const {state}=useLocation()
   return (
-    <div>
+    <div className=''>
       <Navbar/>
+      <div className="">
+
       <LoginBox state={state}/>
+      </div>
     </div>
   )
 }

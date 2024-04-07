@@ -34,7 +34,10 @@ const NotificationBox = () => {
       <div className="div flex w-full flex-col gap-4 mt-4">
         {allNotification?.verification == "true" ? (
           <Link to={`/application/verified`}>
-            <div role="alert" className="alert bg-primary shadow-lg">
+            <div
+              role="alert"
+              className="alert bg-primary flex justify-between md:inline-grid shadow-lg"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -49,7 +52,7 @@ const NotificationBox = () => {
                 ></path>
               </svg>
               <div>
-                <h3 className="font-bold">
+                <h3 className="font-bold line-clamp-1 md:line-clamp-5">
                   you have been approved to serve as doctor
                 </h3>
                 <div className="text-xs">You have 1 unread message</div>
@@ -63,7 +66,10 @@ const NotificationBox = () => {
 
         {allNotification?.status == "success" ? (
           <Link to={`/payment/recieved`}>
-            <div role="alert" className="alert bg-primary shadow-lg">
+            <div
+              role="alert"
+              className="alert bg-primary flex justify-between md:inline-grid shadow-lg"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

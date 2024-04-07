@@ -10,7 +10,7 @@ const ProfileBox = ({ user }) => {
         <h3 className="text-secondary text-3xl font-info  font-semibold">
           User Profile
         </h3>
-        <div className="usercard border-[1px] border-gray-200 h-[26vh] md:h-[43vh] mt-3 w-full rounded-lg flex flex-col gap-5">
+        <div className="usercard border-[1px] border-gray-200 h-[36vh] md:h-[43vh] mt-3 w-full rounded-lg flex flex-col gap-5">
           <div className="div ml-6 flex   items-center mt-10 gap-5">
             <img
               className="w-12 h-12 object-cover rounded-full"

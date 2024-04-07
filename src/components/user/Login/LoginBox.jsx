@@ -48,7 +48,7 @@ const LoginBox = ({ state }) => {
         }}
       >
         {({ errors, touched, handleChange, setFieldTouched }) => (
-          <Form className="form w-[80%]  md:w-[50%] mt-[30%] lg:w-[28%] m-auto lg:mt-10 flex flex-col  ">
+          <Form className="form w-[80%]  p-5 rounded-lg loginBox   md:w-[50%] mt-[30%] lg:w-[28%] m-auto lg:mt-10 flex flex-col  ">
             <h3 className="text-2xl font-info font-bold text-center">Login</h3>
 
             {state?.message && <p className="text-red-500">{state.message}</p>}

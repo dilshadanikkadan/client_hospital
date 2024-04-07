@@ -73,12 +73,15 @@ const Navbar = () => {
   }, [socket, refetch]);
   return (
     <>
-      <div className="navabar w-full overflow-hidden   border-[1px] border-b-gray-100 md:h-24 pb-5 md:pb-0 ">
+      <div className="navabar w-full overflow-hidden  z-50 bg-white  border-[1px] border-b-gray-100 md:h-24 pb-5 md:pb-0 ">
         <div className="navItems w-[84%] over h-full m-auto flex  flex-col md:flex-row  md:items-center">
           <div className="left flex-[6] flex justify-between mt-5">
-            <h3 className="logo md:text-2xl lg:text-3xl mr-2 font-logo font-bold text-info ">
+            {/* <h3 className="logo md:text-2xl lg:text-3xl mr-2 font-logo font-bold text-info ">
               E-CARE
-            </h3>
+            </h3> */}
+            <img className="h-12"  src="/images/bgLogo.png" alt="" />
+            <div>
+            </div>
 
             <img
               onClick={() => setIsOpen(!iseOpen)}
