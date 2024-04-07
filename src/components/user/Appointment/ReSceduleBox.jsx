@@ -134,7 +134,7 @@ const ReSceduleBox = () => {
   };
 
   return (
-    <div className="form w-[60%] md:w-[28%]  m-auto mt-10 flex flex-col relative custom-select  ">
+    <div className="form w-[80%] md:w-[28%]  m-auto mt-10 flex flex-col relative custom-select  ">
       {selectedDoctor?.length > 0 &&
       selectedDoctor &&
       slectedDoctorData?.length > 0 ? (
@@ -189,10 +189,18 @@ const ReSceduleBox = () => {
                   className={`dateBox w-[12%] h-10 rounded-lg relative ${
                     selsctedDate === dates.date
                       ? "bg-secondary"
-                      : "bg-[#8FE82B]"
+                      : "border-[1px] border-secondary text-secondary"
                   }    flex flex-col items-center  justify-center`}
                 >
-                  <p className="text-white text-1xl">{dates?.date}</p>
+                  <p
+                    className={`${
+                      selsctedDate === dates.date
+                        ? "text-white"
+                        : "text-secondary"
+                    }  text-secondary text-1xl`}
+                  >
+                    {dates?.date}
+                  </p>
                 </div>
               ))
             : ""}
@@ -213,7 +221,7 @@ const ReSceduleBox = () => {
                   }   rounded-lg relative ${
                     timeSelected === timeData?.from
                       ? "bg-secondary"
-                      : "bg-[#8FE82B]"
+                      : "border-[1px] border-secondary"
                   }  flex cursor-pointer  items-center  justify-center `}
                   onClick={() =>
                     handleTime(
@@ -224,7 +232,11 @@ const ReSceduleBox = () => {
                   }
                 >
                   <p
-                    className="text-white text-1xl"
+                    className={`${
+                      timeSelected === timeData?.from
+                        ? "text-white"
+                        : "text-secondary"
+                    }  text-secondary text-1xl`}
                     onClick={() => {
                       setTimeSelected(timeData?.from);
                     }}
@@ -239,7 +251,7 @@ const ReSceduleBox = () => {
 
       <div className="w-[87%] flec items-center justify-end">
         <button
-          className={`py-3 w-[82%] lg:w-[52%] mt-5 float-right text-white bg-[#8FE82B] rounded-lg ${
+          className={`py-3 w-[82%] lg:w-[52%] mt-5 float-right text-white bg-secondary rounded-lg ${
             !isFormValid ? "cursor-not-allowed opacity-50" : ""
           }`}
           onClick={handleSubmit}

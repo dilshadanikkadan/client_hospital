@@ -5,7 +5,7 @@ const SccessBox = () => {
   const navigate = useNavigate();
   return (
     <div className="w-full h-[60vh] ">
-      <div className="wrapper w-[70%] md:w-[40%] m-auto flex flex-col gap-5 mt-20">
+      <div className="wrapper w-[90%] md:w-[40%] m-auto flex flex-col gap-5 mt-20">
         <p className="text-center text-xl">
           Apppointment has been sent You will get email once it approved
         </p>

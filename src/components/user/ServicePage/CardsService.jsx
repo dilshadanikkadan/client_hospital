@@ -23,8 +23,8 @@ const CardsService = () => {
   });
   return (
     <div>
-      <motion.div ref={ref} className="w-full mb-10 mt-10">
-        <div className="cardWrapper w-[83%] ml-[17%]  -500 flex gap-3 flex-wrap">
+      <motion.div ref={ref} className="w-full  mb-10 mt-10">
+        <div className="cardWrapper w-full md:w-[83%]   ml-[18%] flex gap-3  flex-wrap">
           {allSpecialities?.map((item, i) => (
             <motion.div
               initial={{ opacity: 0, translateX: -100, translateY: -100 }}

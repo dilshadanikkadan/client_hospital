@@ -73,7 +73,7 @@ const Navbar = () => {
   }, [socket, refetch]);
   return (
     <>
-      <div className="navabar w-full overflow-hidden   border-[1px] border-b-gray-100 md:h-24  ">
+      <div className="navabar w-full overflow-hidden   border-[1px] border-b-gray-100 md:h-24 pb-5 md:pb-0 ">
         <div className="navItems w-[84%] over h-full m-auto flex  flex-col md:flex-row  md:items-center">
           <div className="left flex-[6] flex justify-between mt-5">
             <h3 className="logo md:text-2xl lg:text-3xl mr-2 font-logo font-bold text-info ">
@@ -191,11 +191,11 @@ const Navbar = () => {
               </div>
             ) : (
               <div className="flex gap-5 h-full items-center cursor-pointer">
-                <button className="bg-secondary text-white px-5 py-3">
+                <button className="bg-secondary text-white py-1 px-3 md:px-5 md:py-3">
                   Appointment
                 </button>
                 <div
-                  className="div flex gap-2  bg-primary py-3 px-5 "
+                  className="div flex gap-2  bg-primary py-1 px-3 md:px-5 md:py-3 "
                   onClick={() => navigate("/login")}
                 >
                   <PersonIcon />

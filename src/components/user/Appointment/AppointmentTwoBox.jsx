@@ -170,7 +170,7 @@ const AppointmentTwoBox = () => {
                 <div
                   disabled={true}
                   onClick={() => handleDateBoxClick(dates)}
-                  className={`dateBox w-[12%] h-10 rounded-lg relative ${
+                  className={`dateBox w-[18%] md:w-[12%] h-10 rounded-lg relative ${
                     selsctedDate === dates.date
                       ? "bg-secondary"
                       : "border-[1px] border-secondary text-secondary"

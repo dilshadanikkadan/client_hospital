@@ -16,7 +16,7 @@ import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import VoiceRecordePage from "./VoiceRecordePage";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import DeleteChatModal from "./DeleteChatModal";
-
+import SendIcon from "@mui/icons-material/Send";
 const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
   const { isDoctor, isCalling } = useSelector((state) => state.doctor);
   const [voiceOn, setVoiceOn] = useState(false);
@@ -56,8 +56,6 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
       setMessages(allMsg);
     }
   }, [allMsg, queryClient, messages]);
-
-  
 
   const friend = messages[0]?.chatRoom?.participants.find(
     (user) => user !== userId
@@ -155,15 +153,15 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
   const isOnline = onlineUsers?.map((x) => x._id).includes(friend);
 
   return (
-    <div className={`${isOpen ? "block" : "hidden md:block"} w-full `}>
+    <div className={`${isOpen ? "block" : "hidden md:block"} w-full  `}>
       {currentChat ? (
         <div
           className={`  w-full h-[85vh] md:h-[75vh] border-[1px] border-gray-200 mt-3  rounded-md ml-2`}
         >
-          <div className="div h-[5rem] border-b-[1px] border-gray-200 flex items-center">
+          <div className="div h-[4rem] md:h-[5rem] border-b-[1px] border-gray-200 flex items-center">
             <div className="userview ml-5 flex items-center gap-8">
               <img
-                className="w-16 h-16 object-cover object-top rounded-full"
+                className="w-12 h-12 md:w-16 md:h-16 object-cover object-top rounded-full"
                 src={selectedUser?.profilePicture}
                 alt=""
               />
@@ -328,18 +326,21 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
                 Typing...
               </p>
             )}
-            <label className="input input-bordered flex items-center gap-2 w-[92%] md:w-[93%]">
-              <div>
-                <AttachFileIcon />
-                <input
-                  className="w-1"
-                  hidden
-                  type="file"
-                  onChange={handlePdf}
-                  name=""
-                  id=""
-                />
-              </div>
+
+            <div>
+              <AttachFileIcon />
+
+              <input
+                hidden
+                className="w-[1px!important] hidden"
+                type=""
+                onChange={handlePdf}
+                name=""
+                id=""
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
+            <label className="input input-bordered flex items-center gap-2 w-[95%]  md:w-[93%]">
               <input
                 value={messageValue}
                 onChange={(e) => {
@@ -356,12 +357,18 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
               />
 
               <button
-                className="rounded-lg py-1 px-4 bg-secondary text-white"
+                className="rounded-lg py-1 hidden md:block px-4 bg-secondary text-white"
                 onClick={handleMessageSend}
               >
                 {" "}
                 Send
               </button>
+              <div className="md:hidden ">
+                <SendIcon
+                  onClick={handleMessageSend}
+                  className="md:hidden py-1"
+                />
+              </div>
             </label>
             <VoiceRecordePage
               currentChat={currentChat}
@@ -373,13 +380,12 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
           </div>
         </div>
       ) : (
-        <div className="w-full h-[82vh]  border-[1px] border-gray-200 mt-3  flex items-center justify-center rounded-md ml-2">
+        <div className="w-full h-[75vh]  border-[1px] border-gray-200 mt-3  flex items-center justify-center rounded-md ml-2">
           <span className="text-3xl text-[rgba(0,0,0,0.39)] capitalize font-semibold">
-            Open A chat to conversiate{" "}
+            Open A chat to conversate{" "}
           </span>
         </div>
       )}
- 
 
       {modalOpen && (
         <>
@@ -397,7 +403,7 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
 
             <button
               onClick={handleSendPdf}
-              className="bg-blue-500 text-white py-2 px-4 rounded-md"
+              className="bg-blue-500  text-white py-2 px-4 rounded-md"
             >
               Send
             </button>

@@ -4,7 +4,6 @@ import { useInView } from "react-intersection-observer";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { getBanners } from "../../../services/api/adminRoute";
 import { useQuery } from "@tanstack/react-query";
-
 const SecondPart = () => {
   const controls = useAnimation();
   const { ref, inView } = useInView({ threshold: 0 });
@@ -58,7 +57,10 @@ const SecondPart = () => {
                   </div>
                 </div>
                 <div className="wrap w-full flex gap-10">
-                  <button className=" border-[1px] border-gray-500 rounded-md  px-6 py-3">
+                  
+                  <button className=" border-[1px] border-gray-500 rounded-md  px-6 py-3" onClick={()=>{
+                    
+                  }}>
                     Read More{" "}
                   </button>
                 </div>

@@ -86,7 +86,7 @@ const ViewAppointmentBox = () => {
     console.log("currentTime", penalty);
     return (
         <div className='w-full flex flex-col justify-center  '>
-            <div className='w-[90%] md:w-[60%] m-auto overflow-hidden  mt-10    py-4 px-6 rounded-md shadow-md'>
+            <div className='w-[95%] md:w-[60%] m-auto overflow-hidden  mt-10    py-4 px-6 rounded-md shadow-md'>
                 <h3 className='font-info font-semibold text-2xl capitalize '> Appointment Details</h3>
                 <div className="details">
                     <div className="userinfo flex items-center  gap-3 mt-6">

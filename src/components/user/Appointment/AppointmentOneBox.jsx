@@ -130,7 +130,7 @@ const AppointmentOneBox = () => {
         }}
       >
         {({ errors, touched }) => (
-          <Form className="form w-[60%] md:w-[28%] m-auto mt-10 flex flex-col relative">
+          <Form className="form w-[80%] md:w-[28%] m-auto mt-10 flex flex-col relative">
             <h3 className="text-2xl font-info font-bold ">
               Make an Appointment
             </h3>

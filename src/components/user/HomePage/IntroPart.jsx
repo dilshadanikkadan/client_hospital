@@ -58,7 +58,7 @@ const IntroPart = () => {
                 <Link
                   to="https://www.youtube.com/watch?v=4cPOoXRxNPY"
                   target="_blank"
-                  className="border-[1px] border-secondary rounded-md text-secondary py-3 px-3 md:px-5 md:py-4 "
+                  className="border-[1px] hidden md:block border-secondary rounded-md text-secondary py-3 px-3 md:px-5 md:py-4 "
                 >
                   <PlayCircleOutlineIcon /> Watch Video
                 </Link>
@@ -86,7 +86,7 @@ const IntroPart = () => {
                   </Link>
                 ) : (
                   <button
-                    className="bg-secondary rounded-md text-white px-3 py-3"
+                    className="bg-secondary rounded-md text-white px-3 py-2"
                     onClick={() => navigate("/makeAppointment")}
                   >
                     {" "}

@@ -40,7 +40,7 @@ const LoginBox = () => {
         }}
       >
         {({ errors, touched }) => (
-          <Form className="form  w-[60%] mt-[30%] lg:w-[28%] m-auto lg:mt-10 flex flex-col ">
+          <Form className="form  w-[80%] mt-[30%] lg:w-[28%] m-auto lg:mt-10 flex flex-col ">
             <h3 className="text-2xl font-info font-bold text-center">
               Sign Up
             </h3>
@@ -62,7 +62,7 @@ const LoginBox = () => {
               />
             </label>
             {touched.username && (
-              <p className="capitalize text-red-600 mt-1">{errors.username}</p>
+              <p className=" text-red-600 mt-1">{errors.username}</p>
             )}
 
             <label className="input input-bordered flex items-center gap-2 mt-5">
@@ -83,7 +83,7 @@ const LoginBox = () => {
               />
             </label>
             {touched.email && (
-              <p className="capitalize text-red-600 mt-1">{errors.email}</p>
+              <p className=" text-red-600 mt-1">{errors.email}</p>
             )}
 
             <label className="input input-bordered flex items-center gap-2 mt-5">
@@ -111,7 +111,7 @@ const LoginBox = () => {
               />
             </label>
             {touched.password && (
-              <p className="capitalize text-red-600 mt-1">{errors.password}</p>
+              <p className=" text-red-600 mt-1">{errors.password}</p>
             )}
 
             <label className="input input-bordered flex items-center gap-2 mt-5">
@@ -139,7 +139,7 @@ const LoginBox = () => {
               />
             </label>
             {touched.confirmPassword && (
-              <p className="capitalize text-red-600 mt-1">
+              <p className=" text-red-600 mt-1">
                 {errors.confirmPassword}
               </p>
             )}

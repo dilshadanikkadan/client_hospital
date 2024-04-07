@@ -46,7 +46,7 @@ const ChatWithPatients = () => {
         {isDoctor ? <SideBarDocotor /> : ""}
         <div
           className={`div w-[83%] ${
-            isAuthenticated ? "mx-auto w-[83%] mt-0" : "mt-10 mr-10"
+            isAuthenticated ? "mx-auto w-[93%] md:w-[83%] mt-0" : "mt-10 mr-10"
           }  flex  `}
         >
           <DcotorsViewBar

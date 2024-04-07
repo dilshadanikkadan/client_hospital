@@ -48,12 +48,12 @@ const LoginBox = ({ state }) => {
         }}
       >
         {({ errors, touched, handleChange, setFieldTouched }) => (
-          <Form className="form w-[60%]  md:w-[50%] mt-[30%] lg:w-[28%] m-auto lg:mt-10 flex flex-col ">
+          <Form className="form w-[80%]  md:w-[50%] mt-[30%] lg:w-[28%] m-auto lg:mt-10 flex flex-col  ">
             <h3 className="text-2xl font-info font-bold text-center">Login</h3>
 
             {state?.message && <p className="text-red-500">{state.message}</p>}
             {errorMsg && <p className="text-red-500">{errorMsg}</p>}
-            <label className="input input-bordered flex items-center gap-2 mt-5">
+            <label className="pr-3 input input-bordered flex items-center gap-2 mt-5 ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -65,7 +65,7 @@ const LoginBox = ({ state }) => {
               </svg>
               <Field
                 type="text"
-                className="grow"
+                className="grow "
                 placeholder="Email"
                 name="email"
                 onChange={(e) => {
@@ -76,10 +76,10 @@ const LoginBox = ({ state }) => {
               />
             </label>
             {touched.email && (
-              <p className="capitalize text-red-600 mt-1">{errors.email}</p>
+              <p className=" text-red-600 mt-1">{errors.email}</p>
             )}
 
-            <label className="input input-bordered flex items-center gap-2 mt-5 justify-between">
+            <label className="input input-bordered flex items-center gap-2 mt-5 justify-between ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -109,18 +109,18 @@ const LoginBox = ({ state }) => {
               />
             </label>
             {touched.password && (
-              <p className="capitalize text-red-600 mt-1">{errors.password}</p>
+              <p className=" text-red-600 mt-1">{errors.password}</p>
             )}
 
             <div className="div flex justify-between">
               <p
-                className="text-blue-500 mt-5 underline cursor-pointer"
+                className="text-blue-500 mt-5 underline text-xs md:text-sm cursor-pointer"
                 onClick={() => navigate("/SignUp")}
               >
                 Dont have any Account?
               </p>
               <p
-                className="text-blue-500 mt-5 underline cursor-pointer"
+                className="text-blue-500 mt-5 underline text-xs md:text-sm cursor-pointer"
                 onClick={() => navigate("/forgotPassword")}
               >
                 Forgot Password?
