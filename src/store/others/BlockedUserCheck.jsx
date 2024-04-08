@@ -12,12 +12,14 @@ const IdUserContext = createContext();
 export const useIdUser = () => useContext(IdUserContext);
 
 export const BlockeduserCheck = ({ children }) => {
+  const { isAuthenticated } = useSelector((state) => state.user);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let iduser;
   const jwtToken = localStorage.getItem("persist:root");
 
-  if (JSON.parse(jwtToken).user !== "null") {
+  if (JSON.parse(jwtToken)?.user !== "null" &&isAuthenticated) {
     const decodedToken = JSON.parse(atob(jwtToken.split(".")[1]));
 
     const userId = decodedToken.id;

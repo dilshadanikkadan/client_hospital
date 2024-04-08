@@ -24,7 +24,7 @@ const Navbar = () => {
   let iduser;
   const jwtToken = localStorage.getItem("persist:root");
 
-  if (JSON.parse(jwtToken).user !== "null") {
+  if (JSON.parse(jwtToken)?.user !== "null" && isAuthenticated) {
     const decodedToken = JSON.parse(atob(jwtToken.split(".")[1]));
 
     const userId = decodedToken.id;
