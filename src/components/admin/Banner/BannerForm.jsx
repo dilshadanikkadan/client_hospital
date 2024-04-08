@@ -86,8 +86,7 @@ const BannerForm = ({ selectBannerObj }) => {
 
   return (
     <>
-      {/* {showForm && selectBannerObj ? ( */}
-      {true && true ? (
+      {showForm && selectBannerObj ? (
         <div className="w-[40%]   mt-10 ml-10">
           <div className="border-dashed border-2 border-secondary rounded-2xl h-[40vh] flex flex-col items-center justify-center">
             {!image ? (

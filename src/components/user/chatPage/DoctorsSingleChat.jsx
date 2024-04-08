@@ -17,6 +17,7 @@ import VoiceRecordePage from "./VoiceRecordePage";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import DeleteChatModal from "./DeleteChatModal";
 import SendIcon from "@mui/icons-material/Send";
+import SummarizeIcon from "@mui/icons-material/Summarize";
 const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
   const { isDoctor, isCalling } = useSelector((state) => state.doctor);
   const [voiceOn, setVoiceOn] = useState(false);
@@ -121,6 +122,7 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
   };
 
   const handleSendPdf = async () => {
+    setModalOpen(false);
     const dataOne = new FormData();
     dataOne.append("file", pdf);
     dataOne.append("upload_preset", "application");
@@ -145,7 +147,6 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
         text: res.data.url,
         typeOfMessage: "pdf",
       });
-      setModalOpen(false);
     } catch (error) {}
   };
 
@@ -212,7 +213,7 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
                       <div>
                         {msg?.typeOfMessage == "pdf" ? (
                           <div
-                            className={` h-32  w-56 relative text-gray-500 rounded-md ${
+                            className={` h-16  w-56 flex items-center relative text-gray-500 rounded-md ${
                               msg?.sender === userId
                                 ? "bg-[#E8F1F3]"
                                 : "bg-[#EFEFEF]"
@@ -232,18 +233,17 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
                                 />
                               </div>
                             )}
-                            <img
-                              src="/images/pres.PNG"
-                              alt=""
-                              className="w-full h-[70%]  object-cover object-left border-[1px] border-gray-600 rounded-md "
-                            />
-                            <p className="ml-3">Prescirption Details</p>
+                       
+                            <div className="h-[80%] flex items-center w-[90%] m-auto bg-gray-300  rounded-lg">
+                              <SummarizeIcon  className="ml-2"/>
+                              <p>document</p>
+                            </div>
                             <a
                               href={msg?.text}
                               download="prescription.pdf"
                               target="_blank"
                             >
-                              <FileDownloadIcon className="absolute bottom-2  right-3 border-[1px] border-white rounded-full py-1" />
+                              <FileDownloadIcon className="absolute bottom-3  right-3 border-[1px] border-white rounded-full py-1" />
                             </a>
                           </div>
                         ) : msg?.typeOfMessage == "audio" ? (
@@ -327,19 +327,32 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
               </p>
             )}
 
-            <div>
-              <AttachFileIcon />
-
+            {/* <div className="cursor-pointer">
+            <AttachFileIcon />
+            <input
+            className="w-1 absolute left-0"
+            // hidden
+            type="file"
+            onChange={handlePdf}
+            name=""
+            id=""
+            />
+          </div> */}
+            <div className="rounded-md border bg-gray-50 p-4 shadow-md w-5">
+              <label
+                htmlFor="upload"
+                className="flex flex-col items-center gap-2 cursor-pointer"
+              >
+                <AttachFileIcon />
+              </label>
               <input
-                hidden
-                className="w-[1px!important] hidden"
-                type=""
+                id="upload"
+                type="file"
+                className="hidden"
                 onChange={handlePdf}
-                name=""
-                id=""
-                onClick={(e) => e.stopPropagation()}
               />
             </div>
+
             <label className="input input-bordered flex items-center gap-2 w-[95%]  md:w-[93%]">
               <input
                 value={messageValue}

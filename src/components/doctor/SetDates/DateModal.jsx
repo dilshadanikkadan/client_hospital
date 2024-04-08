@@ -47,7 +47,7 @@ const DateModal = ({ setIsOpen, isOpen, itemId, iduser }) => {
   };
 
   const handleAddingTime = (e) => {
-    if (from.length && to.length > 2) {
+    if (from.length > 2  || to.length > 2) {
       return setTimeErr("invalid time ");
     }
     if (parseInt(to) === parseInt(from)) {
