@@ -32,7 +32,10 @@ const OverViewBoxProfile = ({ user }) => {
                 <p>Apppointment</p>
               </div>
 
-              <div className="w-[80%] lg:w-1/2 border-[1px] flex gap-5 items-center  h-[10vh] rounded-lg border-gray-200 mr-10 ">
+              <div
+                className="w-[80%] lg:w-1/2 border-[1px] flex gap-5 items-center  h-[10vh] rounded-lg border-gray-200 mr-10 "
+                onClick={() => navigate("/Ourdoctors")}
+              >
                 <GroupAddIcon className="text-2xl ml-5" />
                 <p>Doctors</p>
               </div>

@@ -12,6 +12,7 @@ const LicenseList = () => {
   const deleteRef = useRef(null);
   const [license, setLicense] = useState("");
   const [licenseValue, setLicenseValue] = useState("");
+  const [errMsg, setErrMsg] = useState("");
   let id = "65eab6d166a0b15572caaf33";
   const { data: allLicenses } = useQuery({
     queryKey: ["licenses"],
@@ -38,10 +39,14 @@ const LicenseList = () => {
   const handleDelete = () => {
     deleteMutate({ licenseNo: license });
   };
+  const check = allLicenses?.map((x) => x?.toLowerCase());
   const handleAdd = () => {
+    console.log("data dilt");
+    if (check?.includes(licenseValue?.toLowerCase())) {
+      return setErrMsg("dublicate licence you added");
+    }
     deleteLicenseMutate({ licenseNo: licenseValue });
   };
-
   const handleValue = (e) => {
     setLicenseValue(e.target.value);
   };
@@ -68,12 +73,16 @@ const LicenseList = () => {
       </div>
       <div className="div w-[90%] mx-auto mt-10">
         <button
-          onClick={() => licenseRef.current.showModal()}
+          onClick={() => {
+            setErrMsg("")
+            licenseRef.current.showModal();
+          }}
           className="bg-secondary text-white  font-info px-5 py-2 rounded-md"
         >
           Add license
         </button>
       </div>
+      <p className="bg-red-s500 ml-12 mt-2 text-red-500 ">{errMsg}</p>
       <div className="wrapper w-[90%] h-[50vh] overflow-y-scroll mt-10 border-[1px] border-gray-200 mx-auto shadow-md">
         {allLicenses?.map((item, i) => (
           <div
@@ -136,7 +145,6 @@ const LicenseList = () => {
           className="modal modal-bottom sm:modal-middle"
         >
           <div className="modal-box">
-            <h3 className="font-bold text-lg">Hello!</h3>
             <p className="py-4">are you sure want to delete </p>
             <div className="modal-action">
               <form method="dialog">

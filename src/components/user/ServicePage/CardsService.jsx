@@ -43,7 +43,7 @@ const CardsService = () => {
                 <h3 className="text-xl font-bold font-logo">{item?.title}</h3>
                 <p className="font-info">{item.description}</p>
                 <button className=" border-[1px] border-gray-500 rounded-md  w-28 py-2">
-                  Read More{" "}
+                  Show Doctors{" "}
                 </button>
               </div>
             </motion.div>

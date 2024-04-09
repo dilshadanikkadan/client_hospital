@@ -182,7 +182,7 @@ const DoctorsSingleChat = ({ isOpen, selectedUser, currentChat, userId }) => {
             {messages?.map((msg, i) => {
               return (
                 <>
-                  {msg?.deleteForMe === "false" || msg?.sender !== userId ? (
+                  {msg?.deleteForMe === "false"  ? (
                     <div
                       key={i}
                       ref={messageRef}

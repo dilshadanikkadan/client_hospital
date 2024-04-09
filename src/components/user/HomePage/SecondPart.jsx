@@ -7,10 +7,12 @@ import { useQuery } from "@tanstack/react-query";
 const SecondPart = () => {
   const controls = useAnimation();
   const { ref, inView } = useInView({ threshold: 0 });
+
   const { data: Allbanners } = useQuery({
     queryKey: ["all banners"],
     queryFn: getBanners,
   });
+
   useEffect(() => {
     if (inView) {
       controls.start({ y: 0 });
@@ -57,11 +59,11 @@ const SecondPart = () => {
                   </div>
                 </div>
                 <div className="wrap w-full flex gap-10">
-                  
-                  <button className=" border-[1px] border-gray-500 rounded-md  px-6 py-3" onClick={()=>{
-                    
-                  }}>
-                    Read More{" "}
+                  <button
+                    className=" border-[1px] border-gray-500 rounded-md  px-6 py-3"
+                    onClick={() => {}}
+                  >
+                    Contact us{" "}
                   </button>
                 </div>
               </motion.div>

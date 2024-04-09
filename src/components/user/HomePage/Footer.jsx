@@ -102,13 +102,13 @@ const Footer = () => {
                 </div>
                 <div>
                   <KeyboardArrowRightIcon />
-                  <Link className="hover:underline" to="contact">
+                  <Link className="hover:underline" to="/contact">
                     Contact
                   </Link>
                 </div>
                 <div>
                   <KeyboardArrowRightIcon />
-                  <Link className="hover:underline" to="make_appointment">
+                  <Link className="hover:underline" to="/makeAppointment">
                     Appointment
                   </Link>
                 </div>

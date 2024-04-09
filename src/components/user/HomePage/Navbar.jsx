@@ -79,9 +79,8 @@ const Navbar = () => {
             {/* <h3 className="logo md:text-2xl lg:text-3xl mr-2 font-logo font-bold text-info ">
               E-CARE
             </h3> */}
-            <img className="h-12"  src="/images/bgLogo.png" alt="" />
-            <div>
-            </div>
+            <img className="h-12" src="/images/bgLogo.png" alt="" />
+            <div></div>
 
             <img
               onClick={() => setIsOpen(!iseOpen)}
@@ -183,10 +182,12 @@ const Navbar = () => {
                     </span>
                   )}
                 </div>
-                <ChatIcon onClick={() => {
-                  navigate("/chat_doctors")
-                  window.location.reload()
-                }} />
+                <ChatIcon
+                  onClick={() => {
+                    navigate("/chat_doctors");
+                    window.location.reload();
+                  }}
+                />
                 <LogoutIcon
                   onClick={handleLogout}
                   className="text-blue-950 hover:text-red-700 text-3xl"
@@ -194,7 +195,10 @@ const Navbar = () => {
               </div>
             ) : (
               <div className="flex gap-5 h-full items-center cursor-pointer">
-                <button className="bg-secondary text-white py-1 px-3 md:px-5 md:py-3">
+                <button
+                  className="bg-secondary text-white py-1 px-3 md:px-5 md:py-3"
+                  onClick={() => navigate("/makeAppointment")}
+                >
                   Appointment
                 </button>
                 <div

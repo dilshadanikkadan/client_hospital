@@ -32,6 +32,7 @@ const Card = () => {
           <div className="cardWrapper w-[85%] m-auto -500 flex flex-wrap">
             {allSpecialities?.slice(0, 3).map((item, i) => (
               <div
+              key={i}
                 onClick={() => navigate("/Ourdoctors")}
                 className="card ml-3  cursor-pointer w-full  md:w-[31%] mt-3  rounded-lg  border-[1px] border-gray-100 flex flex-col gap-5 pb-5"
               >
