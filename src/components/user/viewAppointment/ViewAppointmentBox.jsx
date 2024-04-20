@@ -30,7 +30,7 @@ const ViewAppointmentBox = () => {
         queryFn: viewAppointment
 
     })
-    // logic of panalty  for cancellation appointment
+    // logic of panalty  
     const currentAppintment = myAppointment?.find((x) => x.status === "pending")
     let penalty = false
     console.log("currentAppintment", currentAppintment?._id);
