@@ -63,7 +63,7 @@ const FormThreePart = () => {
     dataOne.append("file", licenseImage);
     dataOne.append("upload_preset", "application");
 
-    //profile image
+    //profile image  manage
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "application");

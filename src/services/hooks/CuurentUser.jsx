@@ -2,7 +2,6 @@ export const currentUser = () => {
   let iduser;
   const jwtToken = localStorage.getItem("persist:root");
   const user = JSON.parse(jwtToken)
-// console.log("jwtToken",user.user);
   try {
     if (
       JSON.parse(jwtToken).user !== "null" ||
