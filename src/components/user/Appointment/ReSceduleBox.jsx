@@ -70,6 +70,7 @@ const ReSceduleBox = () => {
     },
   });
 
+  // create chat
   const { mutate: rescheduleMutate } = useMutation({
     mutationFn: reScheduleAppointment,
     onSuccess: (data) => {
