@@ -70,7 +70,7 @@ const ReSceduleBox = () => {
     },
   });
 
-  // create chatting for patients for all time 
+  // create chatting for 
   const { mutate: rescheduleMutate } = useMutation({
     mutationFn: reScheduleAppointment,
     onSuccess: (data) => {
