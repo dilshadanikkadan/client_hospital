@@ -29,7 +29,7 @@ const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     console.log(data);
-    const newSocket = io("http://localhost:3000/",{
+    const newSocket = io("https://back-end-hospital-management.onrender.com/",{
       transports: ['websocket']
     }); 
     setSocket(newSocket);
