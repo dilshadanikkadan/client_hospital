@@ -75,7 +75,7 @@ const PatientsListPending = () => {
         </select>
         <p className="ml-4 md:ml-10 mt-3 font-bold subpixel-antialiased text-xl">
           {" "}
-          April {selectDate} th Pending Appointments
+          Auguest{selectDate} th Pending Appointments
         </p>
 
         <div className="wrapper w-[90%] mt-5 border-[1px] border-gray-200 mx-auto shadow-md">

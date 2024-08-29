@@ -29,7 +29,7 @@ const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     console.log(data);
-    const newSocket = io("https://www.medifly.site/",{
+    const newSocket = io("http://localhost:3000/",{
       transports: ['websocket']
     }); 
     setSocket(newSocket);
