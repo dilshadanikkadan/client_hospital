@@ -29,7 +29,8 @@ const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     console.log(data);
-    const newSocket = io("https://back-end-hospital-management.onrender.com/",{
+    // const newSocket = io("https://back-end-hospital-management.onrender.com/",{
+    const newSocket = io("https://backendhospitalmanagement-production.up.railway.app/",{
       transports: ['websocket']
     }); 
     setSocket(newSocket);
